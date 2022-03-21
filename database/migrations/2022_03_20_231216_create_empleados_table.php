@@ -15,7 +15,21 @@ class CreateEmpleadosTable extends Migration
     {
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('nombre', 150);
+            $table->char('RFC',14);
+            $table->date('fecha_nacimiento');
+            $table->string('domicilio');
+            $table->string('telefono', 13);
+            $table->string('correo', 50);
+            $table->double('sueldo', 8, 2);
+            $table->date('fecha_ingreso');
+            $table->char('NSS',11);
+            $table->string('password',150);
+            // $table->foreignId("id_tipoUsuario")
+            //     ->references("id")->on("tipo_usuario")
+            //     ->onDelete("cascade")
+            //     ->onUpdate("cascade");
+
         });
     }
 

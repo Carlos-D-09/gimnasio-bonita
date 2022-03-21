@@ -15,7 +15,14 @@ class CreateAgendasTable extends Migration
     {
         Schema::create('agendas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            // $table->foreignId("id_cliente")
+            //     ->references("id")->on("clientes")
+            //     ->onDelete("cascade")
+            //     ->onUpdate("cascade");
+            // $table->foreignId("id_oferta")
+            //     ->references("id")->on("oferta_actividades")
+            //     ->onDelete("cascade")
+            //     ->onUpdate("cascade");
         });
     }
 

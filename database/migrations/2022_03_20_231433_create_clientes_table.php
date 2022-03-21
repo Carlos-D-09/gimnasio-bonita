@@ -15,7 +15,19 @@ class CreateClientesTable extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('nombre', 150);
+            $table->date('fecha_nacimiento');
+            $table->string('domicilio', 100);
+            $table->string('telefono',13);
+            $table->string('correo', 50);
+            $table->date('fecha_registro');
+            $table->boolean('status');
+            $table->string('password', 150);
+            // $table->foreignId("id_empleado")
+            //     ->references("id")->on("tipo_usuario")
+            //     ->onDelete("cascade")
+            //     ->onUpdate("cascade");
+
         });
     }
 

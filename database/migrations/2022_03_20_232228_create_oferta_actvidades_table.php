@@ -15,7 +15,18 @@ class CreateOfertaActvidadesTable extends Migration
     {
         Schema::create('oferta_actvidades', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->time('horaInicio');
+            $table->time('horaFin');
+            $table->integer('cuposTotales');
+            // $table->foreignId("id_empleado")
+            //     ->references("id")->on("empleados")
+            //     ->onDelete("cascade")
+            //     ->onUpdate("cascade");
+            // $table->foreignId("id_clases")
+            //     ->references("id")->on("clases")
+            //     ->onDelete("cascade")
+            //     ->onUpdate("cascade");
+
         });
     }
 

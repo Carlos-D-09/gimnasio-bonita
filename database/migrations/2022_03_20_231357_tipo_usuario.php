@@ -13,7 +13,11 @@ class TipoUsuario extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('tipo_usuario', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre', 150);
+            $table->string('descripcion', 300);
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class TipoUsuario extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tipo_usuario');
     }
 }

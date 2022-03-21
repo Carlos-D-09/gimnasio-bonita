@@ -13,7 +13,12 @@ class Membresia extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('membresia', function (Blueprint $table) {
+            $table->id();
+            $table->string('Nombre',150);
+            $table->smallInteger('Duracion');
+            $table->double('costo', 8, 2);
+        });
     }
 
     /**
