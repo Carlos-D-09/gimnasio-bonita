@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\clase;
 use App\Models\empleado;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,12 @@ class EmpleadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        //
+        $empleado = session('empleado');
+        $clases = clase::all();
+        return view('/home',compact('clases', 'empleado'));
     }
 
     /**

@@ -24,5 +24,7 @@
 
 11.- Crear llave: php artisan key:generate
 
-12.- Comando: php artisan db:seed --class=empleados
-php artisan db:seed --class=UserTableSeeder
+12.- Comando: php artisan db:seed --class=TipoUsuario
+
+13.- Comando: php artisan db:seed --class=EmpleadoSeeder
+
