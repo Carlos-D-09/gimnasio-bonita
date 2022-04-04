@@ -1,10 +1,6 @@
 <?php
 
-use App\Http\Controllers\ClaseController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmpleadoController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegistroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +14,11 @@ use App\Http\Controllers\RegistroController;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('welcome');
 });
 
-Route::POST('/login',[LoginController::class, 'validar']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::resource('/empleado',EmpleadoController::class);
-
-Route::resource('/clase',ClaseController::class);
+require __DIR__.'/auth.php';
