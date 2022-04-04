@@ -26,5 +26,6 @@ class TipoUsuario extends Seeder
             'nombre' => 'Maestro',
             'descripcion' => 'Usuario que solo puede consultar las clases que tiene que impartir y los alumnos que se registraron a ella'
         ]);
+        
     }
 }
