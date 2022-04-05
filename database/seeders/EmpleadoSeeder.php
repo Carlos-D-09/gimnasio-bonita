@@ -38,7 +38,7 @@ class EmpleadoSeeder extends Seeder
             'correo' => 'carlos@test.com',
             'sueldo' => 8000,
             'fecha_ingreso' => now(),
-            'NSS' => 'PLEOWL',
+            'NSS' => 'DFDSAD',
             'password' => '12345',
             'id_tipoUsuario' => 1
         ]);
