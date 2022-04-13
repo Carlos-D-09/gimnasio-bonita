@@ -18,7 +18,7 @@ class EmpleadoController extends Controller
     {
         $empleado = session('empleado');
         $clases = clase::all();
-        return view('/home',compact('clases', 'empleado'));
+        return view('/dashboard',compact('clases', 'empleado'));
     }
 
     /**
