@@ -17,6 +17,10 @@ class ClaseController extends Controller
 
     public function index()
     {
+        $empleado = session('empleado');
+        $clases = clase::all();
+        $content = 'clases.index';
+        return view('dashboard', compact('clases', 'empleado', 'content'));
     }
 
     /**
@@ -26,7 +30,8 @@ class ClaseController extends Controller
      */
     public function create()
     {
-        return view('clases.formClase');
+        $content = 'clases.formClase';
+        return view('dashboard', compact('content'));
     }
 
     /**

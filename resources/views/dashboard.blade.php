@@ -50,7 +50,7 @@
             <br />
 
             <!-- sidebar menu -->
-            @include('home.slidebarMenu')
+            @include('dashboard.slidebarMenu')
             <!-- /sidebar menu -->
           </div>
         </div>
@@ -72,7 +72,7 @@
                       <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                     </div>
                   </li>
-                  @include('home.notificaciones')
+                  @include('dashboard.notificaciones')
                 </ul>
               </nav>
             </div>
@@ -80,7 +80,7 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        @include('home.content')
+        @include($content)
         <!-- /page content -->
 
         <!-- footer content -->
