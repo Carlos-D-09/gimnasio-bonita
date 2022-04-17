@@ -3,7 +3,7 @@
 use App\Http\Controllers\ClaseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
-use App\Http\Controllers\LoginController;
+//use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistroController;
 
 /*
@@ -21,8 +21,10 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::POST('/login',[LoginController::class, 'validar']);
+//Route::POST('/login',[LoginController::class, 'validar']);
 
 Route::resource('/empleado',EmpleadoController::class);
 
 Route::resource('/clase',ClaseController::class);
+
+require __DIR__.'/auth.php';

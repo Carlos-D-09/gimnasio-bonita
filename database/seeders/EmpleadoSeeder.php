@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\empleado;
 
 class EmpleadoSeeder extends Seeder
 {
@@ -14,6 +15,12 @@ class EmpleadoSeeder extends Seeder
      */
     public function run()
     {
+        /*User::create([
+            'name' => 'alexander',
+            'email' => 'alexander@gmail.com',
+            'password' => bcrypt('12345')
+        ])->assignRole('Gerente'); */
+
         DB::table('empleados')-> insert ([
             'id' => 1,
             'nombre' => 'Alex',
@@ -28,6 +35,7 @@ class EmpleadoSeeder extends Seeder
             'password' => '123',
             'id_tipoUsuario' => 1
         ]);
+
         DB::table('empleados')-> insert ([
             'id' => 2,
             'nombre' => 'Carlos Daniel Medina Sahagún',
@@ -42,5 +50,6 @@ class EmpleadoSeeder extends Seeder
             'password' => '12345',
             'id_tipoUsuario' => 1
         ]);
+
     }
 }
