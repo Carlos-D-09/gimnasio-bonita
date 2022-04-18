@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\empleado;
+use Illuminate\Support\Facades\Hash;
 
 class EmpleadoSeeder extends Seeder
 {
@@ -32,7 +33,7 @@ class EmpleadoSeeder extends Seeder
             'sueldo' => 8000,
             'fecha_ingreso' => now(),
             'NSS' => 'PLEOWL',
-            'password' => '123',
+            'password' => Hash::make('12345'),
             'id_tipoUsuario' => 1
         ]);
 
@@ -47,7 +48,7 @@ class EmpleadoSeeder extends Seeder
             'sueldo' => 8000,
             'fecha_ingreso' => now(),
             'NSS' => 'DFDSAD',
-            'password' => '12345',
+            'password' => Hash::make('12345'),
             'id_tipoUsuario' => 1
         ]);
 

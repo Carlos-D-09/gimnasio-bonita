@@ -18,7 +18,7 @@ use App\Http\Controllers\RegistroController;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('dashboard');
 });
 
 //Route::POST('/login',[LoginController::class, 'validar']);
@@ -27,4 +27,12 @@ Route::resource('/empleado',EmpleadoController::class);
 
 Route::resource('/clase',ClaseController::class);
 
-require __DIR__.'/auth.php';
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
