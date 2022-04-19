@@ -51,6 +51,34 @@ class EmpleadoSeeder extends Seeder
             'password' => Hash::make('12345'),
             'id_tipoUsuario' => 1
         ]);
+        DB::table('empleados')-> insert ([
+            'id' => 3,
+            'nombre' => 'Carlos Daniel Medina Sahagún',
+            'RFC' => 'MESC324232',
+            'fecha_nacimiento' => '1998-10-17',
+            'domicilio' => 'Patria 1378',
+            'telefono' => '3333221191',
+            'correo' => 'carlos2@test.com',
+            'sueldo' => 6000,
+            'fecha_ingreso' => now(),
+            'NSS' => 'dwaqrt',
+            'password' => Hash::make('12345'),
+            'id_tipoUsuario' => 2
+        ]);
+        DB::table('empleados')-> insert ([
+            'id' => 4,
+            'nombre' => 'Carlos Daniel Medina Sahagún',
+            'RFC' => 'MESC324234',
+            'fecha_nacimiento' => '1997-10-17',
+            'domicilio' => 'Patria 1378',
+            'telefono' => '3333221191',
+            'correo' => 'carlos3@test.com',
+            'sueldo' => 6000,
+            'fecha_ingreso' => now(),
+            'NSS' => 'dwaqrq',
+            'password' => Hash::make('12345'),
+            'id_tipoUsuario' => 3
+        ]);
 
     }
 }

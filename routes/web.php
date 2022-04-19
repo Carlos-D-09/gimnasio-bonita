@@ -18,14 +18,14 @@ use App\Http\Controllers\RegistroController;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('auth/login');
 });
 
 //Route::POST('/login',[LoginController::class, 'validar']);
 
-Route::resource('/empleado',EmpleadoController::class);
+Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 
-Route::resource('/clase',ClaseController::class);
+Route::resource('/clase',ClaseController::class)->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',
