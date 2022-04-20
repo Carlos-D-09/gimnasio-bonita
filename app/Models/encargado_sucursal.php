@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Spatie\Permission\Traits\HasRoles;
 
-class empleado extends Model
+class encargado_sucursal extends Model
 {
     use HasFactory;
     use HasRoles;
