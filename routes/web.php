@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 
-Route::resource('/clase',ClaseController::class)->middleware('auth');
+Route::resource('/clase',ClaseController::class);
 
 Route::middleware([
     'auth:sanctum',

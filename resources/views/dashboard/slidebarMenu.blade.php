@@ -3,7 +3,7 @@
     <div class="menu_section">
         <ul class="nav side-menu">
             @if(Auth::user()->id_tipoUsuario == 1)
-                <h2> Gerente</h3>
+                <h2> Gerente</h2>
                 <li>
                     <a><i class="fa-solid fa-id-card-clip fa-xl"></i> Empleados<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
