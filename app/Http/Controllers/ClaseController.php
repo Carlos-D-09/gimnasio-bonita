@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\clase;
+use App\Models\empleado;
+use App\Models\oferta_actividades;
+use App\Models\oferta_actvidades;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use OfertaActividades;
 
 class ClaseController extends Controller
 {
@@ -82,6 +86,11 @@ class ClaseController extends Controller
      */
     public function show(Clase $clase)
     {
+        // $clases = clase::with('empleados')->get();foreach($clases as $clase){
+        //     foreach($clase->empleados as $empleado){
+        //         dd($empleado->nombre);
+        //     }
+        // }
         return view('clases.showClase', compact('clase'));
     }
 

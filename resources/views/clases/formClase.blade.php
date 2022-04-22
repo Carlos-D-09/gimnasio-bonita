@@ -43,7 +43,7 @@
                     @enderror
                     <div class="form-row">
                         <button type="submit">
-                            Editar
+                            Registrar
                             <i class="zmdi zmdi-long-arrow-right"></i>
                         </button>
                         <a href="/clase" class="cancel">Cancelar</a>

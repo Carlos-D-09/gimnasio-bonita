@@ -11,7 +11,6 @@
 
 		<!-- STYLE CSS -->
 		<link rel="stylesheet" href="{{asset('css/Clases/formClases.css')}}">
-
 	</head>
 
 	<body>
