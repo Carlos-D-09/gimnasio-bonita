@@ -1,116 +1,98 @@
 {{-- Slidebar para un empleado de tipo administrador --}}
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
-        <h3>Clases</h3>
         <ul class="nav side-menu">
-            <li>
-                <a>
-                    <i class="fa fa-home"></i>
-                    Control de clases
-                    <span class="fa fa-chevron-down"></span>
-                </a>
-                <ul class="nav child_menu">
-                    <li><a href="/clase">Mostrar clases</a></li>
-                    <li><a href="/clase/create">Agregar una clase</a></li>
-                </ul>
-            </li>
-            <li><a><i class="fa fa-edit"></i> Agenda <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                <li><a href="form.html">General Form</a></li>
-                <li><a href="form_advanced.html">Advanced Components</a></li>
-                <li><a href="form_validation.html">Form Validation</a></li>
-                <li><a href="form_wizards.html">Form Wizard</a></li>
-                <li><a href="form_upload.html">Form Upload</a></li>
-                <li><a href="form_buttons.html">Form Buttons</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <div class="menu_section">
-        <h3>Empleados</h3>
-        <ul class="nav side-menu">
-        <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-            <li><a href="e_commerce.html">E-commerce</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="project_detail.html">Project Detail</a></li>
-            <li><a href="contacts.html">Contacts</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            </ul>
-        </li>
-        <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-            <li><a href="page_403.html">403 Error</a></li>
-            <li><a href="page_404.html">404 Error</a></li>
-            <li><a href="page_500.html">500 Error</a></li>
-            <li><a href="plain_page.html">Plain Page</a></li>
-            <li><a href="login.html">Login Page</a></li>
-            <li><a href="pricing_tables.html">Pricing Tables</a></li>
-            </ul>
-        </li>
-        <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-                <li><a href="#level1_1">Level One</a>
+            @if(Auth::user()->id_tipoUsuario == 1)
+                <h4> Gerente</h4>
+                <li>
+                    <a><i class="fa-solid fa-id-card-clip fa-xl"></i> Empleados<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/">Alta de empleados</a></li>
+                        <li><a href="/">Modificar empleados</a></li>
+                        <li><a href="/">Consultar empleados</a></li>
+                        <li><a href="/">Eliminar empleados</a></li>
+                    </ul>
                 </li>
-                <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li class="sub_menu"><a href="level2.html">Level Two</a>
-                    </li>
-                    <li><a href="#level2_1">Level Two</a>
-                    </li>
-                    <li><a href="#level2_2">Level Two</a>
-                    </li>
-                </ul>
+                <li><a><i class="fa-solid fa-wallet fa-xl"></i> Membresias <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/"></a>Consultar membresias</li>
+                        <li><a href="/"></a>Modificar costo por día</li>
+                        <li><a href="/"></a>Modificar membresias</li>
+                        <li><a href="/"></a>Eliminar membresias</li>
+                    </ul>
                 </li>
-                <li><a href="#level1_2">Level One</a>
+                <li><a><i class="fa-solid fa-users fa-xl"></i> Clientes <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/"></a>Consultar membresias</li>
+                        <li><a href="/"></a>Modificar costo por día</li>
+                        <li><a href="/"></a>Modificar membresias</li>
+                        <li><a href="/"></a>Eliminar membresias</li>
+                    </ul>
                 </li>
-            </ul>
-        </li>
-        <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
-        </ul>
-    </div>
-    <div class="menu_section">
-        <h3>Clientes</h3>
-        <ul class="nav side-menu">
-        <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-            <li><a href="e_commerce.html">E-commerce</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="project_detail.html">Project Detail</a></li>
-            <li><a href="contacts.html">Contacts</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            </ul>
-        </li>
-        <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-            <li><a href="page_403.html">403 Error</a></li>
-            <li><a href="page_404.html">404 Error</a></li>
-            <li><a href="page_500.html">500 Error</a></li>
-            <li><a href="plain_page.html">Plain Page</a></li>
-            <li><a href="login.html">Login Page</a></li>
-            <li><a href="pricing_tables.html">Pricing Tables</a></li>
-            </ul>
-        </li>
-        <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-                <li><a href="#level1_1">Level One</a>
+                <li><a><i class="fa-solid fa-book fa-xl"></i> Agenda <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/"></a>Asignar horario y maestro a clase</li>
+                        <li><a href="/"></a>Modificar horario y maestro de una clase</li>
+                        <li><a href="/"></a>Eliminar horario y maestro de una clase</li>
+                    </ul>
                 </li>
-                <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li class="sub_menu"><a href="level2.html">Level Two</a>
-                    </li>
-                    <li><a href="#level2_1">Level Two</a>
-                    </li>
-                    <li><a href="#level2_2">Level Two</a>
-                    </li>
-                </ul>
+                <li>
+                    <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Control de clases<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/clase">Mostrar clases</a></li>
+                        <li><a href="/clase/create">Agregar una clase</a></li>
+                    </ul>
                 </li>
-                <li><a href="#level1_2">Level One</a>
+                <li>
+                    <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/searchPago">Buscar pago</a></li>
+                        <li><a href="/pago">Consultar pagos</a></li>
+                    </ul>
                 </li>
-            </ul>
-        </li>
-        <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
-        </ul>
+            @elseif(Auth::user()->id_tipoUsuario == 2)
+                <h2> Encargado de sucursal </h2>
+                <li><a><i class="fa-solid fa-wallet fa-xl"></i> Membresias <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/"></a>Consultar membresias</li>
+                        <li><a href="/"></a>Modificar costo por día</li>
+                        <li><a href="/"></a>Modificar membresias</li>
+                        <li><a href="/"></a>Eliminar membresias</li>
+                    </ul>
+                </li>
+                <li><a><i class="fa-solid fa-book fa-xl"></i> Agenda <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/"></a>Asignar horario y maestro a clase</li>
+                        <li><a href="/"></a>Modificar horario y maestro de una clase</li>
+                        <li><a href="/"></a>Eliminar horario y maestro de una clase</li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Control de clases<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/clase">Mostrar clases</a></li>
+                        <li><a href="/clase/create">Agregar una clase</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/clase">Realizar pago</a></li>
+                        <li><a href="/clase/create">Consultar pago</a></li>
+                        <li><a href="/clase/create">Consultar pagos</a></li>
+                    </ul>
+                </li>
+
+            @elseif(Auth::user()->id_tipoUsuario == 3)
+                <h2>Maestro</h2>
+                <li>
+                    <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Control de clases<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/clase">Mostrar clases</a></li>
+                    </ul>
+                </li>
+
+            @endif
     </div>
 
 </div>

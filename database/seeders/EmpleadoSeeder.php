@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\empleado;
+use Illuminate\Support\Facades\Hash;
 
 class EmpleadoSeeder extends Seeder
 {
@@ -32,7 +33,7 @@ class EmpleadoSeeder extends Seeder
             'sueldo' => 8000,
             'fecha_ingreso' => now(),
             'NSS' => 'PLEOWL',
-            'password' => '123',
+            'password' => Hash::make('12345'),
             'id_tipoUsuario' => 1
         ]);
 
@@ -47,8 +48,36 @@ class EmpleadoSeeder extends Seeder
             'sueldo' => 8000,
             'fecha_ingreso' => now(),
             'NSS' => 'DFDSAD',
-            'password' => '12345',
+            'password' => Hash::make('12345'),
             'id_tipoUsuario' => 1
+        ]);
+        DB::table('empleados')-> insert ([
+            'id' => 3,
+            'nombre' => 'Carlos Daniel Medina Sahagún',
+            'RFC' => 'MESC324232',
+            'fecha_nacimiento' => '1998-10-17',
+            'domicilio' => 'Patria 1378',
+            'telefono' => '3333221191',
+            'correo' => 'carlos2@test.com',
+            'sueldo' => 6000,
+            'fecha_ingreso' => now(),
+            'NSS' => 'dwaqrt',
+            'password' => Hash::make('12345'),
+            'id_tipoUsuario' => 2
+        ]);
+        DB::table('empleados')-> insert ([
+            'id' => 4,
+            'nombre' => 'Carlos Daniel Medina Sahagún',
+            'RFC' => 'MESC324234',
+            'fecha_nacimiento' => '1997-10-17',
+            'domicilio' => 'Patria 1378',
+            'telefono' => '3333221191',
+            'correo' => 'carlos3@test.com',
+            'sueldo' => 6000,
+            'fecha_ingreso' => now(),
+            'NSS' => 'dwaqrq',
+            'password' => Hash::make('12345'),
+            'id_tipoUsuario' => 3
         ]);
 
     }

@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/36c2a6041f.js" crossorigin="anonymous"></script>
 
     <title>Gimnasio bonita </title>
 
@@ -41,7 +42,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>{{Auth::user()->nombre}}</h2>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -65,14 +66,22 @@
                 <ul class=" navbar-right">
                   <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                      <img src="{{ asset('images/img.jpg')}}" alt="">John Doe
+                      <img src="{{ asset('images/img.jpg')}}" alt="">{{Auth::user()->nombre}}
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item"  href="javascript:;"> Profile</a>
-                      <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                      <div class = "dropdown-item"> <i class = "fa fa-sign-out pull-right"></i>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault();
+                                this.closest('form').submit();" role="button">
+                                Log Out
+                            </a>
+                        </form>
+                      </div>
                     </div>
                   </li>
-                  @include('dashboard.notificaciones')
+                  {{-- @include('dashboard.notificaciones') --}}
                 </ul>
               </nav>
             </div>
