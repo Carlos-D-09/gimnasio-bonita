@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class oferta_actividades extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+    public function clase(){
+        return $this->belongsTo(clase::class,'id_clase');
+    }
+
+    public function empleado(){
+        return $this->belongsTo(empleado::class,'id_empleado');
+
+    }
 }

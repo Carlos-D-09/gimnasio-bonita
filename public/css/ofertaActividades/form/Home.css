@@ -1,0 +1,123 @@
+.u-section-1 {
+    background-image: url('../../../images/ofertaActividades/Form/backgroundForm.jpeg');
+    background-position: 50% 50%;
+}
+
+.u-section-1 .u-sheet-1 {
+    min-height: 1150px;
+  }
+
+  .u-section-1 .u-icon-1 {
+    height: 105px;
+    width: 105px;
+    background-image: none;
+    margin: 55px auto 0;
+  }
+
+  .u-section-1 .u-text-1 {
+    font-weight: 700;
+    font-style: normal;
+    width: 737px;
+    font-size: 2.25rem;
+    margin: 26px auto 0;
+  }
+
+  .u-section-1 .u-form-1 {
+    height: 696px;
+    background-image: none;
+    width: 510px;
+    margin: 35px auto 60px;
+  }
+
+  .u-section-1 .u-form-group-1 {
+    width: 100%;
+  }
+
+  .u-section-1 .u-label-1 {
+    font-weight: 700;
+  }
+
+  .u-section-1 .u-form-group-2 {
+    width: 100%;
+  }
+
+  .u-section-1 .u-label-2 {
+    font-weight: 700;
+  }
+
+  .u-section-1 .u-form-group-3 {
+    width: 100%;
+  }
+
+  .u-section-1 .u-label-3 {
+    font-weight: 700;
+  }
+
+  .u-section-1 .u-form-group-4 {
+    width: 100%;
+  }
+
+  .u-section-1 .u-label-4 {
+    font-weight: 700;
+  }
+
+  .u-section-1 .u-form-group-5 {
+    width: 100%;
+  }
+
+  .u-section-1 .u-label-5 {
+    font-weight: 700;
+  }
+
+  .u-section-1 .u-form-group-6 {
+    width: 100%;
+  }
+
+  .u-section-1 .u-btn-1 {
+    background-image: none;
+    border-style: none;
+    text-transform: uppercase;
+    width: 100%;
+    letter-spacing: 2px;
+    padding: 14px 30px 15px;
+  }
+
+  @media (max-width: 991px) {
+    .u-section-1 .u-text-1 {
+      width: 720px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .u-section-1 .u-text-1 {
+      width: 540px;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .u-section-1 .u-text-1 {
+      width: 340px;
+      font-size: 1.875rem;
+    }
+
+    .u-section-1 .u-form-1 {
+      width: 340px;
+    }
+  }
+
+.miNavBar{
+    float: right;
+}
+
+a.home{
+    color: white;
+}
+
+a.home:hover{
+    cursor: pointer;
+    color: rgb(179, 176, 176);
+}
+
+a.logo{
+    float: left;
+}

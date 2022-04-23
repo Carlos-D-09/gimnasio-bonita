@@ -79,6 +79,20 @@ class EmpleadoSeeder extends Seeder
             'password' => Hash::make('12345'),
             'id_tipoUsuario' => 3
         ]);
+        DB::table('empleados')-> insert ([
+            'id' => 5,
+            'nombre' => 'Diego Alejandro Medina Sahagun',
+            'RFC' => 'MESC324245',
+            'fecha_nacimiento' => '1997-10-29',
+            'domicilio' => 'Patria 1372',
+            'telefono' => '3333221234',
+            'correo' => 'diego@test.com',
+            'sueldo' => 6000,
+            'fecha_ingreso' => now(),
+            'NSS' => 'dwaqrl',
+            'password' => Hash::make('12345'),
+            'id_tipoUsuario' => 3
+        ]);
 
     }
 }

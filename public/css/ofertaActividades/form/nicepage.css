@@ -368,8 +368,7 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 body {
-    margin: 0;
-    background-image: url("/public/images/ofertaActividades/Form/background.jpeg");
+  margin: 0;
 }
 article,
 aside,
@@ -2007,7 +2006,6 @@ html {
   overflow-x: hidden;
 }
 body {
-  background-image: url("/public/images/ofertaActividades/Form/background.jpeg");
   height: auto;
   min-height: 100%;
 }
@@ -5671,7 +5669,6 @@ ul.u-text li:last-child {
 .u-video-poster {
   object-fit: cover;
   display: block;
-
   vertical-align: middle;
   background-size: cover;
   background-position: 50% 50%;
@@ -36376,7 +36373,6 @@ a.u-link.u-text-hover-grey-90:hover {
 
 .u-header .u-nav-1 {
   font-size: 1rem;
-  letter-spacing: 0px;
 }
 
 .u-header .u-nav-2 {
@@ -36385,6 +36381,10 @@ a.u-link.u-text-hover-grey-90:hover {
 @media (max-width: 1199px) {
   .u-header .u-menu-1 {
     width: auto;
+  }
+
+  .u-header .u-nav-1 {
+    letter-spacing: normal;
   }
 }
 
