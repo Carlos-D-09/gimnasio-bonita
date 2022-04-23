@@ -3,14 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\clase;
-use App\Models\empleado;
-use App\Models\oferta_actividades;
-use App\Models\oferta_actvidades;
 use App\Rules\validarNombreClase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use OfertaActividades;
 
 class ClaseController extends Controller
 {
@@ -109,6 +104,10 @@ class ClaseController extends Controller
      */
     public function update(Request $request, Clase $clase)
     {
+        $request->validate([
+            'nombre' => ['required', 'min:3', new validarNombreClase],
+            'descripcion' => 'required',
+        ]);
         if($request->hasFile('imagen')){
             //Inicio guardado imagen
             $file = $request->file('imagen');
@@ -120,10 +119,7 @@ class ClaseController extends Controller
             $request->file('imagen')->move($destino, $filename);
             //Fin guardado imagen
         }
-        $nombre = DB::select('SELECT nombre FROM clases WHERE nombre = :nombre AND id != :id',['nombre'=>$request->nombre, 'id'=>$clase->id]);
-        if($nombre == null){
-            $clase->nombre = $request->nombre;
-        }
+        $clase->nombre = $request->nombre;
         $clase->descripcion = $request->descripcion;
         $clase->save();
         //Regresar a la vista de clases

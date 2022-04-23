@@ -33,8 +33,6 @@
                     <ul class="nav child_menu">
                         <li><a href="/oferta_actividades">Mostrar la oferta de actividades</a></li>
                         <li><a href="/oferta_actividades/create">Asignar horario y maestro a clase</a></li>
-                        <li><a href="/">Modificar horario y maestro de una clase</a></li>
-                        <li><a href="/">Eliminar horario y maestro de una clase</a></li>
                     </ul>
                 </li>
                 <li>
@@ -65,8 +63,6 @@
                     <ul class="nav child_menu">
                         <li><a href="/oferta_actividad">Mostrar la oferta de actividades</a></li>
                         <li><a href="/oferta_actividades/create">Asignar horario y maestro a clase</a></li>
-                        <li><a href="/">Modificar horario y maestro de una clase</a></li>
-                        <li><a href="/">Eliminar horario y maestro de una clase</a></li>
                     </ul>
                 </li>
                 <li>

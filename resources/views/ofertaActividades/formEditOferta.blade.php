@@ -31,16 +31,17 @@
             <div class="u-clearfix u-sheet u-sheet-1">
                 <br>
                 <img src="{{asset('/images/ofertaActividades/Form/logoForm.png')}}" width="230px" height="200px" alt="">
-                <h2 style="color: white"class="u-text u-text-1">Asignar maestro y horario a una clase</h2>
+                <h2 style="color: white"class="u-text u-text-1">Editar oferta de actividad</h2>
                 <div class="u-form u-palette-2-base u-radius-10 u-form-1">
-                    <form action="/oferta_actividades" method="POST" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" style="padding: 50px;" >
+                    <form action="/oferta_actividades/{{$oferta->id}}" method="POST" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" style="padding: 50px;" >
                         @csrf
+                        @method('PATCH')
                         <div class="u-form-group u-form-select u-form-group-1">
-                            <label for="id_clase" class="u-label u-text-body-alt-color u-label-1">Selecciona clase</label>
+                            <label for="id_clase" class="u-label u-text-body-alt-color u-label-1">Clase</label>
                             <div class="u-form-select-wrapper">
-                                <select id="id_clase" name="id_clase" style="color: black" class="u-border-3 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle">
+                                <select id="id_clase" name="id_clase" style="color: black" class="u-border-3 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle" disabled>
                                     @foreach ($clases as $clase)
-                                        <option value="{{$clase->id}}" {{old('id_clase') == $clase->id ? 'selected' : ''}}>{{$clase->nombre}}</option>
+                                        <option value="{{$clase->id}}" {{$oferta->id_clase == $clase->id ? 'selected' : ''}}>{{$clase->nombre}}</option>
                                     @endforeach
                                 </select>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
@@ -51,7 +52,7 @@
                             <div class="u-form-select-wrapper">
                                 <select id="horaInicio" style="color: black" name="horaInicio" class="u-border-3 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle">
                                     @for ($x=7; $x <= 23; $x++)
-                                        <option value="{{$x . ':00'}}" {{old('horaInicio') == $x . ':00' ? 'selected' : ''}}>{{$x . ':00'}}</option>
+                                        <option value="{{$x . ':00'}}" {{strtotime($oferta->horaInicio) == strtotime($x . ':00') ? 'selected': ''}}>{{$x . ':00'}}</option>
                                     @endfor
                                 </select>
                                 @error('horaInicio')
@@ -65,7 +66,7 @@
                             <div class="u-form-select-wrapper">
                                 <select id="horaFin" name="horaFin" style="color: black" class="u-border-3 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle">
                                     @for ($x=7; $x <= 23; $x++)
-                                        <option value="{{$x . ':00'}}" {{old('horaFin') == $x . ':00' ? 'selected' : ''}}>{{$x . ':00'}}</option>
+                                        <option value="{{$x . ':00'}}" {{strtotime($oferta->horaFin) == strtotime($x . ':00') ? 'selected' : ''}}>{{$x . ':00'}}</option>
                                     @endfor
                                 </select>
                                 @error('horaFin')
@@ -78,12 +79,12 @@
                             <label for="dia" class="u-label u-text-body-alt-color u-label-3">Dia</label>
                             <div class="u-form-select-wrapper">
                                 <select id="dia" name="dia" style="color: black" class="u-border-3 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle">
-                                    <option value="lunes" {{old('dia') == 'lunes' ? 'selected' : ''}}> Lunes </option>
-                                    <option value="martes" {{old('dia') == 'martes' ? 'selected' : ''}}> Martes </option>
-                                    <option value="miercoles" {{old('dia') == 'miercoles' ? 'selected' : ''}}> Miercoles </option>
-                                    <option value="jueves" {{old('dia') == 'jueves' ? 'selected' : ''}}> Jueves </option>
-                                    <option value="viernes" {{old('dia') == 'viernes' ? 'selected' : ''}}> Viernes </option>
-                                    <option value="sabado" {{old('dia') == 'sabado' ? 'selected' : ''}}> Sabado </option>
+                                    <option value="lunes" {{$oferta->dia == 'lunes' ? 'selected' : ''}}> Lunes </option>
+                                    <option value="martes" {{$oferta->dia == 'martes' ? 'selected' : ''}}> Martes </option>
+                                    <option value="miercoles" {{$oferta->dia == 'miercoles' ? 'selected' : ''}}> Miercoles </option>
+                                    <option value="jueves" {{$oferta->dia == 'jueves' ? 'selected' : ''}}> Jueves </option>
+                                    <option value="viernes" {{$oferta->dia == 'viernes' ? 'selected' : ''}}> Viernes </option>
+                                    <option value="sabado" {{$oferta->dia == 'sabado' ? 'selected' : ''}}> Sabado </option>
                                 </select>
                                 @error('dia')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -93,7 +94,7 @@
                         </div>
                         <div class="u-form-group u-form-group-4">
                             <label for="cupos" class="u-label u-text-body-alt-color u-label-4">Cupos</label>
-                            <input type="text" placeholder="Introduce cupos" id="cupos" name="cupos" style="color: black" class="u-border-3 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle" value = "{{old('cupos')}}">
+                            <input type="text" placeholder="Introduce cupos" id="cupos" name="cupos" style="color: black" class="u-border-3 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle" value = "{{$oferta->cupos}}">
                             @error('cupos')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -103,7 +104,7 @@
                             <div class="u-form-select-wrapper">
                                 <select id="id_maestro" name="id_maestro" style="color: black"class="u-border-3 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle">
                                     @foreach ($maestros as $maestro)
-                                        <option value="{{$maestro->id}}" {{old('id_maestro') == $maestro->id ? 'selected' : ''}}>{{$maestro->nombre}}</option>
+                                        <option value="{{$maestro->id}}" {{$oferta->id_empleado == $maestro->id ? 'selected' : ''}}>{{$maestro->nombre}}</option>
                                     @endforeach
                                 </select>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
@@ -112,8 +113,9 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="u-align-left u-form-group u-form-submit u-form-group-6">
-                            <button type="submit" class="u-active-palette-2-light-2 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-2-light-2 u-radius-8 u-text-palette-2-base u-white u-btn-1">Asignar</button>
+                        <div class = "u-align-right u-form u-form-submit u-form-group-6 ">
+                            <button type="submit" class="u-align-center u-active-palette-2-light-2 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-2-light-2 u-radius-8 u-text-palette-2-base u-white u-btn-1" style="width: 45%">Editar</button>
+                            <a href="/oferta_actividades" class="u-align-center u-active-palette-2-light-2 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-2-light-2 u-radius-8 u-text-palette-2-base u-white u-btn-1" style="width: 45%">Cancelar</a>
                         </div>
                     </form>
                 </div>

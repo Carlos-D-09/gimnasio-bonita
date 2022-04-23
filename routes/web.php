@@ -4,6 +4,7 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ClaseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\oferta_actividadesController;
 use App\Http\Controllers\OfertaActividadesController;
 //use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistroController;
@@ -32,11 +33,13 @@ Route::resource('/clase',ClaseController::class)->middleware('auth');
 
 Route::resource('/agenda', AgendaController::class)->middleware('auth');
 
-Route::get('/oferta_actividades/clase', [OfertaActividadesController::class, 'orderByClase'])->middleware('auth');
+Route::get('/oferta_actividades/clase', [oferta_actividadesController::class, 'orderByClase'])->middleware('auth');
 
-Route::get('/oferta_actividades/dia', [OfertaActividadesController::class, 'orderByDia'])->middleware('auth');
+Route::get('/oferta_actividades/dia', [oferta_actividadesController::class, 'orderByDia'])->middleware('auth');
 
-Route::resource('/oferta_actividades', OfertaActividadesController::class)->middleware('auth');
+Route::get('/oferta_actividades/search', [oferta_actividadesController::class, 'busquedaPatron'])->middleware('auth');
+
+Route::resource('/oferta_actividades', oferta_actividadesController::class)->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',
