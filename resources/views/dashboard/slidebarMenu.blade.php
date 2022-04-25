@@ -7,10 +7,8 @@
                 <li>
                     <a><i class="fa-solid fa-id-card-clip fa-xl"></i> Empleados<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/">Alta de empleados</a></li>
-                        <li><a href="/">Modificar empleados</a></li>
-                        <li><a href="/">Consultar empleados</a></li>
-                        <li><a href="/">Eliminar empleados</a></li>
+                        <li><a href="/empleadoCRUD/create">Alta de empleados</a></li>
+                        <li><a href="/empleadoCRUD">Consultar empleados</a></li>
                     </ul>
                 </li>
                 <li><a><i class="fa-solid fa-wallet fa-xl"></i> Membresias <span class="fa fa-chevron-down"></span></a>

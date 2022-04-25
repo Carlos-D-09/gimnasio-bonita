@@ -15,7 +15,7 @@ class empleado extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
-
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
@@ -56,4 +56,8 @@ class empleado extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function clases(){
+        return $this->belongsToMany(clase::class,'oferta_actividades','id_clase','id_empleado');
+    }
 }

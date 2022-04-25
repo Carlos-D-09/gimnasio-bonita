@@ -3,9 +3,9 @@
 use App\Http\Controllers\ClaseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
-//use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\PagosController;
+use App\Http\Controllers\empleadoCRUD_Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,11 +26,13 @@ Route::get('/', function () {
 
 Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 
-Route::resource('/clase',ClaseController::class)->middleware('auth');
+Route::resource('/clase',ClaseController::class);
 
 Route::resource('/pago',PagosController::class)->middleware('auth');
 
 Route::get('/searchPago', 'App\Http\Controllers\PagosController@search');
+
+Route::resource('/empleadoCRUD',empleadoCRUD_Controller::class)->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',

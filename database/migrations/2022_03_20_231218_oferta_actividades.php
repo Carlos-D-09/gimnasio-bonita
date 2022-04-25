@@ -21,9 +21,9 @@ class OfertaActividades extends Migration
             $table->unsignedBigInteger('id_empleado');
             $table->unsignedBigInteger('id_clase');
             $table->foreign("id_empleado")
-                ->references("id")->on("empleados");
+                ->references("id")->on("empleados")->constrained();
             $table->foreign("id_clase")
-                ->references("id")->on("clases");
+                ->references("id")->on("clases")->constrained()->onDelete('cascade');
         });
     }
 

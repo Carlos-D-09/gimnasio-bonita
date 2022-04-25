@@ -1,25 +1,16 @@
-<div class="right_col" role="main">
-    
-        <!--@if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif -->
-        
-        <div class="">
+<div class="right_col" role="main" style="width: 200%;">
+    <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Búsqueda de pagos</h3>
+                <h3>Empleados registrados</h3>
             </div>
         </div>
+        <br><br><br>
+        <p>Tipo de usuario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 .- Gerente  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2 .- Encargado de sucursal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 .- Maestro</p>
         <div class="clearfix"></div>
         <div class="row">
             <div class="col-12">
-                <div class="pagos">
+                <div class="empleadosCRUD">
                     <form>
                         <div class="form-group pull-right top_search" >
                         <div class="input-group">
@@ -30,22 +21,26 @@
                         </div>
                         </div>
                     </form>
-                    <div class="pagos-body" >
-                        <table id="example2" class="table table-bordered table-hover" >
+                    <div class="empleados-body">
+                        <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr style="text-align:center">
+                                    <th>Id</th>
                                     <th>Nombre</th>
-                                    <th>Fecha</th>
-                                    <th>Dias</th>
-                                    <th>Monto</th>
-                                    <th>ID de membresía</th>
-                                    <th>ID de empleado</th>
-                                    <th>ID de cliente</th>
+                                    <th>RFC</th>
+                                    <th>Fecha de nacimiento</th>
+                                    <th>Domicilio</th>
+                                    <th>Telefono</th>
+                                    <th>Correo</th>
+                                    <th>Sueldo</th>
+                                    <th>Fecha de ingreso</th>
+                                    <th>NSS</th>
+                                    <th>Contraseña</th>
+                                    <th>Tipo de usuario</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
                                     <tr style="text-align:center">
                                         <td>  </td>
                                         <td>  </td>
@@ -54,11 +49,12 @@
                                         <td>  </td>
                                         <td>  </td>
                                         <td>  </td>
-                                        <td> 
-                                            <a href="">Ver detalles</a> <br>
-                                        </td>
+                                        <td>  </td>
+                                        <td>  </td>
+                                        <td>  </td>
+                                        <td>  </td>
+                                        <td>  </td>
                                     </tr>
-                                
                             </tbody>
                         </table>
                     </div>
@@ -66,5 +62,4 @@
             </div>
         </div>
     </div>
-    
 </div>

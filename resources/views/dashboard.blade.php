@@ -19,6 +19,11 @@
 
     <!-- Custom Theme Style -->
     <link href="{{asset ('/build/css/custom.min.css')}}" rel="stylesheet">
+    <link href="{{asset ('/css/clases/indexClases.css')}}" rel="stylesheet">
+
+    {{-- <link rel="stylesheet" href="{{asset('/css/indexClases.css')}}" media="screen">
+    <link rel="stylesheet" href="{{asset('/css/nicepage.css')}}" media="screen">
+    <meta name="theme-color" content="#478ac9"> --}}
   </head>
 
   <body class="nav-md">
