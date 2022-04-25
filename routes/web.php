@@ -10,7 +10,6 @@ use App\Http\Controllers\empleadoCRUD_Controller;
 use App\Http\Controllers\oferta_actividadesController;
 use App\Http\Controllers\OfertaActividadesController;
 //use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegistroController;
 use App\Models\oferta_actividades;
 
 /*
