@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     </head>
     <body data-home-page="Casa.html" data-home-page-title="Casa" class="u-body u-xl-mode">
-        <header class="u-clearfix u-header u-header" id="sec-962c">
+        <header class="u-clearfix u-header u-header" id="sec-962c" style="background: rgb(83, 83, 83")>
             <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
                 <div class="u-image u-logo u-image-1">
                     <img src="{{asset('/images/logo.png')}}" class="u-logo-image u-logo-image-1">
@@ -83,22 +83,32 @@
             <div class="u-align-left u-clearfix u-sheet u-sheet-1">
                 <div class="u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-list u-list-1">
                     <div class="u-repeater u-repeater-1">
-                        <div class="u-align-center u-container-style u-list-item u-repeater-item">
-                            @foreach($clase->empleados as $empleado)
-                                <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-1">
-                                    <img class="u-border-20 u-border-palette-3-base u-image u-image-circle u-image-1" src="{{asset('/images/user.png')}}" alt="" data-image-width="864" data-image-height="1080">
-                                    <p>
-                                        <strong>{{$empleado->nombre}}</strong>
-                                    </p>
+                        @php
+                            $columnsMaestros = 1;
+                            $nombres = [];
+                        @endphp
+                        @foreach ($clase->empleados as $empleado)
+                            @if(array_search($empleado->nombre, $nombres) === false && $columnsMaestros < 5)
+                                <div class="u-align-center u-container-style u-list-item u-repeater-item">
+                                    <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-{{$columnsMaestros}}">
+                                        <img class="u-border-20 u-border-palette-3-base u-image u-image-circle u-image-{{$columnsMaestros}}" src="{{asset('/images/user.png')}}" alt="" data-image-width="864" data-image-height="1080">
+                                        <p>
+                                                <strong>{{$empleado->nombre}}</strong>
+                                                @php
+                                                    $columnsMaestros++;
+                                                    $nombres[] = $empleado->nombre;
+                                                @endphp
+                                        </p>
+                                    </div>
                                 </div>
-                            @endforeach
-                        </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
-                <div class="u-align-center-sm u-align-center-xs u-container-style u-group u-shape-rectangle u-group-1">
-                    <div class="u-container-layout u-valign-bottom-xl u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-container-layout-5">
+                <div class="u-align-center-sm u-align-center-xs u-container-style u-group u-shape-rectangle u-group-1" style="align-content: center">
+                    <div class="u-container-layout u-valign-bottom-xl u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-container-layout-5" style="align-content: center">
                         <h2 class="u-text u-text-default u-text-1">Nuestros maestros</h2>
-                        <p class="u-text u-text-2"> Este es nuestro actual equipo de trabajo para impartir las clases de {{$clase->nombre}}</p><br><br><br><br><br><br><br>
+                        <p class="u-text u-text-2"> Este es nuestro actual equipo de trabajo para impartir las clases de {{$clase->nombre}}
                     </div>
                 </div>
             </div>
