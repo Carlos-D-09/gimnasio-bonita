@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ClaseController;
+use App\Http\Controllers\ClientAuthController;
+use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\RegistroController;
@@ -24,22 +26,39 @@ use App\Models\oferta_actividades;
 */
 
 Route::get('/', function () {
-    return view('auth/login');
+    return view('welcome');
 });
 
-//Route::POST('/login',[LoginController::class, 'validar']);
+Route::get('/cliente/login', function(){
+    $usuario = 'cliente';
+    return view('auth/login', compact('usuario'));
+});
+
+Route::get('/empleado/login', function(){
+    $usuario = 'empleado';
+    return view('auth/login',compact('usuario'));
+});
+
+Route::get('redirects','App\Http\Controllers\HomeController@index');
 
 Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 
-Route::resource('/clase',ClaseController::class)->middleware('auth');
+Route::resource('/cliente',ClienteController::class)->middleware('auth');
 
-Route::resource('/agenda', AgendaController::class)->middleware('auth');
+Route::resource('/cliente/clase',ClaseController::class)->middleware('auth');
+Route::resource('/empleado/clase',ClaseController::class)->middleware('auth');
 
-Route::get('/oferta_actividades/clase', [oferta_actividadesController::class, 'orderByClase'])->middleware('auth');
+Route::resource('/cliente/agenda', AgendaController::class)->middleware('auth');
+Route::resource('/empleado/agenda', AgendaController::class)->middleware('auth');
 
-Route::get('/oferta_actividades/dia', [oferta_actividadesController::class, 'orderByDia'])->middleware('auth');
+Route::get('/empleado/oferta_actividades/clase', [oferta_actividadesController::class, 'orderByClase'])->middleware('auth');
+Route::get('/cliente/oferta_actividades/clase', [oferta_actividadesController::class, 'orderByClase'])->middleware('auth');
 
-Route::get('/oferta_actividades/search', [oferta_actividadesController::class, 'busquedaPatron'])->middleware('auth');
+Route::get('/empleado/oferta_actividades/dia', [oferta_actividadesController::class, 'orderByDia'])->middleware('auth');
+Route::get('/cliente/oferta_actividades/dia', [oferta_actividadesController::class, 'orderByDia'])->middleware('auth');
+
+Route::get('/empleado/oferta_actividades/search', [oferta_actividadesController::class, 'busquedaPatron'])->middleware('auth');
+Route::get('/cliente/oferta_actividades/search', [oferta_actividadesController::class, 'busquedaPatron'])->middleware('auth');
 
 Route::resource('/oferta_actividades', oferta_actividadesController::class)->middleware('auth');
 
