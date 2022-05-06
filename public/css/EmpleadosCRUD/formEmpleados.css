@@ -51,7 +51,7 @@ form .user-details .input-box{
 }
 form .input-box span.details{
   display: block;
-  font-weight: 500;
+  font-weight: 500; /**/
   margin-bottom: 5px;
 }
 .user-details .input-box input{
@@ -69,7 +69,7 @@ form .input-box span.details{
 .user-details .input-box input:valid{
   border-color: #FBAB7E;
 }
- form .gender-details .gender-title{
+ form .cargo-details .cargo-title{
   font-size: 20px;
   font-weight: 500;
  }
@@ -100,7 +100,7 @@ form .input-box span.details{
    border-color: #d9d9d9;
  }
  form input[type="radio"]{
-   display: none;
+   display: none; /**/
  }
  form .button{
    height: 45px;
@@ -118,15 +118,16 @@ form .input-box span.details{
    cursor: pointer;
    transition: all 0.3s ease;
    background-color: #FBAB7E;
-background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
 
  }
  form .button input:hover{
   /* transform: scale(0.99); */
   background-color: #FBAB7E;
-background-image: linear-gradient(250deg, #FBAB7E 0%, #F7CE68 100%);
+  background-image: linear-gradient(250deg, #FBAB7E 0%, #F7CE68 100%);
 
   }
+
  @media(max-width: 584px){
  .container{
   max-width: 100%;

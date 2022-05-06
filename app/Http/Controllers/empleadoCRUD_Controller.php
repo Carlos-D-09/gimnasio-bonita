@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\empleado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class empleadoCRUD_Controller extends Controller
 {
@@ -15,7 +17,9 @@ class empleadoCRUD_Controller extends Controller
     {
         $empleado = session('empleado');
         $content = 'empleadosCRUD.seeEmpleado';
-        return view('dashboard', compact('empleado', 'content'));
+
+        $data['empleados'] = empleado::paginate();
+        return view('dashboard', $data, compact('empleado', 'content'));
     }
 
     /**
@@ -36,7 +40,28 @@ class empleadoCRUD_Controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*dd($request->all());*/
+        $EmpleadoCRUD = new empleado();
+
+        $EmpleadoCRUD->id = $request->id;
+        $EmpleadoCRUD->nombre = $request->nombre;
+        $EmpleadoCRUD->RFC = $request->RFC;
+        $EmpleadoCRUD->fecha_nacimiento = $request->fecha_nacimiento;
+        $EmpleadoCRUD->domicilio = $request->domicilio;
+        $EmpleadoCRUD->telefono = $request->telefono;
+        $EmpleadoCRUD->correo = $request->correo;
+        $EmpleadoCRUD->sueldo = $request->sueldo;
+        $EmpleadoCRUD->fecha_ingreso = $request->fecha_ingreso;
+        $EmpleadoCRUD->NSS = $request->NSS;
+        $EmpleadoCRUD->password = $request->password;
+        $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
+        $EmpleadoCRUD->save();
+
+        $empleado = session('empleado');
+
+        $content = 'empleadosCRUD.seeEmpleado';
+        return view('dashboard', compact('empleado', 'content'));
+        /*return 'store';*/
     }
 
     /**
@@ -45,7 +70,7 @@ class empleadoCRUD_Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(empleado $EmpleadoCRUD)
     {
         //
     }

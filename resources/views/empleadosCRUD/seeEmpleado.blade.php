@@ -1,4 +1,4 @@
-<div class="right_col" role="main" style="width: 200%;">
+<div class="right_col" role="main" >
     <div class="">
         <div class="page-title">
             <div class="title_left">
@@ -24,37 +24,28 @@
                     <div class="empleados-body">
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
+                                
                                 <tr style="text-align:center">
                                     <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>RFC</th>
-                                    <th>Fecha de nacimiento</th>
-                                    <th>Domicilio</th>
-                                    <th>Telefono</th>
                                     <th>Correo</th>
-                                    <th>Sueldo</th>
                                     <th>Fecha de ingreso</th>
-                                    <th>NSS</th>
-                                    <th>Contraseña</th>
                                     <th>Tipo de usuario</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr style="text-align:center">
+                                    @foreach( $empleados as $empleado )
+                                    @if ($empleado->id_tipoUsuario != 1) <!--Probando las validaciones --> 
+                                        <tr style="text-align:center">
+                                        <td>{{ $empleado->id }}</td>
+                                        <td>{{ $empleado->correo }}</td>
+                                        <td>{{ $empleado->fecha_ingreso }}</td>
+                                        <td>{{ $empleado->id_tipoUsuario }}</td>
                                         <td>  </td>
-                                        <td>  </td>
-                                        <td>  </td>
-                                        <td>  </td>
-                                        <td>  </td>
-                                        <td>  </td>
-                                        <td>  </td>
-                                        <td>  </td>
-                                        <td>  </td>
-                                        <td>  </td>
-                                        <td>  </td>
-                                        <td>  </td>
-                                    </tr>
+                                        </tr>
+                                    @endif
+                                    
+                                    @endforeach
                             </tbody>
                         </table>
                     </div>
