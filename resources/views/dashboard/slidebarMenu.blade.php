@@ -45,8 +45,6 @@
                     <ul class="nav child_menu">
                         <li><a href="/searchPago">Buscar pago</a></li>
                         <li><a href="/pago">Consultar pagos</a></li>
-                        <li><a href="/clase/create">Constular pago</a></li>
-                        <li><a href="/clase/create">Consultar pagos</a></li>
                     </ul>
                 </li>
             @elseif(Auth::user()->id_tipoUsuario == 2)
@@ -75,10 +73,9 @@
                 <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/clase">Realizar pago</a></li>
-                        <li><a href="/clase/create">Consultar pago</a></li>
-                        <li><a href="/clase/create">Consultar pagos</a></li>
-                        <li><a href="/clase/create">Realizar pago</a></li>
+                        <li><a href="">Realizar pago</a></li>
+                        <li><a href="">Consultar pago</a></li>
+                        <li><a href="">Consultar pagos</a></li>
                     </ul>
                 </li>
 

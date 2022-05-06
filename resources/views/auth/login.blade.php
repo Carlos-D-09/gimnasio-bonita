@@ -1,20 +1,33 @@
 <x-guest-layout>
     <x-jet-authentication-card>
-        <x-slot name="logo">
+
+        <x-slot name="logo" style="justify-content: center">
             <img src="{{asset('images/logo.png')}}" width="200" height="200">
+            @if($usuario == "cliente")
+                <h1 style="justify-content: center">Inicio de sesión para clientes</h1>
+            @elseif ($usuario == "empleado")
+                <h1 style="justify-content: center">Inicio de sesión para empleados</h1>
+            @endif
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
 
         @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
+        <div class="mb-4 font-medium text-sm text-green-600">
+            {{ session('status') }}
+        </div>
         @endif
+
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
+            <div>
+                @if($usuario == "cliente")
+                <input id="usuario" class="block mt-1 w-full" type="hidden" name="cliente" value = "cliente" />
+                @elseif ($usuario == "empleado")
+                <input id="usuario" class="block mt-1 w-full" type="hidden" name="usuario" value = "empleado" />
+                @endif
+            </div>
             <div>
                 <x-jet-label for="email" value="{{ __('Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />

@@ -22,6 +22,7 @@ class CreateAgendasTable extends Migration
             $table->foreign("id_oferta")
                 ->references("id")->on("oferta_actividades")->constrained()->onDelete('cascade');
         });
+        
     }
 
     /**

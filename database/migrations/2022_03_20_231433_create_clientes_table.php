@@ -28,6 +28,7 @@ class CreateClientesTable extends Migration
                 ->references("id")->on("empleados");
 
         });
+        
     }
 
     /**

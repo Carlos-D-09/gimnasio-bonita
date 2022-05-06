@@ -18,6 +18,7 @@ class TipoUsuario extends Migration
             $table->string('nombre', 150);
             $table->string('descripcion', 300);
         });
+        
     }
 
     /**

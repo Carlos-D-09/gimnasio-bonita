@@ -29,6 +29,7 @@ class CreateEmpleadosTable extends Migration
             $table->foreign('id_tipoUsuario')->references("id")->on("tipo_usuario");
 
         });
+        
     }
 
     /**

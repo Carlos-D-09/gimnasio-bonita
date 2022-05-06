@@ -29,6 +29,7 @@ class CreatePagosTable extends Migration
             $table->foreign("id_cliente")
                 ->references("id")->on("clientes");
         });
+        
     }
 
     /**
