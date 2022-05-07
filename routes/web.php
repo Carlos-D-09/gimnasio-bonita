@@ -11,7 +11,6 @@ use App\Http\Controllers\PagosController;
 use App\Http\Controllers\empleadoCRUD_Controller;
 use App\Http\Controllers\oferta_actividadesController;
 use App\Http\Controllers\OfertaActividadesController;
-//use App\Http\Controllers\LoginController;
 use App\Models\oferta_actividades;
 
 /*
@@ -29,21 +28,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/cliente/login', function(){
-    $usuario = 'cliente';
-    return view('auth/login', compact('usuario'));
-});
+Route::get('/cliente/login', [ClientAuthController::class, 'login']);
+
+Route::post('/cliente/login', [ClientAuthController::class, 'handleLogin']);
 
 Route::get('/empleado/login', function(){
-    $usuario = 'empleado';
-    return view('auth/login',compact('usuario'));
+    return view('auth/login');
 });
-
-Route::get('redirects','App\Http\Controllers\HomeController@index');
 
 Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 
-Route::resource('/cliente',ClienteController::class)->middleware('auth');
+Route::resource('/cliente',ClienteController::class)->middleware('auth:client');
 
 Route::resource('/cliente/clase',ClaseController::class)->middleware('auth');
 Route::resource('/empleado/clase',ClaseController::class)->middleware('auth');

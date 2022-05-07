@@ -32,11 +32,13 @@
                     <img id="preview" class="alineadoCentro" src="{{asset($clase->imagen)}}" width="100px" height="100px">
                     <script src="{{asset('js/Clases/formClases.js')}}"></script>
                     <br><br>
+                    <p>Nombre: </p>
                     <input type="text" name="nombre" class="form-control" value = {{$clase->nombre}}>
                     @error('nombre')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <br><br>
+                    <p>Descripcion: </p>
 					<textarea name="descripcion" class="form-control" style="height: 130px;">{{$clase->descripcion}}</textarea>
                     @error('descripcion')
                         <div class="alert alert-danger">{{ $message }}</div>
