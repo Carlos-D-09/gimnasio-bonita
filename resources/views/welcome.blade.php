@@ -131,7 +131,7 @@
                     <div class="col-xl-8 col-lg-9 col-sm-10">
                         <div class="banner-content">
                             <h4 class="sub-title wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1s">Confia en nosotros</h4>
-                            <h1 style="display:inline" class="banner-title mt-10 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="2s"><span>Gimnasio-bonita</span> Gimnasio con cl<FONT COLOR="white">ases</FONT> <br>de interes</h1>
+                            <h1 style="display:inline" class="banner-title mt-10 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="2s"><span>Gimnasio-bonita</span> <FONT COLOR="aquamarine">Gimnasio con clases</FONT> <br> <FONT COLOR="aquamarine">de interes</FONT></h1>
                             <br>
                             <a class="banner-contact mt-25 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="2.3s" href="#" @disabled(true)>Ven a conocernos</a>
                         </div> <!-- banner content -->
