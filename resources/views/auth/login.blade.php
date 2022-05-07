@@ -3,11 +3,7 @@
 
         <x-slot name="logo" style="justify-content: center">
             <img src="{{asset('images/logo.png')}}" width="200" height="200">
-            @if($usuario == "cliente")
-                <h1 style="justify-content: center">Inicio de sesión para clientes</h1>
-            @elseif ($usuario == "empleado")
-                <h1 style="justify-content: center">Inicio de sesión para empleados</h1>
-            @endif
+            <h1 style="justify-content: center">Inicio de sesión para empleados</h1>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\clase;
 use App\Models\cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
 {
     public function index()
     {
-        dd("Hola soy un cliente que inicio sesión");
-        $cliente = session('clients');
-        dd($cliente);
+        $cliente = Auth::user();
+        $clases = clase::all();
+        $content = 'clases.index';
         return view('dashboard',compact('clases', 'cliente', 'content'));
     }
 
