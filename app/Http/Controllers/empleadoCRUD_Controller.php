@@ -55,6 +55,7 @@ class empleadoCRUD_Controller extends Controller
         $EmpleadoCRUD->NSS = $request->NSS;
         $EmpleadoCRUD->password = $request->password;
         $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
+        $EmpleadoCRUD->activo = $request->activo;
         $EmpleadoCRUD->save();
 
         $empleado = session('empleado');
@@ -72,7 +73,7 @@ class empleadoCRUD_Controller extends Controller
      */
     public function show(empleado $EmpleadoCRUD)
     {
-        //
+        return view('empleadosCRUD.showEmpleado', compact('EmpleadoCRUD'));
     }
 
     /**
@@ -81,9 +82,9 @@ class empleadoCRUD_Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(empleado $EmpleadoCRUD)
     {
-        //
+        return view('empleadosCRUD.formEmpleado', compact('EmpleadoCRUD'));
     }
 
     /**
@@ -93,9 +94,24 @@ class empleadoCRUD_Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, empleado $EmpleadoCRUD)
     {
-        //
+        $EmpleadoCRUD->id = $request->id;
+        $EmpleadoCRUD->nombre = $request->nombre;
+        $EmpleadoCRUD->RFC = $request->RFC;
+        $EmpleadoCRUD->fecha_nacimiento = $request->fecha_nacimiento;
+        $EmpleadoCRUD->domicilio = $request->domicilio;
+        $EmpleadoCRUD->telefono = $request->telefono;
+        $EmpleadoCRUD->correo = $request->correo;
+        $EmpleadoCRUD->sueldo = $request->sueldo;
+        $EmpleadoCRUD->fecha_ingreso = $request->fecha_ingreso;
+        $EmpleadoCRUD->NSS = $request->NSS;
+        $EmpleadoCRUD->password = $request->password;
+        $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
+        $EmpleadoCRUD->activo = $request->activo;
+        $EmpleadoCRUD->save();
+
+        return redirect('/empleadoCRUD/' . $EmpleadoCRUD->id);
     }
 
     /**

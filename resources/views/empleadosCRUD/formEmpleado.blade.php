@@ -9,50 +9,58 @@
    </head>
 <body>
   <div class="container">
-    <div class="title">Registro de empleados</div> <!-- Fecha de ingreso e id se asignan en automatico -->
-    <div class="content">
+    @isset($EmpleadoCRUD)
+      <div class="title">Edición del empleado</div> <!-- Edit empleado -->
+      <div class="content">
+      <form action="empleadoCRUD/{{ $EmpleadoCRUD->id }}" method="POST">
+        @method('PATCH')
+    @else
+      <div class="title">Registro de empleados</div> <!-- Fecha de ingreso e id se asignan en automatico -->
+      <div class="content">
       <form action="{{ route('empleadoCRUD.store') }}" method="POST">
+    @endisset
+    
       @csrf
         <div class="user-details">
           <div class="input-box">
             <span class="details">Nombre del empleado</span>
-            <input type="text" name="nombre" placeholder="Ejemplo: David Fletes" required> <!-- required a un lado del placeholder -->
+            <input type="text" name="nombre" placeholder="Ejemplo: David Fletes" value="{{ isset($EmpleadoCRUD) ? $empleado->nombre : ''}}{{ old('nombre') }}" required> <!-- required a un lado del placeholder -->
           </div>
           <div class="input-box">
             <span class="details">RFC del empleado</span>
-            <input type="text" name="RFC" placeholder="Incluye sólo caracteres" required>
+            <input type="text" name="RFC" placeholder="Incluye sólo caracteres" value="{{ isset($EmpleadoCRUD) ? $empleado->RFC : ''  }}{{ old('RFC') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Fecha de nacimiento del empleado</span>
-            <input type="text" name="fecha_nacimiento" placeholder="Ejemplo: 2010-10-04" required>
+            <input type="text" name="fecha_nacimiento" placeholder="Ejemplo: 2010-10-04" value="{{ isset($EmpleadoCRUD) ? $empleado->fecha_nacimiento : '' }}{{ old('fecha_nacimiento') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Domicilio del empleado</span>
-            <input type="text" name="domicilio" placeholder="Ejemplo: La Paz #203" required>
+            <input type="text" name="domicilio" placeholder="Ejemplo: La Paz #203" value="{{ isset($EmpleadoCRUD) ? $empleado->domicilio : '' }}{{ old('domicilio') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Telefono del empleado</span>
-            <input type="text" name="telefono" placeholder="Ejemplo: 33454345345" required>
+            <input type="text" name="telefono" placeholder="Ejemplo: 33454345345" value="{{ isset($EmpleadoCRUD) ? $empleado->telefono : '' }}{{ old('telefono') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Correo del empleado</span>
-            <input type="text" name="correo" placeholder="Ejemplo: hola@gmail.com" required>
+            <input type="text" name="correo" placeholder="Ejemplo: hola@gmail.com" value="{{ isset($EmpleadoCRUD) ? $empleado->correo : '' }}{{ old('correo') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Sueldo mensual del empleado</span>
-            <input type="text" name="sueldo" placeholder="Ejemplo: 10000" required>
+            <input type="text" name="sueldo" placeholder="Ejemplo: 10000" value="{{ isset($EmpleadoCRUD) ? $empleado->sueldo : '' }}{{ old('sueldo') }}" required>
           </div>
           <div class="input-box">
             <span class="details">NSS del empleado</span>
-            <input type="text" name="NSS" placeholder="Incluye sólo caracteres" required>
+            <input type="text" name="NSS" placeholder="Incluye sólo caracteres" value="{{ isset($EmpleadoCRUD) ? $empleado->NSS : '' }}{{ old('NSS') }}" required>
           </div>
           <div class="input-box" style="width: 100%;">
             <span class="details" align="center">Contraseña del empleado</span>
-            <input type="password" name="password" placeholder="Introduce su contraseña" required>
+            <input type="password" name="password" placeholder="Introduce su contraseña" value="{{ isset($EmpleadoCRUD) ? $empleado->password : '' }}{{ old('password') }}" required>
           </div>
           <div class="input-box" style="width: 100%;">
             <span class="details" align="center">Fecha de registro de empleado detectado por el sistema</span>
-            <input type="text" name="fecha_ingreso" value="<?php echo now() ?>" readonly>
+            <input type="text" name="fecha_ingreso" value="{{ isset($EmpleadoCRUD) ? $empleado->fecha_ingreso : '' }}{{ old('fecha_ingreso') }}<?php echo now() ?>" readonly>
           </div>
         </div>
         <div class="cargo-details">
@@ -76,10 +84,10 @@
           </div>
         </div>
         <div class="button">
-          <input type="submit" value="Registrar">
+          <input type="submit" value="Subir">
         </div>
         <div class="buttonCancel">
-          <a href="/empleado">Cancelar registro de empleado</a>
+          <a href="/empleado">Cancelar proceso</a>
         </div>
       </form>
     </div>

@@ -2,7 +2,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Empleados registrados</h3> <br>
+                <h3>Información del empleado</h3> <br>
             </div>
             <div class="title_right">
                 <div class="col-md-5 col-sm-5 form-group pull-right top_search">
@@ -36,29 +36,37 @@
                                     <thead>
                                         
                                         <tr style="text-align:center">
-                                            <th>Id</th>
-                                            <th>Correo</th>
-                                            <th>Fecha de ingreso</th>
-                                            <th>Tipo de usuario</th>
-                                            <th>Opciones</th>
+                                                <th>Id</th>
+                                                <th>Nombre</th>
+                                                <th>RFC</th>
+                                                <th>Fecha de nacimiento</th>
+                                                <th>Domicilio</th>
+                                                <th>Telefono</th>
+                                                <th>Correo</th>
+                                                <th>Sueldo</th>
+                                                <th>Fecha de ingreso</th>
+                                                <th>NSS</th>
+                                                <th>Contraseña</th>
+                                                <th>Activo</th>
+                                                <th>Tipo de usuario</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            @foreach( $empleados as $empleado )
-                                            @if ($empleado->id_tipoUsuario != 1) <!--Probando las validaciones --> 
                                                 <tr style="text-align:center">
                                                 <td>{{ $empleado->id }}</td>
+                                                <td>{{ $empleado->nombre }}</td>
+                                                <td>{{ $empleado->RFC }}</td>
+                                                <td>{{ $empleado->fecha_nacimiento }}</td>
+                                                <td>{{ $empleado->domicilio }}</td>
+                                                <td>{{ $empleado->telefono }}</td>
                                                 <td>{{ $empleado->correo }}</td>
+                                                <td>{{ $empleado->sueldo }}</td>
                                                 <td>{{ $empleado->fecha_ingreso }}</td>
+                                                <td>{{ $empleado->NSS }}</td>
+                                                <td>{{ $empleado->password }}</td>
+                                                <td>{{ $empleado->activo }}</td>
                                                 <td>{{ $empleado->id_tipoUsuario }}</td>
-                                                <td>
-                                                    <a href="/empleadoCRUD/{{ $empleado->id }}">Ver detalles del empleado</a>
-                                                    <a href="/empleadoCRUD/{{ $empleado->id }}/edit">Editar información del empleado</a>
-                                                </td>
                                                 </tr>
-                                            @endif
-                                            
-                                            @endforeach
                                     </tbody>
                                 </table>
                                 </div>
