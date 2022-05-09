@@ -34,6 +34,7 @@ class EmpleadoSeeder extends Seeder
             'fecha_ingreso' => now(),
             'NSS' => 'PLEOWL',
             'password' => Hash::make('12345'),
+            'activo' => true,
             'id_tipoUsuario' => 1
         ]);
 
@@ -49,6 +50,7 @@ class EmpleadoSeeder extends Seeder
             'fecha_ingreso' => now(),
             'NSS' => 'DFDSAD',
             'password' => Hash::make('12345'),
+            'activo' => true,
             'id_tipoUsuario' => 1
         ]);
         DB::table('empleados')-> insert ([
@@ -63,6 +65,7 @@ class EmpleadoSeeder extends Seeder
             'fecha_ingreso' => now(),
             'NSS' => 'dwaqrt',
             'password' => Hash::make('12345'),
+            'activo' => true,
             'id_tipoUsuario' => 2
         ]);
         DB::table('empleados')-> insert ([
@@ -77,6 +80,7 @@ class EmpleadoSeeder extends Seeder
             'fecha_ingreso' => now(),
             'NSS' => 'dwaqrq',
             'password' => Hash::make('12345'),
+            'activo' => true,
             'id_tipoUsuario' => 3
         ]);
         DB::table('empleados')-> insert ([
@@ -91,6 +95,7 @@ class EmpleadoSeeder extends Seeder
             'fecha_ingreso' => now(),
             'NSS' => 'dwaqrl',
             'password' => Hash::make('12345'),
+            'activo' => false,
             'id_tipoUsuario' => 3
         ]);
 
