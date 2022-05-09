@@ -38,20 +38,27 @@ Route::get('/empleado/login', function(){
 
 Route::resource('/empleado/clase',ClaseController::class)->middleware('auth');
 
-Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
-
-Route::resource('/cliente',ClienteController::class)->middleware('auth:client');
-
-
-Route::resource('/empleado/agenda', AgendaController::class)->middleware('auth');
-
 Route::get('/empleado/oferta_actividades/clase', [oferta_actividadesController::class, 'orderByClase'])->middleware('auth');
 
 Route::get('/empleado/oferta_actividades/dia', [oferta_actividadesController::class, 'orderByDia'])->middleware('auth');
 
+Route::get('/empleado/oferta_actividades/maestro', [oferta_actividadesController::class, 'orderByMaestro'])->middleware('auth');
+
 Route::get('/empleado/oferta_actividades/search', [oferta_actividadesController::class, 'busquedaPatron'])->middleware('auth');
 
-Route::resource('/empleado/oferta_actividades', oferta_actividadesController::class)->middleware('auth');
+Route::get('/empleado/oferta_actividades/maestro/search', [oferta_actividadesController::class, 'busquedaPatronMaestro'])->middleware('auth');
+
+Route::get('/empleado/oferta_actividades/dia/search', [oferta_actividadesController::class, 'busquedaPatronDia'])->middleware('auth');
+
+Route::get('/empleado/oferta_actividades/clase/search', [oferta_actividadesController::class, 'busquedaPatronClase'])->middleware('auth');
+
+Route::resource('/empleado/oferta_actividades', oferta_actividadesController::class)->middleware('auth')->except('show');
+
+Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
+
+Route::resource('/cliente',ClienteController::class)->middleware('auth:client');
+
+Route::resource('/empleado/agenda', AgendaController::class)->middleware('auth');
 
 Route::resource('/empleado/pago',PagosController::class)->middleware('auth');
 

@@ -6,12 +6,16 @@
             </div>
             <div class="title_right">
                 <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                    <form action="/oferta_actividades/search">
+                    @if( strpos(Route::current()->uri,"search",0) === false)
+                        <form action="{{ '/' . Route::current()->uri . '/search'}}">
+                    @else
+                        <form action="{{ '/' . Route::current()->uri}}">
+                    @endif
                         <div class="input-group">
                             <input type="text" name="patron" class="form-control inputPatron" placeholder="Buscar por nombre">
                             <span class="input-group-btn">
                                 <button class="btn btn-default buttonPatron" type="submit"> Buscar</button>
-                                <script src="{{asset('/js/ofertaActividades/index/botonBusqueda.js')}}"></script>  
+                                <script src="{{asset('/js/ofertaActividades/index/botonBusqueda.js')}}"></script>
                             </span>
                         </div>
                     </form>
@@ -23,13 +27,6 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        @if(isset($dia))
-                            <h2>Oferta de actividades ordenada por día</h2>
-                        @elseif(isset($clase))
-                            <h2>Oferta de actividades ordenada de la A-Z en base a la clase</h2>
-                        @else
-                            <h2>Oferta de actividades</h2>
-                        @endif
                         <ul class="nav navbar-right panel_toolbox">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -37,17 +34,31 @@
                                     Ordenar por
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="/oferta_actividades">Todos</a>
-                                    <a class="dropdown-item" href="/oferta_actividades/dia">Dia L-S</a>
-                                    <a class="dropdown-item" href="/oferta_actividades/clase">Clase A-Z</a>
+                                    <a class="dropdown-item" href="/empleado/oferta_actividades">Todos</a>
+                                    <a class="dropdown-item" href="/empleado/oferta_actividades/dia">Dia L-S</a>
+                                    <a class="dropdown-item" href="/empleado/oferta_actividades/clase">Clase A-Z</a>
+                                    <a class="dropdown-item" href="/empleado/oferta_actividades/maestro">Maestros A-Z</a>
                                     @isset(Auth::user()->id_tipoUsuario)
                                         @if (Auth::user()->id_tipoUsuario == 3)
-                                            <a class="dropdown-item" href="/oferta_actividades/clase">Mis clases</a>
+                                            <a class="dropdown-item" href="/empleado/oferta_actividades/clase">Mis clases</a>
                                         @endif
                                     @endisset
                                 </div>
                             </li>
                         </ul>
+                        @if(isset($dia))
+                            <h2>Oferta de actividades ordenada por día</h2>
+                        @elseif(isset($clase))
+                            <h2>Oferta de actividades ordenada de la A-Z en base a la clase</h2>
+                        @elseif(isset($maestro))
+                            <h2>Oferta de actividades ordenada de la A-Z en base a los maestros</h2>
+                        @else
+                            <h2>Oferta de actividades</h2>
+                        @endif
+                        @if(isset($patronBuscado))
+                            <br><br>
+                            <p>Resultados de la busqueda para la cadena "{{$patronBuscado}}"</p>
+                        @endif
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -57,6 +68,9 @@
                                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
+                                                <th>
+                                                    <p style="text-align: center">Id</p>
+                                                </th>
                                                 <th>
                                                     <p style="text-align: center">Clase</p>
                                                 </th>
@@ -84,6 +98,9 @@
                                             @foreach ($ofertaActividades as $ofertaActividad)
                                             <tr>
                                                 <td align="center">
+                                                    {{$ofertaActividad->id}}
+                                                </td>
+                                                <td align="center">
                                                     {{$ofertaActividad->clase->nombre}}
                                                 </td>
                                                 <td align="center">
@@ -101,22 +118,16 @@
                                                 <td align="center">
                                                     {{$ofertaActividad->empleado->nombre}}
                                                 </td>
-                                                @if(isset(Auth::user()->id_tipoUsuario))
+                                                @if(isset(Auth::user()->id_tipoUsuario) and Auth::user()->id_tipoUsuario != 3)
                                                 <td align="center">
                                                     <table style="align-content: center">
                                                         <tr>
-                                                            <form action="/oferta_actividades/{{$ofertaActividad->id}}" method="GET">
-                                                                <button type="submit" class="btn btn-round btn-info btn-sm">Detalle</button>
-                                                            </form>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <form action="/oferta_actividades/{{$ofertaActividad->id}}/edit" method="GET">
+                                                            <form action="/empleado/oferta_actividades/{{$ofertaActividad->id}}/edit" method="GET">
                                                                 <button type="submit" class="btn btn-round btn-warning btn-sm">Editar</button>
                                                             </form>
                                                         </tr>
                                                         <tr>
-                                                            <form action="/oferta_actividades/{{$ofertaActividad->id}}" method="POST">
+                                                            <form action="/empleado/oferta_actividades/{{$ofertaActividad->id}}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit"class="btn btn-round btn-danger btn-sm">Eliminar</button>

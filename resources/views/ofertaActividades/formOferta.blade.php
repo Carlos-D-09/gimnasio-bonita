@@ -17,24 +17,19 @@
         <meta property="og:type" content="website">
     </head>
     <body data-home-page="Home.html" data-home-page-title="Home.html" class="u-body u-xl-mode">
-        <header data-home-page="Home.html" data-home-page-title="Home" class="u-clearfix u-header u-header" id="sec-698e" style="background:rgb(83, 83, 83);">
-            <div class="u-clearfix u-sheet u-sheet-1">
-                <a class="logo">
-                    <img src="{{asset('/images/logo.png')}}" height="70px" width="80px">
-                </a>
-                <nav class= "miNavBar">
-                    <a class="home" href="/oferta_actividades"> <h3>Home</h3></a>
-                </nav>
-            </div>
-        </header>
         <section class="u-align-center u-clearfix u-section-1" id="sec-5c09" data-image-width="450" data-image-height="301">
             <div class="u-clearfix u-sheet u-sheet-1">
                 <br>
                 <img src="{{asset('/images/ofertaActividades/Form/logoForm.png')}}" width="230px" height="200px" alt="">
                 <h2 style="color: white"class="u-text u-text-1">Asignar maestro y horario a una clase</h2>
                 <div class="u-form u-palette-2-base u-radius-10 u-form-1">
-                    <form action="/oferta_actividades" method="POST" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" style="padding: 50px;" >
+                    <form action="/empleado/oferta_actividades" method="POST" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" style="padding: 50px;" >
                         @csrf
+                        <div class="u-form-group u-form-select u-form-group-1">
+                            <div class="u-form-select-wrapper">
+                                <p> <b> Id de la nueva oferta de actividad: {{$id}} </b> </p>
+                            </div>
+                        </div>
                         <div class="u-form-group u-form-select u-form-group-1">
                             <label for="id_clase" class="u-label u-text-body-alt-color u-label-1">Selecciona clase</label>
                             <div class="u-form-select-wrapper">
@@ -112,8 +107,9 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="u-align-left u-form-group u-form-submit u-form-group-6">
-                            <button type="submit" class="u-active-palette-2-light-2 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-2-light-2 u-radius-8 u-text-palette-2-base u-white u-btn-1">Asignar</button>
+                        <div class = "u-align-right u-form u-form-submit u-form-group-6 ">
+                            <button type="submit" class="u-align-center u-active-palette-2-light-2 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-2-light-2 u-radius-8 u-text-palette-2-base u-white u-btn-1" style="width: 45%">Guardar</button>
+                            <a href="/empleado/oferta_actividades" class="u-align-center u-active-palette-2-light-2 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-2-light-2 u-radius-8 u-text-palette-2-base u-white u-btn-1" style="width: 45%">Cancelar</a>
                         </div>
                     </form>
                 </div>

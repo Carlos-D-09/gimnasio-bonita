@@ -5,19 +5,19 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
-class validarDisponibilidadMaestro implements Rule
+class validarDisponibilidadMaestroEdit implements Rule
 {
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    private $horaInicio,$dia;
-
-    public function __construct($horaInicio,$dia)
+    private $horaInicio,$dia, $idOferta;
+    public function __construct($horaInicio, $dia, $idOferta)
     {
         $this->horaInicio = $horaInicio;
         $this->dia = $dia;
+        $this->idOferta = $idOferta;
     }
 
     /**
@@ -29,10 +29,12 @@ class validarDisponibilidadMaestro implements Rule
      */
     public function passes($attribute, $value)
     {
-        $actvsMaestro = DB::select('SELECT horaInicio, horaFin FROM oferta_actividades WHERE id_empleado = :id_empleado AND dia = :dia AND status = :status',['id_empleado'=>$value, 'dia'=>$this->dia, 'status' => 'activo']);
+        $actvsMaestro = DB::select('SELECT horaInicio, horaFin, id FROM oferta_actividades WHERE id_empleado = :id_empleado AND dia = :dia AND status = :status',['id_empleado'=>$value, 'dia'=>$this->dia, 'status' => 'activo']);
         foreach($actvsMaestro as $actvMaestro){
             if(strtotime($actvMaestro->horaInicio) == strtotime($this->horaInicio) || strtotime($this->horaInicio) > strtotime($actvMaestro->horaInicio) && strtotime($this->horaInicio) < strtotime($actvMaestro->horaFin)){
-                return false;
+                if($actvMaestro->id != $this->idOferta){
+                    return false;
+                }
             }
         }
         return true;
@@ -45,6 +47,6 @@ class validarDisponibilidadMaestro implements Rule
      */
     public function message()
     {
-        return 'El maestro ya imparte alguna clase ese día en el mismo lapso horario';
+        return 'The validation error message.';
     }
 }

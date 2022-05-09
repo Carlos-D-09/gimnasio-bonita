@@ -30,8 +30,8 @@
                 </li>
                 <li><a><i class="fa-solid fa-book fa-xl"></i> Agenda <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/oferta_actividades">Mostrar la oferta de actividades</a></li>
-                        <li><a href="/oferta_actividades/create">Asignar horario y maestro a clase</a></li>
+                        <li><a href="/empleado/oferta_actividades">Mostrar la oferta de actividades</a></li>
+                        <li><a href="/empleado/oferta_actividades/create">Asignar horario y maestro a clase</a></li>
                     </ul>
                 </li>
                 <li>
