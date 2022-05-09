@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\clase;
 use App\Models\empleado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EmpleadoController extends Controller
 {
@@ -17,7 +18,7 @@ class EmpleadoController extends Controller
     public function index()
     {
         $empleado = session('empleado');
-        $clases = clase::all();
+        $clases = DB::table('clases')->select()->where('status','activo')->get();
         $content = 'clases.index';
         return view('dashboard',compact('clases', 'empleado', 'content'));
     }

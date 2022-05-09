@@ -21,9 +21,10 @@
                 <div class="image-holder">
                     <img src="{{asset('images/Clases/Form/registration-form-6.jpg')}}" alt="">
 				</div>
-				<form action="/clase" method="POST" enctype="multipart/form-data">
+				<form action="/empleado/clase" method="POST" enctype="multipart/form-data">
                     @csrf
 					<h3>Registrar clase</h3>
+                    <p>ID del nuevo registro: {{$id}}</p>
                     <input type="file" id="imagen" name="imagen">
                     <label for="imagen" >
                         <i class="fa-solid fa-file-circle-plus fa-xl"></i>
@@ -46,7 +47,7 @@
                             Registrar
                             <i class="zmdi zmdi-long-arrow-right"></i>
                         </button>
-                        <a href="/clase" class="cancel">Cancelar</a>
+                        <a href="/empleado" class="cancel">Cancelar</a>
                     </div>
 				</form>
 			</div>

@@ -18,6 +18,7 @@ class CreateClasesTable extends Migration
             $table->string('imagen',250);
             $table->string('nombre', 150);
             $table->string('descripcion', 300);
+            $table->string('status');
         });
     }
 

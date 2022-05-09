@@ -36,30 +36,26 @@ Route::get('/empleado/login', function(){
     return view('auth/login');
 });
 
+Route::resource('/empleado/clase',ClaseController::class)->middleware('auth');
+
 Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 
 Route::resource('/cliente',ClienteController::class)->middleware('auth:client');
 
-Route::resource('/cliente/clase',ClaseController::class)->middleware('auth');
-Route::resource('/empleado/clase',ClaseController::class)->middleware('auth');
 
-Route::resource('/cliente/agenda', AgendaController::class)->middleware('auth');
 Route::resource('/empleado/agenda', AgendaController::class)->middleware('auth');
 
 Route::get('/empleado/oferta_actividades/clase', [oferta_actividadesController::class, 'orderByClase'])->middleware('auth');
-Route::get('/cliente/oferta_actividades/clase', [oferta_actividadesController::class, 'orderByClase'])->middleware('auth');
 
 Route::get('/empleado/oferta_actividades/dia', [oferta_actividadesController::class, 'orderByDia'])->middleware('auth');
-Route::get('/cliente/oferta_actividades/dia', [oferta_actividadesController::class, 'orderByDia'])->middleware('auth');
 
 Route::get('/empleado/oferta_actividades/search', [oferta_actividadesController::class, 'busquedaPatron'])->middleware('auth');
-Route::get('/cliente/oferta_actividades/search', [oferta_actividadesController::class, 'busquedaPatron'])->middleware('auth');
 
-Route::resource('/oferta_actividades', oferta_actividadesController::class)->middleware('auth');
+Route::resource('/empleado/oferta_actividades', oferta_actividadesController::class)->middleware('auth');
 
-Route::resource('/pago',PagosController::class)->middleware('auth');
+Route::resource('/empleado/pago',PagosController::class)->middleware('auth');
 
-Route::get('/searchPago', 'App\Http\Controllers\PagosController@search')->middleware('auth');
+Route::get('/empleado/searchPago', 'App\Http\Controllers\PagosController@search')->middleware('auth');
 
 Route::resource('/empleadoCRUD',empleadoCRUD_Controller::class)->middleware('auth');
 

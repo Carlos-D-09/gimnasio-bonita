@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Models\clase;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,7 @@ class validarNombreClase implements Rule
      */
     public function __construct()
     {
-        
+
     }
 
     /**
@@ -26,8 +27,8 @@ class validarNombreClase implements Rule
      */
     public function passes($attribute, $value)
     {
-        $nombre = DB::select('SELECT nombre FROM clases WHERE nombre = :nombre',['nombre'=>ucfirst($value)]);
-        if($nombre == null){
+        $nombre = DB::select('SELECT nombre FROM clases WHERE nombre = :nombre AND status = :status',['nombre'=>ucfirst($value),'status'=>'activo']);
+        if(count($nombre) == 0){
             return true;
         }
         return false;

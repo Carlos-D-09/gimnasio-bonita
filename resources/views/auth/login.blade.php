@@ -18,13 +18,6 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div>
-                @if($usuario == "cliente")
-                <input id="usuario" class="block mt-1 w-full" type="hidden" name="cliente" value = "cliente" />
-                @elseif ($usuario == "empleado")
-                <input id="usuario" class="block mt-1 w-full" type="hidden" name="usuario" value = "empleado" />
-                @endif
-            </div>
-            <div>
                 <x-jet-label for="email" value="{{ __('Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             </div>
