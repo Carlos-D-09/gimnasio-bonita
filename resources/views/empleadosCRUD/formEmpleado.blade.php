@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="{{asset('css/EmpleadosCRUD/formEmpleados.css')}}">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
-<body>
+<body> 
   <div class="container">
-    @isset($EmpleadoCRUD)
+    @isset($empleado)
       <div class="title">Edición del empleado</div> <!-- Edit empleado -->
       <div class="content">
-      <form action="empleadoCRUD/{{ $EmpleadoCRUD->id }}" method="POST">
-        @method('PATCH')
+      <form action="/empleadoCRUD/{{ $empleado->id }}" method="POST">
+      
+
+        @method('PATCH') 
     @else
       <div class="title">Registro de empleados</div> <!-- Fecha de ingreso e id se asignan en automatico -->
       <div class="content">
@@ -24,70 +26,79 @@
         <div class="user-details">
           <div class="input-box">
             <span class="details">Nombre del empleado</span>
-            <input type="text" name="nombre" placeholder="Ejemplo: David Fletes" value="{{ isset($EmpleadoCRUD) ? $empleado->nombre : ''}}{{ old('nombre') }}" required> <!-- required a un lado del placeholder -->
+            <input type="text" name="nombre" placeholder="Ejemplo: David Fletes" value="{{ isset($empleado) ? $empleado->nombre : ''}}{{ old('nombre') }}" required> <!-- required a un lado del placeholder -->
           </div>
           <div class="input-box">
             <span class="details">RFC del empleado</span>
-            <input type="text" name="RFC" placeholder="Incluye sólo caracteres" value="{{ isset($EmpleadoCRUD) ? $empleado->RFC : ''  }}{{ old('RFC') }}" required>
+            <input type="text" name="RFC" placeholder="Incluye sólo caracteres" value="{{ isset($empleado) ? $empleado->RFC : ''  }}{{ old('RFC') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Fecha de nacimiento del empleado</span>
-            <input type="text" name="fecha_nacimiento" placeholder="Ejemplo: 2010-10-04" value="{{ isset($EmpleadoCRUD) ? $empleado->fecha_nacimiento : '' }}{{ old('fecha_nacimiento') }}" required>
+            <input type="text" name="fecha_nacimiento" placeholder="Ejemplo: 2010-10-04" value="{{ isset($empleado) ? $empleado->fecha_nacimiento : '' }}{{ old('fecha_nacimiento') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Domicilio del empleado</span>
-            <input type="text" name="domicilio" placeholder="Ejemplo: La Paz #203" value="{{ isset($EmpleadoCRUD) ? $empleado->domicilio : '' }}{{ old('domicilio') }}" required>
+            <input type="text" name="domicilio" placeholder="Ejemplo: La Paz #203" value="{{ isset($empleado) ? $empleado->domicilio : '' }}{{ old('domicilio') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Telefono del empleado</span>
-            <input type="text" name="telefono" placeholder="Ejemplo: 33454345345" value="{{ isset($EmpleadoCRUD) ? $empleado->telefono : '' }}{{ old('telefono') }}" required>
+            <input type="text" name="telefono" placeholder="Ejemplo: 33454345345" value="{{ isset($empleado) ? $empleado->telefono : '' }}{{ old('telefono') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Correo del empleado</span>
-            <input type="text" name="correo" placeholder="Ejemplo: hola@gmail.com" value="{{ isset($EmpleadoCRUD) ? $empleado->correo : '' }}{{ old('correo') }}" required>
+            <input type="text" name="correo" placeholder="Ejemplo: hola@gmail.com" value="{{ isset($empleado) ? $empleado->correo : '' }}{{ old('correo') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Sueldo mensual del empleado</span>
-            <input type="text" name="sueldo" placeholder="Ejemplo: 10000" value="{{ isset($EmpleadoCRUD) ? $empleado->sueldo : '' }}{{ old('sueldo') }}" required>
+            <input type="text" name="sueldo" placeholder="Ejemplo: 10000" value="{{ isset($empleado) ? $empleado->sueldo : '' }}{{ old('sueldo') }}" required>
           </div>
           <div class="input-box">
             <span class="details">NSS del empleado</span>
-            <input type="text" name="NSS" placeholder="Incluye sólo caracteres" value="{{ isset($EmpleadoCRUD) ? $empleado->NSS : '' }}{{ old('NSS') }}" required>
+            <input type="text" name="NSS" placeholder="Incluye sólo caracteres" value="{{ isset($empleado) ? $empleado->NSS : '' }}{{ old('NSS') }}" required>
           </div>
           <div class="input-box" style="width: 100%;">
             <span class="details" align="center">Contraseña del empleado</span>
-            <input type="password" name="password" placeholder="Introduce su contraseña" value="{{ isset($EmpleadoCRUD) ? $empleado->password : '' }}{{ old('password') }}" required>
+            <input type="password" name="password" placeholder="Introduce su contraseña" value="{{ isset($empleado) ? $empleado->password : '' }}{{ old('password') }}" required>
           </div>
+          @isset($empleado)
           <div class="input-box" style="width: 100%;">
             <span class="details" align="center">Fecha de registro de empleado detectado por el sistema</span>
-            <input type="text" name="fecha_ingreso" value="{{ isset($EmpleadoCRUD) ? $empleado->fecha_ingreso : '' }}{{ old('fecha_ingreso') }}<?php echo now() ?>" readonly>
+            <input type="text" name="fecha_ingreso" value="{{ isset($empleado) ? $empleado->fecha_ingreso : '' }}" readonly>
           </div>
+          @endisset
         </div>
         <div class="cargo-details">
           <input type="radio" name="id_tipoUsuario" id="dot-1" value=1>
           <input type="radio" name="id_tipoUsuario" id="dot-2" value=2>
-          <input type="radio" name="id_tipoUsuario" id="dot-3" value=3>
+          <input type="radio" name="id_tipoUsuario" id="dot-3" value=3 checked>
           <span class="cargo-title">Rol</span>
           <div class="category">
             <label for="dot-1">
             <span class="dot one"></span>
             <span class="cargo">Gerente</span>
           </label>
-          <label for="dot-2">
+            <label for="dot-2">
             <span class="dot two"></span>
             <span class="cargo">Encargado de sucursal</span>
           </label>
-          <label for="dot-3">
+            <label for="dot-3">
             <span class="dot three"></span>
             <span class="cargo">Maestro</span>
             </label>
           </div>
         </div>
+        @isset($empleado)
+        <br><span class="details" align="center">Estatus del empleado en la plataforma: </span> 
+        <select name="activo">
+          <option value="1" selected>Activo</option>
+          <option value="0">Desactivo</option>
+        </select>
+        @endisset
         <div class="button">
-          <input type="submit" value="Subir">
+          <input type="submit" value="Completar">
         </div>
         <div class="buttonCancel">
-          <a href="/empleado">Cancelar proceso</a>
+          <a href="/empleadoCRUD">Cancelar proceso</a>
         </div>
       </form>
     </div>

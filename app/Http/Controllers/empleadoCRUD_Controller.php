@@ -51,17 +51,20 @@ class empleadoCRUD_Controller extends Controller
         $EmpleadoCRUD->telefono = $request->telefono;
         $EmpleadoCRUD->correo = $request->correo;
         $EmpleadoCRUD->sueldo = $request->sueldo;
-        $EmpleadoCRUD->fecha_ingreso = $request->fecha_ingreso;
+        $EmpleadoCRUD->fecha_ingreso = now();
         $EmpleadoCRUD->NSS = $request->NSS;
         $EmpleadoCRUD->password = $request->password;
         $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
-        $EmpleadoCRUD->activo = $request->activo;
+        $EmpleadoCRUD->activo = true;
         $EmpleadoCRUD->save();
 
         $empleado = session('empleado');
 
         $content = 'empleadosCRUD.seeEmpleado';
-        return view('dashboard', compact('empleado', 'content'));
+
+        $data['empleados'] = empleado::paginate();
+        
+        return view('dashboard', $data, compact('empleado', 'content'));
         /*return 'store';*/
     }
 
@@ -71,9 +74,10 @@ class empleadoCRUD_Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(empleado $EmpleadoCRUD)
+    public function show($id)
     {
-        return view('empleadosCRUD.showEmpleado', compact('EmpleadoCRUD'));
+        $empleado = empleado::find($id);
+        return view('empleadosCRUD.showEmpleado')->with('empleado', $empleado);
     }
 
     /**
@@ -82,9 +86,10 @@ class empleadoCRUD_Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(empleado $EmpleadoCRUD)
+    public function edit($id)
     {
-        return view('empleadosCRUD.formEmpleado', compact('EmpleadoCRUD'));
+        $empleado = empleado::find($id);
+        return view('empleadosCRUD.formEmpleado')->with('empleado', $empleado);
     }
 
     /**
@@ -94,9 +99,11 @@ class empleadoCRUD_Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, empleado $EmpleadoCRUD)
+    public function update(Request $request, empleado $EmpleadoCRUD, $id)
     {
-        $EmpleadoCRUD->id = $request->id;
+        //dd($request->all());
+        $empleado = empleado::find($id);
+        $EmpleadoCRUD->id = $empleado->id;
         $EmpleadoCRUD->nombre = $request->nombre;
         $EmpleadoCRUD->RFC = $request->RFC;
         $EmpleadoCRUD->fecha_nacimiento = $request->fecha_nacimiento;
@@ -109,8 +116,24 @@ class empleadoCRUD_Controller extends Controller
         $EmpleadoCRUD->password = $request->password;
         $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
         $EmpleadoCRUD->activo = $request->activo;
-        $EmpleadoCRUD->save();
 
+        DB::table('empleados')
+        ->where('id', $empleado->id)
+        ->update([
+            'nombre' => $EmpleadoCRUD->nombre,
+            'RFC' => $EmpleadoCRUD->RFC,
+            'fecha_nacimiento' => $EmpleadoCRUD->fecha_nacimiento,
+            'domicilio' => $EmpleadoCRUD->domicilio,
+            'telefono' => $EmpleadoCRUD->telefono,
+            'correo' => $EmpleadoCRUD->correo,
+            'sueldo' => $EmpleadoCRUD->sueldo,
+            'fecha_ingreso' => $EmpleadoCRUD->fecha_ingreso,
+            'NSS' => $EmpleadoCRUD->NSS,
+            'password' => $EmpleadoCRUD->password,
+            'id_tipoUsuario' => $EmpleadoCRUD->id_tipoUsuario,
+            'activo' => $EmpleadoCRUD->activo
+        ]);
+        
         return redirect('/empleadoCRUD/' . $EmpleadoCRUD->id);
     }
 

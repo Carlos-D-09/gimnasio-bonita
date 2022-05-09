@@ -24,10 +24,6 @@
         <div class="row">
             <div class="col-12 col-sm-12">
                 <div class="x_panel">
-                    <div class="x_title">
-                        <p>Tipo de usuario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 .- Gerente  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2 .- Encargado de sucursal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 .- Maestro</p>
-                        <div class="clearfix"></div>
-                    </div>
                     <div class="empleados-body x-content">
                         <div class="row">
                             <div class="col-sm-12">
@@ -44,16 +40,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            @foreach( $empleados as $empleado )
+                                            @foreach($empleados as $empleado)
                                             @if ($empleado->id_tipoUsuario != 1) <!--Probando las validaciones --> 
                                                 <tr style="text-align:center">
                                                 <td>{{ $empleado->id }}</td>
                                                 <td>{{ $empleado->correo }}</td>
                                                 <td>{{ $empleado->fecha_ingreso }}</td>
-                                                <td>{{ $empleado->id_tipoUsuario }}</td>
+                                                <td>@if ($empleado->id_tipoUsuario == 1) Gerente @elseif ($empleado->id_tipoUsuario == 2) Encargado de sucursal @else Maestro @endif</td>
                                                 <td>
-                                                    <a href="/empleadoCRUD/{{ $empleado->id }}">Ver detalles del empleado</a>
-                                                    <a href="/empleadoCRUD/{{ $empleado->id }}/edit">Editar información del empleado</a>
+                                                    <u><a href="/empleadoCRUD/{{ $empleado->id }}">Ver detalles del empleado</a></u><br>
+                                                    <u><a href="/empleadoCRUD/{{ $empleado->id }}/edit">Editar información del empleado</a></u>
                                                 </td>
                                                 </tr>
                                             @endif
