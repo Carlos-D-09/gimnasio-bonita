@@ -57,11 +57,12 @@ Route::get('/cliente/oferta_actividades/search', [oferta_actividadesController::
 
 Route::resource('/oferta_actividades', oferta_actividadesController::class)->middleware('auth');
 
-Route::resource('/pago',PagosController::class)->middleware('auth');
-
+Route::resource('/seePagos',PagosController::class)->middleware('auth');
 Route::get('/searchPago', 'App\Http\Controllers\PagosController@search')->middleware('auth');
 
 Route::resource('/empleadoCRUD',empleadoCRUD_Controller::class)->middleware('auth');
+Route::get('/searchEmpleado', 'App\Http\Controllers\empleadoCRUD_Controller@search')->middleware('auth');
+Route::get('/empleadoCRUD/{id}/delete', 'App\Http\Controllers\empleadoCRUD_Controller@destroy')->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',

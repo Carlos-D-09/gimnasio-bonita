@@ -5,16 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class oferta_actividades extends Model
+class pago extends Model
 {
-    use HasFactory;
     public $timestamps = false;
+    use HasFactory;
 
-    public function clase(){
-        return $this->belongsTo(clase::class,'id_clase');
+    public function membresia(){
+        return $this->belongsTo(membresia::class,'id_membresia');
     }
 
     public function empleado(){
         return $this->belongsTo(empleado::class,'id_empleado');
+    }
+
+    public function cliente(){
+        return $this->belongsTo(cliente::class,'id_cliente');
     }
 }

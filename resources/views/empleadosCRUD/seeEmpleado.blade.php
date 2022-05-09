@@ -6,12 +6,11 @@
             </div>
             <div class="title_right">
                 <div class="col-md-5 col-sm-5 form-group pull-right top_search">
-                    <form>
+                    <form action="/searchEmpleado" method="GET">
                         <div class="input-group">
-                            <input type="text" class="form-control inputPatron" placeholder="Buscar por id">
+                            <input type="search" class="form-control inputPatron" placeholder="Buscar por id" name="search">
                             <span class="input-group-btn">
-                                <button class="btn btn-secondary buttonPatron" type="button" style="color: white">Buscar</button>
-                                <script src="{{asset('/js/ofertaActividades/index/botonBusqueda.js')}}"></script>
+                                <button class="btn btn-secondary buttonPatron" type="submit" style="color: white">Buscar</button>
                             </span>
                         </div>
                     </form>
@@ -41,7 +40,6 @@
                                     </thead>
                                     <tbody>
                                             @foreach($empleados as $empleado)
-                                            @if ($empleado->id_tipoUsuario != 1) <!--Probando las validaciones --> 
                                                 <tr style="text-align:center">
                                                 <td>{{ $empleado->id }}</td>
                                                 <td>{{ $empleado->correo }}</td>
@@ -49,11 +47,10 @@
                                                 <td>@if ($empleado->id_tipoUsuario == 1) Gerente @elseif ($empleado->id_tipoUsuario == 2) Encargado de sucursal @else Maestro @endif</td>
                                                 <td>
                                                     <u><a href="/empleadoCRUD/{{ $empleado->id }}">Ver detalles del empleado</a></u><br>
-                                                    <u><a href="/empleadoCRUD/{{ $empleado->id }}/edit">Editar información del empleado</a></u>
+                                                    <u><a href="/empleadoCRUD/{{ $empleado->id }}/edit">Editar información del empleado</a></u><br>
+                                                    <u><a href="/empleadoCRUD/{{ $empleado->id }}/delete">Desactivar cuenta del empleado</a></u>
                                                 </td>
                                                 </tr>
-                                            @endif
-                                            
                                             @endforeach
                                     </tbody>
                                 </table>

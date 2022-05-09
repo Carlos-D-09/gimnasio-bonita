@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class empleado extends Authenticatable
 {
@@ -16,6 +18,7 @@ class empleado extends Authenticatable
     use HasFactory;
     use Notifiable;
     public $timestamps = false;
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *

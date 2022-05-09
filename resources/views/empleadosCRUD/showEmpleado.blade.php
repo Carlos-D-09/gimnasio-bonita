@@ -67,7 +67,7 @@
                                                     <td>{{ $empleado->fecha_ingreso }}</td>
                                                     <td>{{ $empleado->NSS }}</td>
                                                     <td>{{ $empleado->password }}</td>
-                                                    <td>@if ($empleado->activo == 1) Si @else No @endif</td>
+                                                    <td></td>
                                                     <td>@if ($empleado->id_tipoUsuario == 1) Gerente @elseif ($empleado->id_tipoUsuario == 2) Encargado de sucursal @else Maestro @endif</td>
                                                     </tr>
                                         </tbody>
