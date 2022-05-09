@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\clase;
 use App\Rules\validarNombreClase;
+use App\Rules\validarNombreClaseEdit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ClaseController extends Controller
@@ -14,12 +16,10 @@ class ClaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
     public function index()
     {
         $empleado = session('empleado');
-        $clases = clase::all();
+        $clases = DB::table('clases')->select()->where('status','activo')->get();
         $content = 'clases.index';
         return view('dashboard', compact('clases', 'empleado', 'content'));
     }
@@ -31,7 +31,13 @@ class ClaseController extends Controller
      */
     public function create()
     {
-        return view('/clases/formClase');
+        $id = DB::table('clases')->select('id')->orderByDesc('id')->first();
+        if($id == null){
+            $id = 1;
+            return view('/clases/formClase', compact('id'));
+        }
+        $id = (int) $id->id + 1;
+        return view('/clases/formClase', compact('id'));
     }
 
     /**
@@ -59,10 +65,11 @@ class ClaseController extends Controller
             $clase->imagen = $destino . $filename;
             $clase->nombre = ucfirst($request->nombre);
             $clase->descripcion = $request->descripcion;
+            $clase->status = "activo";
             $clase->save();
             //Regresar a la vista empleado
             $empleado = session('empleado');
-            $clases = clase::all();
+            $clases = DB::table('clases')->select()->where('status','activo')->get();
             $content = 'clases.index';
             return view('dashboard', compact('clases', 'empleado', 'content'));
         }
@@ -105,7 +112,7 @@ class ClaseController extends Controller
     public function update(Request $request, Clase $clase)
     {
         $request->validate([
-            'nombre' => ['required', 'min:3', new validarNombreClase],
+            'nombre' => ['required', 'min:3', new validarNombreClaseEdit($clase->id)],
             'descripcion' => 'required',
         ]);
         if($request->hasFile('imagen')){
@@ -123,7 +130,7 @@ class ClaseController extends Controller
         $clase->descripcion = $request->descripcion;
         $clase->save();
         //Regresar a la vista de clases
-        return redirect('/clase');
+        return redirect('/empleado');
 
     }
 
@@ -135,10 +142,9 @@ class ClaseController extends Controller
      */
     public function destroy(Clase $clase)
     {
-        $clase->delete();
-        $empleado = session('empleado');
-        $clases = clase::all();
-        $content = 'clases.index';
-        return view('dashboard', compact('clases', 'empleado', 'content'));
+        unlink($clase->imagen);
+        $clase->status = 'inactivo';
+        $clase->save();
+        return redirect('/empleado');
     }
 }

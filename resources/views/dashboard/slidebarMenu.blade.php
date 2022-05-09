@@ -2,6 +2,7 @@
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
         <ul class="nav side-menu">
+            {{-- Vista Gerente --}}
             @if(Auth::user()->id_tipoUsuario == 1)
                 <h4> Gerente</h4>
                 <li>
@@ -29,15 +30,15 @@
                 </li>
                 <li><a><i class="fa-solid fa-book fa-xl"></i> Agenda <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/oferta_actividades">Mostrar la oferta de actividades</a></li>
-                        <li><a href="/oferta_actividades/create">Asignar horario y maestro a clase</a></li>
+                        <li><a href="/empleado/oferta_actividades">Mostrar la oferta de actividades</a></li>
+                        <li><a href="/empleado/oferta_actividades/create">Asignar horario y maestro a clase</a></li>
                     </ul>
                 </li>
                 <li>
                     <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Control de clases<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/clase">Mostrar clases</a></li>
-                        <li><a href="/clase/create">Agregar una clase</a></li>
+                        <li><a href="/empleado/clase">Mostrar clases</a></li>
+                        <li><a href="/empleado/clase/create">Agregar una clase</a></li>
                     </ul>
                 </li>
                 <li>
@@ -46,6 +47,7 @@
                         <li><a href="/seePagos">Consultar pagos</a></li>
                     </ul>
                 </li>
+            {{-- Vista encargado sucursal --}}
             @elseif(Auth::user()->id_tipoUsuario == 2)
                 <h2> Encargado de sucursal </h2>
                 <li><a><i class="fa-solid fa-wallet fa-xl"></i> Membresias <span class="fa fa-chevron-down"></span></a>
@@ -65,8 +67,8 @@
                 <li>
                     <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Control de clases<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/clase">Mostrar clases</a></li>
-                        <li><a href="/clase/create">Agregar una clase</a></li>
+                        <li><a href="/empleado/clase">Mostrar clases</a></li>
+                        <li><a href="/empleado/clase/create">Agregar una clase</a></li>
                     </ul>
                 </li>
                 <li>
@@ -77,13 +79,13 @@
                         <li><a href="">Consultar pagos</a></li>
                     </ul>
                 </li>
-
+            {{-- Vista maestro --}}
             @elseif(Auth::user()->id_tipoUsuario == 3)
                 <h2>Maestro</h2>
                 <li>
                     <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Clases<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/clase">Mostrar clases</a></li>
+                        <li><a href="/empleado/clase">Mostrar clases</a></li>
                     </ul>
                 </li>
                 <li><a><i class="fa-solid fa-book fa-xl"></i> Agenda <span class="fa fa-chevron-down"></span></a>

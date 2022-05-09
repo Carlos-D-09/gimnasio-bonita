@@ -33,7 +33,7 @@
                     </div>
                     <div class="u-nav-container">
                         <ul class="u-nav u-unstyled u-nav-1">
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/clase" style="padding: 10px 20px; color:white">Home</a></li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/empleado" style="padding: 10px 20px; color:white">Home</a></li>
                         </ul>
                     </div>
                     <div class="u-nav-container-collapse">
@@ -41,7 +41,7 @@
                             <div class="u-inner-container-layout u-sidenav-overflow">
                                 <div class="u-menu-close"></div>
                                 <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                                    <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/clase">Home</a></li>
+                                    <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/empleado">Home</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                     <div class="u-layout" style="">
                         <div class="u-layout-row" style="">
                             <div class="u-align-left u-container-style u-image u-layout-cell u-left-cell u-size-28-md u-size-28-sm u-size-28-xs u-size-30-lg u-size-30-xl u-size-xs-60 u-image-1" src="" data-image-width="1000" data-image-height="1000">
-                                <div class="u-container-layout u-container-layout-1" src="">
+                                <div class="u-container-layout u-container-layout-1"rc="">
                                     <img src="{{asset($clase->imagen)}}"alt="">
                                 </div>
                             </div>

@@ -21,6 +21,9 @@
                                         <thead>
                                             <tr>
                                                 <th>
+                                                    <p style="text-align: center">Id clase</p>
+                                                </th>
+                                                <th>
                                                     <p style="text-align: center">Nombre</p>
                                                 </th>
                                                 <th>
@@ -35,6 +38,9 @@
                                             @foreach ($clases as $clase)
                                             <tr>
                                                 <td align="center">
+                                                    {{$clase->id}}
+                                                </td>
+                                                <td align="center">
                                                     {{$clase->nombre}}
                                                 </td>
                                                 <td align="center">
@@ -43,19 +49,19 @@
                                                 <td align="center">
                                                     <table style="align-content: center">
                                                         <tr>
-                                                            <form action="/clase/{{$clase->id}}">
+                                                            <form action="/empleado/clase/{{$clase->id}}">
                                                                 <button type="submit"class="btn btn-round btn-info btn-sm">Detalle</button>
                                                             </form>
                                                         </tr>
                                                         @isset(Auth::user()->id_tipoUsuario)
                                                             @if(Auth::user()->id_tipoUsuario != 3)
                                                                 <tr>
-                                                                    <form action="/clase/{{$clase->id}}/edit" method="GET">
+                                                                    <form action="/empleado/clase/{{$clase->id}}/edit" method="GET">
                                                                         <button type="submit" class="btn btn-round btn-warning btn-sm">Editar</button>
                                                                     </form>
                                                                 </tr>
                                                                 <tr>
-                                                                    <form action="/clase/{{$clase->id}}" method="POST">
+                                                                    <form action="/empleado/clase/{{$clase->id}}" method="POST">
                                                                         @csrf
                                                                         @method('DELETE')
                                                                         <button type="submit"class="btn btn-round btn-danger btn-sm">Eliminar</button>

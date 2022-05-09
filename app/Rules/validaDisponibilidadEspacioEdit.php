@@ -5,16 +5,19 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
-class validarDisponibilidadEspacio implements Rule
+class validaDisponibilidadEspacioEdit implements Rule
 {
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($horaInicio)
+    public $horaInicio;
+    public $idOferta;
+    public function __construct($horaInicio, $idOferta)
     {
         $this->horaInicio = $horaInicio;
+        $this->idOferta = $idOferta;
     }
 
     /**
@@ -26,13 +29,15 @@ class validarDisponibilidadEspacio implements Rule
      */
     public function passes($attribute, $value)
     {
-        $clases = DB::select('SELECT horaInicio,horaFin FROM oferta_actividades WHERE dia = :dia AND status = :status',['dia'=>$value,'status'=>'activo']);
+        $clases = DB::select('SELECT horaInicio,horaFin, id FROM oferta_actividades WHERE dia = :dia AND status = :status',['dia'=>$value,'status'=>'activo']);
         $numAulasOcupadas = 0;
         foreach($clases as $clase){
             if(strtotime($clase->horaInicio) == strtotime($this->horaInicio) || strtotime($this->horaInicio) > strtotime($clase->horaInicio) && strtotime($this->horaInicio) < strtotime($clase->horaFin)){
-                $numAulasOcupadas++;
-                if($numAulasOcupadas == 3){
-                    return false;
+                if($clase->id != $this->idOferta){
+                    $numAulasOcupadas++;
+                    if($numAulasOcupadas == 3){
+                        return false;
+                    }
                 }
             }
         }
