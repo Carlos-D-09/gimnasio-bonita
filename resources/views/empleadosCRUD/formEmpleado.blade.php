@@ -87,13 +87,6 @@
             </label>
           </div>
         </div>
-        @isset($empleado)
-        <br><span class="details" align="center">Estatus del empleado en la plataforma: </span> 
-        <select name="activo">
-          <option value="1" selected>Activo</option>
-          <option value="0">Desactivo</option>
-        </select>
-        @endisset
         <div class="button">
           <input type="submit" value="Completar">
         </div>

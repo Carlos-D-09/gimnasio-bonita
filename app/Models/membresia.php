@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class pagos extends Model
+class membresia extends Model
 {
-    public $timestamps = false;
     use HasFactory;
 }

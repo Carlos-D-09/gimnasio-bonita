@@ -53,7 +53,6 @@ class empleadoCRUD_Controller extends Controller
         $EmpleadoCRUD->NSS = $request->NSS;
         $EmpleadoCRUD->password = $request->password;
         $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
-        $EmpleadoCRUD->activo = true;
         $EmpleadoCRUD->save();
 
         $content = 'empleadosCRUD.seeEmpleado';
@@ -111,7 +110,6 @@ class empleadoCRUD_Controller extends Controller
         $EmpleadoCRUD->NSS = $request->NSS;
         $EmpleadoCRUD->password = $request->password;
         $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
-        $EmpleadoCRUD->activo = $request->activo;
 
         DB::table('empleados')
         ->where('id', $empleado->id)
@@ -127,10 +125,24 @@ class empleadoCRUD_Controller extends Controller
             'NSS' => $EmpleadoCRUD->NSS,
             'password' => $EmpleadoCRUD->password,
             'id_tipoUsuario' => $EmpleadoCRUD->id_tipoUsuario,
-            'activo' => $EmpleadoCRUD->activo
         ]);
 
         return redirect('/empleadoCRUD/' . $EmpleadoCRUD->id);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $content = 'empleadosCRUD.seeEmpleado';
+        $empleado = DB::table('empleados')->where('id', 'like', '%'.$search.'%')->paginate();
+
+        if(!empty($search)){
+            return view('dashboard', ['empleados' => $empleado], compact('content'));
+            
+        } else {
+            return redirect('/empleadoCRUD');
+        }
+        
     }
 
     /**
@@ -141,6 +153,9 @@ class empleadoCRUD_Controller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $empleado = empleado::find($id);
+        $empleado->delete();
+
+        return redirect('/empleadoCRUD');
     }
 }

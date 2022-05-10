@@ -40,8 +40,7 @@
                 <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/empleado/searchPago">Buscar pago</a></li>
-                        <li><a href="/empleado/pago">Consultar pagos</a></li>
+                        <li><a href="/seePagos">Consultar pagos</a></li>
                     </ul>
                 </li>
             {{-- Vista encargado sucursal --}}

@@ -26,10 +26,11 @@ class CreateEmpleadosTable extends Migration
             $table->char('NSS',11)->unique();
             $table->string('password',150);
             $table->unsignedBigInteger('id_tipoUsuario');
-            $table->boolean('activo');
             $table->foreign('id_tipoUsuario')->references("id")->on("tipo_usuario");
-
+            $table->softDeletes();
         });
+        
+        
         
     }
 

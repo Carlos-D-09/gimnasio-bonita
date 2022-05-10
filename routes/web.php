@@ -64,8 +64,12 @@ Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 
 Route::resource('/empleado/agenda', AgendaController::class)->middleware('auth');
 
+Route::resource('/seePagos',PagosController::class)->middleware('auth');
+Route::get('/searchPago', 'App\Http\Controllers\PagosController@search')->middleware('auth');
 
 Route::resource('/empleadoCRUD',empleadoCRUD_Controller::class)->middleware('auth');
+Route::get('/searchEmpleado', 'App\Http\Controllers\empleadoCRUD_Controller@search')->middleware('auth');
+Route::get('/empleadoCRUD/{id}/delete', 'App\Http\Controllers\empleadoCRUD_Controller@destroy')->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',
