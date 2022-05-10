@@ -38,6 +38,12 @@ Route::get('/empleado/login', function(){
 
 Route::resource('/empleado/clase',ClaseController::class)->middleware('auth');
 
+Route::resource('/empleado/cliente',ClienteController::class)->middleware('auth');
+
+Route::resource('/empleado/pago',PagosController::class)->middleware('auth');
+
+Route::get('/empleado/searchPago', 'App\Http\Controllers\PagosController@search')->middleware('auth');
+
 Route::get('/empleado/oferta_actividades/clase', [oferta_actividadesController::class, 'orderByClase'])->middleware('auth');
 
 Route::get('/empleado/oferta_actividades/dia', [oferta_actividadesController::class, 'orderByDia'])->middleware('auth');
@@ -55,8 +61,6 @@ Route::get('/empleado/oferta_actividades/clase/search', [oferta_actividadesContr
 Route::resource('/empleado/oferta_actividades', oferta_actividadesController::class)->middleware('auth')->except('show');
 
 Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
-
-Route::resource('/cliente',ClienteController::class)->middleware('auth:client');
 
 Route::resource('/empleado/agenda', AgendaController::class)->middleware('auth');
 

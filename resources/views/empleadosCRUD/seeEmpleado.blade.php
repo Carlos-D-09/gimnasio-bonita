@@ -2,7 +2,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Empleados registrados</h3> <br>
+                <h3>Empleados registrados</h3>
             </div>
             <div class="title_right">
                 <div class="col-md-5 col-sm-5 form-group pull-right top_search">
@@ -14,31 +14,42 @@
                             </span>
                         </div>
                     </form>
-                    <div class="empleados-body">
-                        
                 </div>
             </div>
         </div>
         <div class="clearfix"></div>
         <div class="row">
-            <div class="col-12 col-sm-12">
+            <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
-                    <div class="empleados-body x-content">
+                    <div class="x_title">
+                        <h2>Listado de empleados</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                <table id="example2" class="table table-striped table-bordered"  style="width:100%">
-                                    <thead>
-                                        
-                                        <tr style="text-align:center">
-                                            <th>Id</th>
-                                            <th>Correo</th>
-                                            <th>Fecha de ingreso</th>
-                                            <th>Tipo de usuario</th>
-                                            <th>Opciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <p style="text-align: center">Id</p>
+                                                </th>
+                                                <th>
+                                                    <p style="text-align: center">Correo</p>
+                                                </th>
+                                                <th>
+                                                    <p style="text-align: center">Fecha de ingreso</p>
+                                                </th>
+                                                <th>
+                                                    <p style="text-align: center">Tipo de usuario</p>
+                                                </th>
+                                                <th>
+                                                    <p style="text-align: center">Opciones</p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             @foreach($empleados as $empleado)
                                                 <tr style="text-align:center">
                                                 <td>{{ $empleado->id }}</td>
@@ -52,8 +63,8 @@
                                                 </td>
                                                 </tr>
                                             @endforeach
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -63,3 +74,4 @@
         </div>
     </div>
 </div>
+

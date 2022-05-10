@@ -18,10 +18,9 @@ class ClaseController extends Controller
      */
     public function index()
     {
-        $empleado = session('empleado');
         $clases = DB::table('clases')->select()->where('status','activo')->get();
         $content = 'clases.index';
-        return view('dashboard', compact('clases', 'empleado', 'content'));
+        return view('dashboard', compact('clases', 'content'));
     }
 
     /**
@@ -67,11 +66,9 @@ class ClaseController extends Controller
             $clase->descripcion = $request->descripcion;
             $clase->status = "activo";
             $clase->save();
-            //Regresar a la vista empleado
-            $empleado = session('empleado');
             $clases = DB::table('clases')->select()->where('status','activo')->get();
             $content = 'clases.index';
-            return view('dashboard', compact('clases', 'empleado', 'content'));
+            return view('dashboard', compact('clases', 'content'));
         }
     }
 

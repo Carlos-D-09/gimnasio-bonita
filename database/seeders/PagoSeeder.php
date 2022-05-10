@@ -16,10 +16,9 @@ class PagoSeeder extends Seeder
     {
         DB::table('pagos')-> insert ([
             'id' => 1,
-            'Nombre' => 'Pago de membresia en Gimnasio Bonita',
             'fecha' => '2022-05-09',
             'dias' => 15,
-            'monto' => 1000, 	
+            'monto' => 1000,
             'id_membresia' => 1,
             'id_empleado' => 1,
             'id_cliente' => 1
@@ -27,14 +26,13 @@ class PagoSeeder extends Seeder
 
         DB::table('pagos')-> insert ([
             'id' => 2,
-            'Nombre' => 'Pago de membresia en Gimnasio Bonita',
             'fecha' => '2022-05-09',
             'dias' => 10,
-            'monto' => 700, 	
+            'monto' => 700,
             'id_membresia' => 2,
             'id_empleado' => 1,
             'id_cliente' => 2
         ]);
-        
+
     }
 }

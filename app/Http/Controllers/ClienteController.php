@@ -11,10 +11,9 @@ class ClienteController extends Controller
 {
     public function index()
     {
-        $cliente = Auth::user();
-        $clases = clase::all();
-        $content = 'clases.index';
-        return view('dashboard',compact('clases', 'cliente', 'content'));
+        $clientes = cliente::all()->except('password');
+        $content = 'cliente.index';
+        return view('dashboard',compact('clientes', 'content'));
     }
 
     /**
@@ -46,7 +45,8 @@ class ClienteController extends Controller
      */
     public function show(cliente $cliente)
     {
-        //
+        unset($cliente['password']);
+        return view('cliente.profile', compact('cliente'));
     }
 
     /**

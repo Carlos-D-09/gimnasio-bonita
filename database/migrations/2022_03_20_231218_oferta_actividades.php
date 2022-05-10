@@ -19,6 +19,7 @@ class OfertaActividades extends Migration
             $table->time('horaFin');
             $table->string('dia');
             $table->smallInteger('cupos');
+            $table->double('costo',8,2);
             $table->unsignedBigInteger('id_empleado');
             $table->unsignedBigInteger('id_clase');
             $table->foreign("id_empleado")
