@@ -13,8 +13,6 @@
       <div class="title">Edición del empleado</div> <!-- Edit empleado -->
       <div class="content">
       <form action="/empleadoCRUD/{{ $empleado->id }}" method="POST">
-      
-
         @method('PATCH') 
     @else
       <div class="title">Registro de empleados</div> <!-- Fecha de ingreso e id se asignan en automatico -->
@@ -34,7 +32,7 @@
           </div>
           <div class="input-box">
             <span class="details">Fecha de nacimiento del empleado</span>
-            <input type="text" name="fecha_nacimiento" placeholder="Ejemplo: 2010-10-04" value="{{ isset($empleado) ? $empleado->fecha_nacimiento : '' }}{{ old('fecha_nacimiento') }}" required>
+            <input type="date" name="fecha_nacimiento" value="{{ isset($empleado) ? $empleado->fecha_nacimiento : '' }}{{ old('fecha_nacimiento') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Domicilio del empleado</span>

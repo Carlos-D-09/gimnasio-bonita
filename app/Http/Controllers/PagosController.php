@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\pago;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class PagosController extends Controller
 {
@@ -17,6 +18,8 @@ class PagosController extends Controller
 
     public function index()
     {
+        /*$date = Carbon::now();
+        dd($date);*/
         $data['pagos'] = pago::paginate();
         $content = 'pagos.seePagos';
         return view('dashboard', $data, compact('content'));

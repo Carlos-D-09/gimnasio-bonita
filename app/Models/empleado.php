@@ -63,4 +63,8 @@ class empleado extends Authenticatable
     public function clases(){
         return $this->belongsToMany(clase::class,'oferta_actividades','id_clase','id_empleado');
     }
+    //Mutator
+    /*public function setSueldoAttribute($value){
+        $this->attributes['sueldo'] = $value. ' mxn';
+    }*/
 }

@@ -42,6 +42,7 @@ class empleadoCRUD_Controller extends Controller
     {
         /*dd($request->all());*/
         $EmpleadoCRUD = new empleado();
+        //$EmpleadoCRUD->getRawOriginal('sueldo');
 
         $EmpleadoCRUD->id = $request->id;
         $EmpleadoCRUD->nombre = $request->nombre;
@@ -55,6 +56,7 @@ class empleadoCRUD_Controller extends Controller
         $EmpleadoCRUD->NSS = $request->NSS;
         $EmpleadoCRUD->password = $request->password;
         $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
+        
         $EmpleadoCRUD->save();
 
         $empleado = session('empleado');

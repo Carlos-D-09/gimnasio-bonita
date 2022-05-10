@@ -21,4 +21,12 @@ class pago extends Model
     public function cliente(){
         return $this->belongsTo(cliente::class,'id_cliente');
     }
+
+    //Accessors
+    public function getNombreAttribute($value){
+        return strtoupper($value);
+    }
+    public function getMontoAttribute($value){
+        return $value.' mxn';
+    }
 }
