@@ -15,7 +15,6 @@ class CreatePagosTable extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->id();
-            $table->string('Nombre',100);
             $table->date('fecha');
             $table->integer('dias')->NULL;
             $table->double('monto',8,2);
@@ -29,7 +28,7 @@ class CreatePagosTable extends Migration
             $table->foreign("id_cliente")
                 ->references("id")->on("clientes");
         });
-        
+
     }
 
     /**
