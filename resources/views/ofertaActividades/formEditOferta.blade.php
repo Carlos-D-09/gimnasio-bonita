@@ -94,6 +94,13 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="u-form-group u-form-group-4">
+                            <label for="costo" class="u-label u-text-body-alt-color u-label-4">Costo</label>
+                            <input type="text" placeholder="Introduce el costo" id="costo" name="costo" style="color: black" class="u-border-3 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle" value = "{{$oferta->costo}}">
+                            @error('costo')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="u-form-group u-form-select u-form-group-5">
                             <label for="id_maestro" class="u-label u-text-body-alt-color u-label-5">Selecciona maestro</label>
                             <div class="u-form-select-wrapper">

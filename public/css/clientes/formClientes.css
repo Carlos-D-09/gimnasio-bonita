@@ -105,23 +105,51 @@ form .input-box span.details{
  }
  form .button{
    height: 45px;
-   margin: 35px 0
+   margin: 35px 0;
  }
  form .button input{
-   height: 100%;
-   width: 100%;
-   border-radius: 5px;
-   border: none;
-   color: #fff;
-   font-size: 18px;
-   font-weight: 500;
-   letter-spacing: 1px;
-   cursor: pointer;
-   transition: all 0.3s ease;
-   background-color: #FBAB7E;
-  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
-
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #FBAB7E;
+    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
  }
+.button{
+    height: 45px;
+    margin: 35px 0;
+}
+
+.button a{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #a11818;
+    background-image: linear-gradient(62deg,#a11818 0%,#f72525 100%);
+ }
+
+.button a:hover {
+    background-color: #a11818;
+    background-image: linear-gradient(250deg,#a11818 0%,#f72525 100%);
+}
+
  form .button input:hover{
   /* transform: scale(0.99); */
   background-color: #FBAB7E;
@@ -158,4 +186,34 @@ form .user-details .input-box{
   .container .content .categoria{
     flex-direction: column;
   }
+}
+
+.inputFile{
+    position: relative;
+    display: inline-block;
+}
+
+.inputFile::before{
+    background-color: #5678EF;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    content: 'Seleccionar'; /* testo por defecto */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.inputFile input[type="file"]{
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.inputFile :hover {
+    cursor: pointer;
 }

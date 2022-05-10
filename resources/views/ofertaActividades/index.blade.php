@@ -87,6 +87,9 @@
                                                     <p style="text-align: center">Cupos</p>
                                                 </th>
                                                 <th>
+                                                    <p style="text-align: center">Costo</p>
+                                                </th>
+                                                <th>
                                                     <p style="text-align: center">Maestro</p>
                                                 </th>
                                                 <th>
@@ -114,6 +117,9 @@
                                                 </td>
                                                 <td align="center">
                                                     {{$ofertaActividad->cupos}}
+                                                </td>
+                                                <td align="center">
+                                                    {{'$'.$ofertaActividad->costo}}
                                                 </td>
                                                 <td align="center">
                                                     {{$ofertaActividad->empleado->nombre}}
