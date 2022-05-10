@@ -15,11 +15,9 @@ class empleadoCRUD_Controller extends Controller
      */
     public function index()
     {
-        $empleado = session('empleado');
         $content = 'empleadosCRUD.seeEmpleado';
-
         $data['empleados'] = empleado::paginate();
-        return view('dashboard', $data, compact('empleado', 'content'));
+        return view('dashboard', $data, compact('content'));
     }
 
     /**
@@ -58,13 +56,11 @@ class empleadoCRUD_Controller extends Controller
         $EmpleadoCRUD->activo = true;
         $EmpleadoCRUD->save();
 
-        $empleado = session('empleado');
-
         $content = 'empleadosCRUD.seeEmpleado';
 
         $data['empleados'] = empleado::paginate();
-        
-        return view('dashboard', $data, compact('empleado', 'content'));
+
+        return view('dashboard', $data, compact('content'));
         /*return 'store';*/
     }
 
@@ -77,7 +73,7 @@ class empleadoCRUD_Controller extends Controller
     public function show($id)
     {
         $empleado = empleado::find($id);
-        return view('empleadosCRUD.showEmpleado')->with('empleado', $empleado);
+        return view('empleadosCRUD.showEmpleado')->with('empleado',$empleado);
     }
 
     /**
@@ -133,7 +129,7 @@ class empleadoCRUD_Controller extends Controller
             'id_tipoUsuario' => $EmpleadoCRUD->id_tipoUsuario,
             'activo' => $EmpleadoCRUD->activo
         ]);
-        
+
         return redirect('/empleadoCRUD/' . $EmpleadoCRUD->id);
     }
 

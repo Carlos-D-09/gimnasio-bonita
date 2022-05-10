@@ -37,4 +37,8 @@ class cliente extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function empleado(){
+        return $this->belongsTo(empleado::class,'id_empleado');
+    }
 }

@@ -17,6 +17,7 @@ class ClienteSeeder extends Seeder
     {
         DB::table('clientes')->insert([
             'id' => 1,
+            'imagen' => '/images/Cliente/imagenCliente/miImagen.jpg',
             'nombre' => 'Carlos Daniel Medina Sahagún',
             'fecha_nacimiento' => '1999-10-17',
             'domicilio' => 'Patria 1374',
@@ -29,6 +30,7 @@ class ClienteSeeder extends Seeder
         ]);
         DB::table('clientes')->insert([
             'id' => 2,
+            'imagen' => '/images/Cliente/imagenCliente/miImagen.jpg',
             'nombre' => 'Carlos Daniel Medina Sahagún',
             'fecha_nacimiento' => '1998-10-17',
             'domicilio' => 'Patria 1373',

@@ -16,16 +16,12 @@
                     <ul class="nav child_menu">
                         <li><a href="/"></a>Consultar membresias</li>
                         <li><a href="/"></a>Modificar costo por día</li>
-                        <li><a href="/"></a>Modificar membresias</li>
-                        <li><a href="/"></a>Eliminar membresias</li>
                     </ul>
                 </li>
                 <li><a><i class="fa-solid fa-users fa-xl"></i> Clientes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/"></a>Consultar clientes</li>
-                        <li><a href="/"></a>Modificar clientes</li>
-                        <li><a href="/"></a>Alta de clientes</li>
-                        <li><a href="/"></a>Eliminar clientes</li>
+                        <li><a href="/empleado/cliente">Consultar clientes</a></li>
+                        <li><a href="/empleado/cliente/create">Alta de clientes</a></li>
                     </ul>
                 </li>
                 <li><a><i class="fa-solid fa-book fa-xl"></i> Agenda <span class="fa fa-chevron-down"></span></a>
@@ -44,8 +40,8 @@
                 <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/searchPago">Buscar pago</a></li>
-                        <li><a href="/pago">Consultar pagos</a></li>
+                        <li><a href="/empleado/searchPago">Buscar pago</a></li>
+                        <li><a href="/empleado/pago">Consultar pagos</a></li>
                     </ul>
                 </li>
             {{-- Vista encargado sucursal --}}
