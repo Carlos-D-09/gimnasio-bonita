@@ -59,7 +59,8 @@ class oferta_actividadesController extends Controller
             'cupos' => ['required', 'numeric', 'min:5', 'max:25'],
             'dia' => [new validarDisponibilidadEspacio($request->horaInicio)],
             'horaFin' => [new validarHora_fin($request->horaInicio), new validarIntervaloTiempo($request->horaInicio)],
-            'id_maestro' => [new validarDisponibilidadMaestro($request->horaInicio,$request->dia)]
+            'id_maestro' => [new validarDisponibilidadMaestro($request->horaInicio,$request->dia)],
+            'costo' => ['numeric']
         ]);
         $oferta = new oferta_actividades();
         $oferta->id_clase = $request->id_clase;
@@ -67,6 +68,7 @@ class oferta_actividadesController extends Controller
         $oferta->horaFin = $request->horaFin;
         $oferta->dia = $request->dia;
         $oferta->cupos = $request->cupos;
+        $oferta->costo = $request->costo;
         $oferta->id_empleado = $request->id_maestro;
         $oferta->status = 'activo';
         $oferta->save();
@@ -114,9 +116,10 @@ class oferta_actividadesController extends Controller
         $oferta = $ofertas[0];
         $request->validate([
             'cupos' => ['required', 'numeric', 'min:0', 'max:25',new validarCuposMinimos($oferta->id)],
-        'dia' => [new validaDisponibilidadEspacioEdit($request->horaInicio,$oferta->id)],
+            'dia' => [new validaDisponibilidadEspacioEdit($request->horaInicio,$oferta->id)],
             'horaFin' => [new validarHora_fin($request->horaInicio), new validarIntervaloTiempo($request->horaInicio)],
-            'id_maestro' => [new validarDisponibilidadMaestroEdit($request->horaInicio,$request->dia,$oferta->id)]
+            'id_maestro' => [new validarDisponibilidadMaestroEdit($request->horaInicio,$request->dia,$oferta->id)],
+            'costs' => ['numeric']
         ]);
         $oferta->horaInicio = $request->horaInicio;
         $oferta->horaFin = $request->horaFin;

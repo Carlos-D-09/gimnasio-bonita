@@ -50,7 +50,7 @@
                                                     <p style="text-align: center">Correo</p>
                                                 </th>
                                                 <th>
-                                                    <p style="text-align: center">Id empleado que <br> registro</p>
+                                                    <p style="text-align: center">Id empleado que registro</p>
                                                 </th>
                                                 <th>
                                                     <p style="text-align: center">Nombre empleado <br> que registro</p>

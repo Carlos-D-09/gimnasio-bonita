@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\clase;
 use App\Models\cliente;
+use App\Rules\validaFechaNacimientoCliente;
+use App\Rules\validarPasswordCliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +25,9 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        $ultimoId = cliente::all('id')->last();
+        $siguienteId = (int)$ultimoId->id + 1;
+        return view('cliente.formCliente',compact('siguienteId'));
     }
 
     /**
@@ -34,7 +38,40 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules =[
+            'nombre' => ['required','string'],
+            'fecha_nacimiento' => ['required','date',new validaFechaNacimientoCliente],
+            'telefono' => ['numeric','min:1000000000','max:9999999999'],
+            'correo' => 'email:rfc',
+            'passwordNuevo' => [new validarPasswordCliente($request->re_password)]
+        ];
+        $message = [
+            'telefono.min' => 'El número teléfonico debe tener 10 digitos',
+            'telefono.max' => 'El número teléfonico debe tener 10 digitos',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $cliente = new cliente();
+        if($request->imagen == null){
+            $cliente->imagen = '/images/user.png';
+        }
+        else{
+            $cliente->imagen = $request->imagen;
+        }
+        $cliente->nombre = $request->nombre;
+        $timestamp = strtotime($request->fecha_nacimiento);
+        $cliente->fecha_nacimiento = date("Y-m-d",$timestamp);
+        $cliente->domicilio = $request->domicilio;
+        $cliente->telefono = $request->telefono;
+        $cliente->correo = $request->correo;
+        $cliente->fecha_registro = date('Y-m-d');
+        $cliente->password = $request->passwordNuevo;
+        $cliente->status = 1;
+        $cliente->id_empleado = Auth::user()->id;
+        $cliente->save();
+        $clientes = cliente::all();
+        $content = 'cliente.index';
+        return view('dashboard', compact('clientes', 'content'));
     }
 
     /**
@@ -46,7 +83,8 @@ class ClienteController extends Controller
     public function show(cliente $cliente)
     {
         unset($cliente['password']);
-        return view('cliente.profile', compact('cliente'));
+        $content = 'cliente.profile';
+        return view('dashboard', compact('cliente','content'));
     }
 
     /**

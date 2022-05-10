@@ -30,14 +30,15 @@
                 </form>
               </div>
               <div class="col-md-9 col-sm-9 ">
-                <div class="">
-                    <br><br>
+                <div class="" ">
                     <ul class="list-unstyled user_data">
-                        <li><i class="fa-solid fa-location-dot fa-2x"></i> <h3 style="display:inline;"> &nbsp;&nbsp;Dirección:</h3> <h2 style="display: inline;">&nbsp;{{$cliente->domicilio}}</h2></li><br>
-                        <li><i class="fa-solid fa-heart fa-2x"></i> <h3 style="display:inline;">&nbsp;Fecha de nacimiento:</h3><h2 style="display: inline;">&nbsp;{{$cliente->fecha_nacimiento}}</h2></li><br>
-                        <li><i class="fa-solid fa-mobile fa-2x"></i> <h3 style="display:inline;">&nbsp;&nbsp;Teléfono:</h3><h2 style="display: inline;">&nbsp;{{$cliente->telefono}}</h2></li><br>
-                        <li><i class="fa-solid fa-envelope fa-2x"></i> <h3 style="display:inline;">&nbsp;Correo:</h3> <h2 style="display: inline;">&nbsp;{{$cliente->correo}}</h2></li><br>
-                        <li><i class="fa-solid fa-calendar fa-2x"></i><h3 style="display:inline;">&nbsp;&nbsp;Fecha de registro:</h3><h2 style="display: inline;">&nbsp;{{$cliente->fecha_registro}}</h2></li><br>
+                        <li><i class="fa-solid fa-address-card fa-2x"></i></li>
+                        <li><i class="fa-solid fa-location-dot fa-2x"></i></li>
+                        <li><i class="fa-solid fa-heart fa-2x"></i></li>
+                        <li><i class="fa-solid fa-mobile fa-2x"></i></li>
+                        <li><i class="fa-solid fa-envelope fa-2x"></i></li>
+                        <li><i class="fa-solid fa-calendar fa-2x"></i></li>
+                        <li><i class="fa-solid fa-book-medical fa-2x"></i></li>
                     </ul>
                 </div>
               </div>
