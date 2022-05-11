@@ -38,13 +38,28 @@
                     </ul>
                 </li>
                 <li>
-                    <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
+                    <a><i class="fa-solid fa-baseball-bat-ball"></i></i> Equipos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/seePagos">Consultar pagos</a></li>
+                        <li><a href="/empleado/equipos">Consultar equipos</a></li>
+                        <li><a href="/empleado/equipos/create">Registrar equipo</a></li>
                     </ul>
                 </li>
-            {{-- Vista encargado sucursal --}}
-            @elseif(Auth::user()->id_tipoUsuario == 2)
+                <li>
+                    <a><i class="fa-solid fa-hand-holding-dollar"></i></i></i> Prestamos equipos<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/empleado/historialPrestamo">Consultar prestamos</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/seePagos">Consultar pagos membresias</a></li>
+                        <li><a href="/seePagos">Consultar pagos equipos</a></li>
+                        <li><a href="/seePagos">Consultar pagos clases</a></li>
+                    </ul>
+                </li>
+                {{-- Vista encargado sucursal --}}
+                @elseif(Auth::user()->id_tipoUsuario == 2)
                 <h2> Encargado de sucursal </h2>
                 <li><a><i class="fa-solid fa-wallet fa-xl"></i> Membresias <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -68,11 +83,17 @@
                     </ul>
                 </li>
                 <li>
+                    <a><i class="fa-solid fa-baseball-bat-ball"></i></i> Equipos<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/empleado/equipos">Consultar equipos</a></li>
+                        <li><a href="/empleado/equipos/create">Registrar equipo</a></li>
+                    </ul>
+                </li>
+                <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="">Realizar pago</a></li>
-                        <li><a href="">Consultar pago</a></li>
-                        <li><a href="">Consultar pagos</a></li>
+                        <li><a href="/seePagos">Consultar pagos equipos</a></li>
+                        <li><a href="/seePagos">Consultar pagos clases</a></li>
                     </ul>
                 </li>
             {{-- Vista maestro --}}

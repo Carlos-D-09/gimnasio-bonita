@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\equipos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EquiposController extends Controller
 {
@@ -14,7 +15,9 @@ class EquiposController extends Controller
      */
     public function index()
     {
-        //
+        $equipos = equipos::all()->where('status',1);
+        $content = 'equipos.index';
+        return view('dashboard',compact('equipos','content'));
     }
 
     /**
@@ -24,7 +27,13 @@ class EquiposController extends Controller
      */
     public function create()
     {
-        //
+        $id = DB::table('equipos')->select('id')->orderByDesc('id')->first();
+        if($id == null){
+            $id = 1;
+            return view('equipos.formEquipo', compact('id'));
+        }
+        $id = (int) $id->id + 1;
+        return view('equipos.formEquipo',compact('id'));
     }
 
     /**

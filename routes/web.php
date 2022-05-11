@@ -9,6 +9,7 @@ use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\PagosController;
 use App\Http\Controllers\empleadoCRUD_Controller;
+use App\Http\Controllers\EquiposController;
 use App\Http\Controllers\oferta_actividadesController;
 use App\Http\Controllers\OfertaActividadesController;
 use App\Models\oferta_actividades;
@@ -65,6 +66,8 @@ Route::get('/empleado/oferta_actividades/dia/search', [oferta_actividadesControl
 Route::get('/empleado/oferta_actividades/clase/search', [oferta_actividadesController::class, 'busquedaPatronClase'])->middleware('auth');
 
 Route::resource('/empleado/oferta_actividades', oferta_actividadesController::class)->middleware('auth')->except('show');
+
+Route::resource('/empleado/equipos',EquiposController::class)->middleware('auth');
 
 Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 
