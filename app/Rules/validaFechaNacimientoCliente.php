@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use DateTime;
 use Illuminate\Contracts\Validation\Rule;
 
 class validaFechaNacimientoCliente implements Rule
@@ -25,9 +26,14 @@ class validaFechaNacimientoCliente implements Rule
      */
     public function passes($attribute, $value)
     {
-        $fechaActual = date('d/m/Y');
-        $fechaIntroucidaMas15 = date("d/m/Y",strtotime($value."+ 15 years"));
-        if($fechaActual == $value || $value > $fechaActual || $fechaIntroucidaMas15 > $fechaActual){
+        $fechaActual = date('d-m-Y');
+        $fechaNuevoFormato = DateTime::createFromFormat('d/m/Y', $value);
+        $fechaNuevoFormato = $fechaNuevoFormato->format('d-m-Y');
+        $fechaNuevoFormatoMas15 = date("d-m-Y",strtotime($fechaNuevoFormato."+ 15 year"));
+        $fechaActual = strtotime($fechaActual);
+        $fechaNuevoFormato = strtotime($fechaNuevoFormato);
+        $fechaNuevoFormatoMas15 = strtotime($fechaNuevoFormatoMas15);
+        if($fechaActual == $fechaNuevoFormato || $fechaNuevoFormato > $fechaActual || $fechaNuevoFormatoMas15 > $fechaActual){
             return false;
         }
         return true;

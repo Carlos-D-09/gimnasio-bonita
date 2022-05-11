@@ -13,7 +13,7 @@
             <div class="content">
                 <br>
                 <p>Id del nuevo cliente: {{$siguienteId}}</p>
-                <form action="/empleado/cliente" method="POST">
+                <form action="/empleado/cliente" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="user-details">
                         <div class="input-box">

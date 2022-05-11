@@ -12,7 +12,7 @@
                         <form action="{{ '/' . Route::current()->uri}}">
                     @endif
                         <div class="input-group">
-                            <input type="text" name="patron" class="form-control inputPatron" placeholder="Buscar por id">
+                            <input type="text" name="idBuscar" class="form-control inputPatron" placeholder="Buscar por id">
                             <span class="input-group-btn">
                                 <button class="btn btn-default buttonPatron" type="submit"> Buscar</button>
                                 <script src="{{asset('/js/ofertaActividades/index/botonBusqueda.js')}}"></script>
@@ -27,8 +27,12 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                            <h2>Listado de clientes</h2>
-                        <div class="clearfix"></div>
+                            @if(isset($idBuscado))
+                                <h2>Resultados de la busqueda para el id: {{$idBuscado}}</h2>
+                            @else
+                                <h2>Listado de clientes</h2>
+                            @endif
+                            <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
                         <div class="row">

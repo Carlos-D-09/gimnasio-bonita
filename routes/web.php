@@ -38,7 +38,13 @@ Route::get('/empleado/login', function(){
 
 Route::resource('/empleado/clase',ClaseController::class)->middleware('auth');
 
+Route::get('/empleado/cliente/search',[ClienteController::class,'search'])->middleware('auth');
+
 Route::resource('/empleado/cliente',ClienteController::class)->middleware('auth');
+
+Route::get('/empleado/cliente/{id}/edit/password',[ClienteController::class,'editPassword'])->middleware('auth');
+
+Route::patch('/empleado/cliente/{id}/edit/password',[ClienteController::class,'updatePassword'])->middleware('auth');
 
 Route::resource('/empleado/pago',PagosController::class)->middleware('auth');
 
