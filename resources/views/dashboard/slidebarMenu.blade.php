@@ -43,6 +43,12 @@
                         <li><a href="/seePagos">Consultar pagos</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a><i class="fa fa-laptop"></i> Soporte técnico<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/email">Enviar email</a></li>
+                    </ul>
+                </li>
             {{-- Vista encargado sucursal --}}
             @elseif(Auth::user()->id_tipoUsuario == 2)
                 <h2> Encargado de sucursal </h2>
@@ -75,6 +81,12 @@
                         <li><a href="">Consultar pagos</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a><i class="fa fa-laptop"></i> Soporte técnico<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/email">Enviar email</a></li>
+                    </ul>
+                </li>
             {{-- Vista maestro --}}
             @elseif(Auth::user()->id_tipoUsuario == 3)
                 <h2>Maestro</h2>
@@ -87,6 +99,12 @@
                 <li><a><i class="fa-solid fa-book fa-xl"></i> Agenda <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="/oferta_actividades"></a>Mostrar la oferta de actividades</li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa fa-laptop"></i> Soporte técnico<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/email">Enviar email</a></li>
                     </ul>
                 </li>
             @endif

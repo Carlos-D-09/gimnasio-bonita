@@ -71,6 +71,9 @@ Route::resource('/empleadoCRUD',empleadoCRUD_Controller::class)->middleware('aut
 Route::get('/searchEmpleado', 'App\Http\Controllers\empleadoCRUD_Controller@search')->middleware('auth');
 Route::get('/empleadoCRUD/{id}/delete', 'App\Http\Controllers\empleadoCRUD_Controller@destroy')->middleware('auth');
 
+Route::get('/email', 'App\Http\Controllers\MailController@index')->middleware('auth');
+Route::post('/send-email', 'App\Http\Controllers\MailController@sendEmail')->middleware('auth');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
