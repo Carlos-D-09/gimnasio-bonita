@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\equipos;
+use App\Rules\validarNombreEquipo;
+use App\Rules\validarNombreEquipoEdit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -44,7 +46,22 @@ class EquiposController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => ['required', 'min:3', 'max:150', new validarNombreEquipo],
+            'unidades' => ['required','integer'],
+            'costo' => ['required','numeric'],
+            'descripcion'=> ['required','min:5','max:150']
+        ]);
+        $equipo = new equipos();
+        $equipo->nombre = ucfirst($request->nombre);
+        $equipo->unidades = $request->unidades;
+        $equipo->cost_x_renta = $request->costo;
+        $equipo->descripcion = $request->descripcion;
+        $equipo->status = 1;
+        $equipo->save();
+        $equipos = equipos::all()->where('status',1);
+        $content = 'equipos.index';
+        return view('dashboard',compact('equipos','content'));
     }
 
     /**
@@ -64,9 +81,9 @@ class EquiposController extends Controller
      * @param  \App\Models\equipos  $equipos
      * @return \Illuminate\Http\Response
      */
-    public function edit(equipos $equipos)
+    public function edit(equipos $equipo)
     {
-        //
+        return view('equipos.formEditEquipo',compact('equipo'));
     }
 
     /**
@@ -76,9 +93,20 @@ class EquiposController extends Controller
      * @param  \App\Models\equipos  $equipos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, equipos $equipos)
+    public function update(Request $request, equipos $equipo)
     {
-        //
+        $request->validate([
+            'nombre' => ['required', 'min:3', 'max:150', new validarNombreEquipoEdit($equipo->id)],
+            'unidades' => ['required','integer'],
+            'costo' => ['required','numeric'],
+            'descripcion'=> ['required','min:5','max:150']
+        ]);
+        $equipo->nombre = $request->nombre;
+        $equipo->unidades = $request->unidades;
+        $equipo->cost_x_renta = $request->costo;
+        $equipo->descripcion = $request->descripcion;
+        $equipo->save();
+        return redirect('/empleado/equipos');
     }
 
     /**
@@ -87,8 +115,10 @@ class EquiposController extends Controller
      * @param  \App\Models\equipos  $equipos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(equipos $equipos)
+    public function destroy(equipos $equipo)
     {
-        //
+        $equipo->status = 0;
+        $equipo->save();
+        return redirect('/empleado/equipos');
     }
 }

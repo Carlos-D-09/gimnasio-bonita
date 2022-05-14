@@ -31,6 +31,11 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <br>
+                    <input type="text" name="unidades" class="form-control" placeholder="Unidades disponibles" value = "{{old('unidades')}}" style="display: inline">
+                    @error('unidades')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    <br><br>
                     <label for="costo">$</label>
                     <input type="text" name="costo" class="form-control" placeholder="Costo x dia" value = "{{old('costo')}}" style="display: inline">
                     @error('costo')

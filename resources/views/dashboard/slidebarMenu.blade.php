@@ -47,7 +47,7 @@
                 <li>
                     <a><i class="fa-solid fa-hand-holding-dollar"></i></i></i> Prestamos equipos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/empleado/historialPrestamo">Consultar prestamos</a></li>
+                        <li><a href="/empleado/prestamosEquipos">Consultar prestamos</a></li>
                     </ul>
                 </li>
                 <li>

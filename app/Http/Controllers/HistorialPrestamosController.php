@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\historial_prestamos_equipos;
+use App\Models\historial_prestamos;
 use Illuminate\Http\Request;
 
-class HistorialPrestamosEquiposController extends Controller
+class HistorialPrestamosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,9 @@ class HistorialPrestamosEquiposController extends Controller
      */
     public function index()
     {
-        //
+        $prestamos = historial_prestamos::all();
+        $content = 'prestamosEquipos.index';
+        return view('dashboard',compact('prestamos','content'));
     }
 
     /**
@@ -41,10 +43,10 @@ class HistorialPrestamosEquiposController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\historial_prestamos_equipos  $historial_prestamos_equipos
+     * @param  \App\Models\historial_prestamos  $historial_prestamos
      * @return \Illuminate\Http\Response
      */
-    public function show(historial_prestamos_equipos $historial_prestamos_equipos)
+    public function show(historial_prestamos $historial_prestamos)
     {
         //
     }
@@ -52,10 +54,10 @@ class HistorialPrestamosEquiposController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\historial_prestamos_equipos  $historial_prestamos_equipos
+     * @param  \App\Models\historial_prestamos  $historial_prestamos
      * @return \Illuminate\Http\Response
      */
-    public function edit(historial_prestamos_equipos $historial_prestamos_equipos)
+    public function edit(historial_prestamos $historial_prestamos)
     {
         //
     }
@@ -64,10 +66,10 @@ class HistorialPrestamosEquiposController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\historial_prestamos_equipos  $historial_prestamos_equipos
+     * @param  \App\Models\historial_prestamos  $historial_prestamos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, historial_prestamos_equipos $historial_prestamos_equipos)
+    public function update(Request $request, historial_prestamos $historial_prestamos)
     {
         //
     }
@@ -75,10 +77,10 @@ class HistorialPrestamosEquiposController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\historial_prestamos_equipos  $historial_prestamos_equipos
+     * @param  \App\Models\historial_prestamos  $historial_prestamos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(historial_prestamos_equipos $historial_prestamos_equipos)
+    public function destroy(historial_prestamos $historial_prestamos)
     {
         //
     }

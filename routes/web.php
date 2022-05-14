@@ -6,13 +6,12 @@ use App\Http\Controllers\ClientAuthController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
-use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\PagosController;
 use App\Http\Controllers\empleadoCRUD_Controller;
 use App\Http\Controllers\EquiposController;
+use App\Http\Controllers\HistorialPrestamosController;
+use App\Http\Controllers\HistorialPrestamosEquiposController;
 use App\Http\Controllers\oferta_actividadesController;
-use App\Http\Controllers\OfertaActividadesController;
-use App\Models\oferta_actividades;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,11 +68,14 @@ Route::resource('/empleado/oferta_actividades', oferta_actividadesController::cl
 
 Route::resource('/empleado/equipos',EquiposController::class)->middleware('auth');
 
+Route::get('/empleado/prestamosEquipos',[HistorialPrestamosController::class,'index'])->middleware('auth');
+
 Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 
 Route::resource('/empleado/agenda', AgendaController::class)->middleware('auth');
 
 Route::resource('/seePagos',PagosController::class)->middleware('auth');
+
 Route::get('/searchPago', 'App\Http\Controllers\PagosController@search')->middleware('auth');
 
 Route::resource('/empleadoCRUD',empleadoCRUD_Controller::class)->middleware('auth');
