@@ -162,6 +162,9 @@ class ClienteController extends Controller
             $destino = "images/Cliente/imagenCliente/";
             $filename = time() . '_' . $file->getClientOriginalName();
             $request->file('imagen')->move($destino,$filename);
+            if($cliente->imagen != '/images/user.png'){
+                unlink($cliente->imagen);
+            }
             $cliente->imagen = $destino . $filename;
         }
         $cliente->nombre = $request->nombre;

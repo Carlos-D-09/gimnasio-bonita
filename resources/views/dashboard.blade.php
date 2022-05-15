@@ -40,7 +40,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="{{asset('images/img.jpg')}}" alt="..." class="img-circle profile_img">
+                <img src="{{asset(Auth::user()->imagen)}}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -68,11 +68,15 @@
                 <ul class=" navbar-right">
                   <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                      <img src="{{ asset('images/img.jpg')}}" alt="">{{Auth::user()->nombre}}
+                      <img src="{{ asset(Auth::user()->imagen)}}" alt="">{{Auth::user()->nombre}}
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item"  href="javascript:;"> Profile</a>
-                      <div class = "dropdown-item"> <i class = "fa fa-sign-out pull-right"></i>
+                        @if (isset(Auth::user()->id_tipoUsuario))
+                            <a class="dropdown-item"  href="/empleadoCRUD/{{Auth::user()->id}}"> Profile</a>
+                        @else
+                            <a class="dropdown-item"  href="/cliente/{{Auth::user()->id}}"> Profile</a>
+                        @endif
+                        <div class = "dropdown-item"> <i class = "fa fa-sign-out pull-right"></i>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault();

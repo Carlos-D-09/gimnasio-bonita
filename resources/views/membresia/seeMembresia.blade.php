@@ -57,7 +57,7 @@
                                                     <p style="text-align: center">Nombre</p>
                                                 </th>
                                                 <th>
-                                                    <p style="text-align: center">Duracion</p>
+                                                    <p style="text-align: center">Duracion (Días)</p>
                                                 </th>
                                                 <th>
                                                     <p style="text-align: center">Costo</p>
@@ -73,7 +73,7 @@
                                                 <td>{{ $membresia->id }}</td>
                                                 <td>{{ $membresia->Nombre }}</td>
                                                 <td>{{ $membresia->Duracion }}</td>
-                                                <td>{{ $membresia->costo }}</td>
+                                                <td>${{ $membresia->costo }}</td>
                                                 <td>
                                                     <form action="/membresia/{{ $membresia->id }}/delete">
                                                         @csrf

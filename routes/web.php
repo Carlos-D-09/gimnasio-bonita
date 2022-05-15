@@ -46,6 +46,10 @@ Route::get('/empleado/cliente/{id}/edit/password',[ClienteController::class,'edi
 
 Route::patch('/empleado/cliente/{id}/edit/password',[ClienteController::class,'updatePassword'])->middleware('auth');
 
+Route::get('/empleadoCRUD/{id}/edit/password',[empleadoCRUD_Controller::class,'editPassword'])->middleware('auth');
+
+Route::patch('/empleadoCRUD/{id}/edit/password',[empleadoCRUD_Controller::class,'updatePassword'])->middleware('auth');
+
 Route::resource('/empleado/pago',PagosController::class)->middleware('auth');
 
 Route::get('/empleado/searchPago', 'App\Http\Controllers\PagosController@search')->middleware('auth');

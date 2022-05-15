@@ -7,14 +7,8 @@
     <link rel="stylesheet" href="{{asset('css/EmpleadosCRUD/formEmpleados.css')}}">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
-<body> 
+<body>
   <div class="container">
-    @isset($empleado)
-      <div class="title">Edición del empleado</div> <!-- Edit empleado -->
-      <div class="content">
-      <form action="/empleadoCRUD/{{ $empleado->id }}" method="POST">
-        @method('PATCH') 
-    @else
       <div class="title">Registro de empleados</div> <!-- Fecha de ingreso e id se asignan en automatico -->
       <div class="content">
       <form action="{{ route('empleadoCRUD.store') }}" method="POST">
@@ -28,6 +22,37 @@
           }
         </style>
         <div class="user-details">
+          <div class="input-box">
+              <br>
+            <input type="file" id="imagen" name="imagen">
+            <label for="imagen" >
+                <i class="fa-solid fa-file-circle-plus fa-xl"></i>
+                Selecciona Imagen
+            </label>
+            <style type="text/css">
+                input#imagen{
+                    display: none;
+                }
+
+                input#imagen + label{
+                    background-color:rgb(252, 217, 172);
+                    padding: 8px;
+                    color: white;
+                    border: 2px solid white;
+                    border-radius: 9px;
+                }
+
+                input#imagen + label:hover{
+                    background-color: rgba(197, 160, 112, 0.767);
+                    border-color: black;
+                    cursor: pointer;
+                }
+            </style>
+          </div>
+          <div class="input-box">
+              <img id="preview" class="alineadoCentro" src="{{asset('/images/Clases/Form/adjuntarArchivo.png')}}" width="100px" height="100px">
+              <script src="{{asset('/js/Empleado/formEmpleado.js')}}"></script>
+          </div>
           <div class="input-box">
             <span class="details">Nombre del empleado</span>
             <input type="text" name="nombre" placeholder="Ejemplo: David Fletes" value="{{ isset($empleado) ? $empleado->nombre : ''}}{{ old('nombre') }}" required> <!-- required a un lado del placeholder -->
@@ -115,7 +140,6 @@
             <span class="details" align="center">Fecha de registro de empleado detectado por el sistema</span>
             <input type="text" name="fecha_ingreso" value="{{ isset($empleado) ? $empleado->fecha_ingreso : '' }}" readonly>
           </div>
-          @endisset
         </div>
         <div class="cargo-details">
           <input type="radio" name="id_tipoUsuario" id="dot-1" value=1>

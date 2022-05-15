@@ -24,6 +24,7 @@ class EmpleadoSeeder extends Seeder
 
         DB::table('empleados')-> insert ([
             'id' => 1,
+            'imagen' => '/images/user.png',
             'nombre' => 'Alex',
             'RFC' => 'OTELDE',
             'fecha_nacimiento' => '2000-12-31',
@@ -39,6 +40,7 @@ class EmpleadoSeeder extends Seeder
 
         DB::table('empleados')-> insert ([
             'id' => 2,
+            'imagen' => '/images/user.png',
             'nombre' => 'Carlos Daniel Medina Sahagún',
             'RFC' => 'MESC99101',
             'fecha_nacimiento' => '1999-10-17',
@@ -53,6 +55,7 @@ class EmpleadoSeeder extends Seeder
         ]);
         DB::table('empleados')-> insert ([
             'id' => 3,
+            'imagen' => '/images/user.png',
             'nombre' => 'Carlos Daniel Sahagún',
             'RFC' => 'MESC4232',
             'fecha_nacimiento' => '1998-10-17',
@@ -67,6 +70,7 @@ class EmpleadoSeeder extends Seeder
         ]);
         DB::table('empleados')-> insert ([
             'id' => 4,
+            'imagen' => '/images/user.png',
             'nombre' => 'Carlos Daniel Medina',
             'RFC' => 'MESC324234',
             'fecha_nacimiento' => '1997-10-17',
@@ -81,6 +85,7 @@ class EmpleadoSeeder extends Seeder
         ]);
         DB::table('empleados')-> insert ([
             'id' => 5,
+            'imagen' => '/images/user.png',
             'nombre' => 'Diego Alejandro Medina Sahagun',
             'RFC' => 'MESC324245',
             'fecha_nacimiento' => '1997-10-29',

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset('css/EmpleadosCRUD/formEmpleados.css')}}">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
-<body> 
+<body>
   <div class="container">
       <div class="title">Formulario de membresia</div> <!-- Fecha de ingreso e id se asignan en automatico -->
         <div class="content">
