@@ -19,17 +19,36 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-            <div class="col-md-12 col-sm-12 ">
-                <div class="x_panel">
+            <div class="col-md-12 col-sm-12">
+                <div class="x_panel" >
                     <div class="x_title">
+                        @if(session()->has('success'))
+                        <div class="alert alert-success text-center" style="text-align: center;">
+                            {{ session()->get('success') }}
+                        </div>
+                        @endif
+
+                        @if(session()->has('deleted'))
+                        <div class="alert alert-danger" role="alert" style="text-align: center;">
+                            {{ session()->get('deleted') }}
+                        </div>
+                        @endif
+
                         <h2>Listado de empleados</h2>
                         <div class="clearfix"></div>
+                        <!--@if(session()->has('message'))
+                        <div class="alert alert-success alert-dismissible " role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                            </button>
+                            <strong>{{ session()->get('message') }}</strong>
+                        </div>
+                        @endif-->
                     </div>
                     <div class="x_content">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                    <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                                         <thead>
                                             <tr>
                                                 <th>

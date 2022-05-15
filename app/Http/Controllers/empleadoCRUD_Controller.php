@@ -39,8 +39,20 @@ class empleadoCRUD_Controller extends Controller
     public function store(Request $request)
     {
         /*dd($request->all());*/
+        $request->validate([
+            'nombre' => 'required|regex:/^[\pL\s\-]+$/u',
+            'RFC' => 'required|alpha|size:14|unique:empleados,RFC',
+            'fecha_nacimiento' => 'required',
+            'domicilio' => 'required',
+            'telefono' => 'required|digits:10',
+            'correo' => 'required|email|unique:empleados,correo',
+            'sueldo' => 'required|digits_between:4,6',
+            'NSS' => 'required|alpha|size:11|unique:empleados,NSS',
+            'password' => 'required|min:5',
+            'id_tipoUsuario' => 'required'
+        ]);
+
         $EmpleadoCRUD = new empleado();
-        //$EmpleadoCRUD->getRawOriginal('sueldo');
 
         $EmpleadoCRUD->id = $request->id;
         $EmpleadoCRUD->nombre = $request->nombre;
@@ -57,12 +69,12 @@ class empleadoCRUD_Controller extends Controller
         
         $EmpleadoCRUD->save();
 
-        $content = 'empleadosCRUD.seeEmpleado';
+        /*$content = 'empleadosCRUD.seeEmpleado';
 
-        $data['empleados'] = empleado::paginate();
+        $data['empleados'] = empleado::paginate();*/
+        return redirect('/empleadoCRUD')->with('success', 'Se ha registrado el empleado de forma exitosa');
 
-        return view('dashboard', $data, compact('content'));
-        /*return 'store';*/
+        //return view('dashboard', $data, compact('content'))->with('message', 'El empleado ha sido registrado con exito');
     }
 
     /**
@@ -104,6 +116,19 @@ class empleadoCRUD_Controller extends Controller
     public function update(Request $request, empleado $EmpleadoCRUD, $id)
     {
         //dd($request->all());
+        $request->validate([
+            'nombre' => 'required|regex:/^[\pL\s\-]+$/u',
+            'RFC' => 'required|alpha|size:14|unique:empleados,RFC',
+            'fecha_nacimiento' => 'required',
+            'domicilio' => 'required',
+            'telefono' => 'required|digits:10',
+            'correo' => 'required|email|unique:empleados,correo',
+            'sueldo' => 'required|digits_between:4,6',
+            'NSS' => 'required|alpha|size:11|unique:empleados,NSS',
+            'password' => 'required|min:5',
+            'id_tipoUsuario' => 'required'
+        ]);
+
         $empleado = empleado::find($id);
         $EmpleadoCRUD->id = $empleado->id;
         $EmpleadoCRUD->nombre = $request->nombre;
@@ -134,7 +159,7 @@ class empleadoCRUD_Controller extends Controller
             'id_tipoUsuario' => $EmpleadoCRUD->id_tipoUsuario,
         ]);
 
-        return redirect('/empleadoCRUD/' . $EmpleadoCRUD->id);
+        return redirect('/empleadoCRUD/' . $EmpleadoCRUD->id)->with('edited', 'Se ha modificado la informacion del empleado');
     }
 
     public function search(Request $request)
@@ -163,6 +188,6 @@ class empleadoCRUD_Controller extends Controller
         $empleado = empleado::find($id);
         $empleado->delete();
 
-        return redirect('/empleadoCRUD');
+        return redirect('/empleadoCRUD')->with('deleted', 'Se ha desactivado la cuenta del empleado con el id de: ' . $empleado->id);
     }
 }

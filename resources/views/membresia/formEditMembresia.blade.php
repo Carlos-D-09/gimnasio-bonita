@@ -31,6 +31,12 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
+                            <style>
+                            .danger {
+                                color: red;
+                                font-size: 13px;
+                            }
+                            </style>
                                         <br>
                                         <div class="form-group row">
                                             <label class="control-label col-md-3 col-sm-3" style="text-align: right;" for="nombre">
@@ -60,6 +66,11 @@
                                             </label><br><br><br>
                                             <div class="col-md-9 col-sm-9 ">
                                                 <input type="number" name="costo" class="form-control" style="display: inline" value="{{ $membresia->costo }}">
+                                                @error('costo')
+                                                <br>
+                                                <small class="danger">*{{ $message }}</small>
+                                                <br>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>

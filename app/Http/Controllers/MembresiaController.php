@@ -40,6 +40,12 @@ class MembresiaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'Nombre' => 'required|regex:/^[\pL\s\-]+$/u|unique:membresias,Nombre',
+            'Duracion' => 'required|digits_between:1,5',
+            'costo' => 'required|digits_between:2,5',
+        ]);
+
         $membresiaData = new membresia();
         $membresiaData->id = $request->id;
         $membresiaData->Nombre = $request->Nombre;
@@ -56,7 +62,7 @@ class MembresiaController extends Controller
 
         $data['membresias'] = membresia::paginate();
         
-        return view('dashboard', $data, compact('content'));
+        return redirect('/membresia')->with('success', 'Se ha registrado la membresia de forma exitosa');
     }
 
     /**
@@ -93,6 +99,10 @@ class MembresiaController extends Controller
      */
     public function update(Request $request, membresia $membresiaData, $id)
     {
+        $request->validate([
+            'costo' => 'required|digits_between:2,5',
+        ]);
+        
         $membresia = membresia::find($id);
         $membresiaData->id = $membresia->id;
         $membresiaData->Nombre = $membresia->Nombre;
@@ -104,7 +114,7 @@ class MembresiaController extends Controller
             'costo' => $membresiaData->costo
         ]);
 
-        return redirect('/membresia');
+        return redirect('/membresia')->with('edited', 'Se ha modificado el costo por dia de la membresia con el id de ' . $membresia->id);
     }
 
     /**
@@ -118,6 +128,6 @@ class MembresiaController extends Controller
         $membresia = membresia::find($id);
         $membresia->delete();
 
-        return redirect('/membresia');
+        return redirect('/membresia')->with('deleted', 'Se ha eliminado la membresia con el id de: ' . $membresia->id);
     }
 }

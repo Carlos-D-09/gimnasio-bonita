@@ -22,6 +22,24 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
+                        @if(session()->has('success'))
+                        <div class="alert alert-success text-center" style="text-align: center;">
+                            {{ session()->get('success') }}
+                        </div>
+                        @endif
+
+                        @if(session()->has('edited'))
+                        <div class="alert alert-warning" role="alert" style="text-align: center;">
+                            {{ session()->get('edited') }}
+                        </div>
+                        @endif
+
+                        @if(session()->has('deleted'))
+                        <div class="alert alert-danger" role="alert" style="text-align: center;">
+                            {{ session()->get('deleted') }}
+                        </div>
+                        @endif
+                        
                         <h2>Listado de membresias</h2>
                         <div class="clearfix"></div>
                     </div>

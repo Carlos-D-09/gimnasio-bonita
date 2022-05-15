@@ -26,6 +26,11 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
+                        @if(session()->has('edited'))
+                        <div class="alert alert-warning" role="alert" style="text-align: center;">
+                            {{ session()->get('edited') }}
+                        </div>
+                        @endif
                         <h2>Datos personales</h2>
                         <div class="clearfix"></div>
                     </div>
