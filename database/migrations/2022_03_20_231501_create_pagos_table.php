@@ -22,7 +22,7 @@ class CreatePagosTable extends Migration
             $table->unsignedBigInteger('id_empleado');
             $table->unsignedBigInteger('id_cliente');
             $table->foreign("id_membresia")
-                ->references("id")->on("membresia");
+                ->references("id")->on("membresias");
             $table->foreign("id_empleado")
                 ->references("id")->on("empleados");
             $table->foreign("id_cliente")

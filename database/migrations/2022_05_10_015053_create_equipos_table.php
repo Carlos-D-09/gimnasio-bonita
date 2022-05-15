@@ -19,6 +19,7 @@ class CreateEquiposTable extends Migration
             $table->string('descripcion', 150);
             $table->integer('unidades');
             $table->double('cost_x_renta',8,2);
+            $table->boolean('status');
         });
     }
 

@@ -24,7 +24,6 @@
                             <thead>
                                 <tr style="text-align:center">
                                     <th>Id</th>
-                                    <th>Nombre</th>
                                     <th>Fecha</th>
                                     <th>Dias</th>
                                     <th>Monto</th>
@@ -37,7 +36,6 @@
                                 @foreach($pagos as $pago)
                                     <tr style="text-align:center">
                                         <td>{{ $pago->id }}</td>
-                                        <td>{{ $pago->Nombre }}</td>
                                         <td>{{ $pago->fecha }}</td>
                                         <td>{{ $pago->dias }}</td>
                                         <td>{{ $pago->monto }}</td>

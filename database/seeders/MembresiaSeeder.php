@@ -14,21 +14,21 @@ class MembresiaSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('membresia')-> insert ([
+        DB::table('membresias')-> insert ([
             'id' => 1,
             'Nombre' => 'Membresia premium',
             'Duracion' => 15,
             'costo' => 1000
         ]);	
         
-        DB::table('membresia')-> insert ([
+        DB::table('membresias')-> insert ([
             'id' => 2,
             'Nombre' => 'Membresia premium',
             'Duracion' => 10,
             'costo' => 700
         ]);	
 
-        DB::table('membresia')-> insert ([
+        DB::table('membresias')-> insert ([
             'id' => 3,
             'Nombre' => 'Membresia premium',
             'Duracion' => 30,

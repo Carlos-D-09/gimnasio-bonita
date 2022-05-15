@@ -74,7 +74,10 @@ class empleadoCRUD_Controller extends Controller
     public function show($id)
     {
         $empleado = empleado::find($id);
-        return view('empleadosCRUD.showEmpleado')->with('empleado',$empleado);
+        $content = 'empleadosCRUD.showEmpleado';
+        return view('dashboard', compact('empleado','content'));
+        /*$empleado = empleado::find($id);
+        return view('empleadosCRUD.showEmpleado')->with('empleado',$empleado);*/
     }
 
     /**
@@ -86,6 +89,8 @@ class empleadoCRUD_Controller extends Controller
     public function edit($id)
     {
         $empleado = empleado::find($id);
+        $content = 'empleadosCRUD.formEditEmpleado';
+        //dd($empleado->nombre);
         return view('empleadosCRUD.formEmpleado')->with('empleado', $empleado);
     }
 

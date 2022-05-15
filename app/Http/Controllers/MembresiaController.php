@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\membresia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MembresiaController extends Controller
 {
@@ -12,9 +13,13 @@ class MembresiaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $costoXdia = 30;
+
     public function index()
     {
-        //
+        $content = 'membresia.seeMembresia';
+        $data['membresias'] = membresia::paginate();
+        return view('dashboard', $data, compact('content'));
     }
 
     /**
@@ -24,7 +29,7 @@ class MembresiaController extends Controller
      */
     public function create()
     {
-        //
+        return view('membresia.formMembresia');
     }
 
     /**
@@ -35,7 +40,23 @@ class MembresiaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $membresiaData = new membresia();
+        $membresiaData->id = $request->id;
+        $membresiaData->Nombre = $request->Nombre;
+        $membresiaData->Duracion = $request->Duracion;
+        if(empty($request->costo)) {
+            $membresiaData->costo = $this->costoXdia * $request->Duracion;
+        } else {
+            $membresiaData->costo = $request->costo * $request->Duracion;
+        }
+        
+        $membresiaData->save();
+
+        $content = 'membresia.seeMembresia';
+
+        $data['membresias'] = membresia::paginate();
+        
+        return view('dashboard', $data, compact('content'));
     }
 
     /**
@@ -55,9 +76,12 @@ class MembresiaController extends Controller
      * @param  \App\Models\membresia  $membresia
      * @return \Illuminate\Http\Response
      */
-    public function edit(membresia $membresia)
+    public function edit($id)
     {
-        //
+        $membresia = membresia::find($id);
+        $content = 'membresia.formEditMembresia';
+        //return view('empleadosCRUD.formEmpleado')->with('empleado', $empleado);
+        return view('dashboard', compact('content'))->with('membresia', $membresia);
     }
 
     /**
@@ -67,9 +91,20 @@ class MembresiaController extends Controller
      * @param  \App\Models\membresia  $membresia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, membresia $membresia)
+    public function update(Request $request, membresia $membresiaData, $id)
     {
-        //
+        $membresia = membresia::find($id);
+        $membresiaData->id = $membresia->id;
+        $membresiaData->Nombre = $membresia->Nombre;
+        $membresiaData->costo = $request->costo * $membresia->Duracion;
+
+        DB::table('membresias')
+        ->where('id', $membresia->id)
+        ->update([
+            'costo' => $membresiaData->costo
+        ]);
+
+        return redirect('/membresia');
     }
 
     /**
@@ -78,8 +113,11 @@ class MembresiaController extends Controller
      * @param  \App\Models\membresia  $membresia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(membresia $membresia)
+    public function destroy($id)
     {
-        //
+        $membresia = membresia::find($id);
+        $membresia->delete();
+
+        return redirect('/membresia');
     }
 }

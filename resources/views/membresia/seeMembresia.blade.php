@@ -2,11 +2,11 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Empleados registrados</h3>
+                <h3>Membresias registradas</h3>
             </div>
             <div class="title_right">
                 <div class="col-md-5 col-sm-5 form-group pull-right top_search">
-                    <form action="/searchEmpleado" method="GET">
+                    <form action="" method="">
                         <div class="input-group">
                             <input type="search" class="form-control inputPatron" placeholder="Buscar por id" name="search">
                             <span class="input-group-btn">
@@ -22,7 +22,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Listado de empleados</h2>
+                        <h2>Listado de membresias</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -36,13 +36,13 @@
                                                     <p style="text-align: center">Id</p>
                                                 </th>
                                                 <th>
-                                                    <p style="text-align: center">Correo</p>
+                                                    <p style="text-align: center">Nombre</p>
                                                 </th>
                                                 <th>
-                                                    <p style="text-align: center">Fecha de ingreso</p>
+                                                    <p style="text-align: center">Duracion</p>
                                                 </th>
                                                 <th>
-                                                    <p style="text-align: center">Tipo de usuario</p>
+                                                    <p style="text-align: center">Costo</p>
                                                 </th>
                                                 <th>
                                                     <p style="text-align: center">Opciones</p>
@@ -50,22 +50,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($empleados as $empleado)
+                                            @foreach($membresias as $membresia)
                                                 <tr style="text-align:center">
-                                                <td>{{ $empleado->id }}</td>
-                                                <td>{{ $empleado->correo }}</td>
-                                                <td>{{ $empleado->fecha_ingreso }}</td>
-                                                <td>@if ($empleado->id_tipoUsuario == 1) Gerente @elseif ($empleado->id_tipoUsuario == 2) Encargado de sucursal @else Maestro @endif</td>
+                                                <td>{{ $membresia->id }}</td>
+                                                <td>{{ $membresia->Nombre }}</td>
+                                                <td>{{ $membresia->Duracion }}</td>
+                                                <td>{{ $membresia->costo }}</td>
                                                 <td>
-                                                    <form action="/empleadoCRUD/{{ $empleado->id }}" method="GET">
-                                                        <button type="submit" class="btn btn-round btn-info btn-sm">Ver detalles del empleado</button>
-                                                    </form>
-                                                    <form action="/empleadoCRUD/{{ $empleado->id }}/edit" method="GET">
-                                                        <button type="submit" class="btn btn-round btn-warning btn-sm">Editar información del empleado</button>
-                                                    </form>
-                                                    <form action="/empleadoCRUD/{{ $empleado->id }}/delete">
+                                                    <form action="/membresia/{{ $membresia->id }}/delete">
                                                         @csrf
-                                                        <button type="submit"class="btn btn-round btn-danger btn-sm">Desactivar cuenta del empleado</button>
+                                                        <button type="submit"class="btn btn-round btn-danger btn-sm">Eliminar membresia</button>
+                                                    </form>
+                                                    <form action="/membresia/{{ $membresia->id }}/edit" method="GET">
+                                                        <button type="submit" class="btn btn-round btn-warning btn-sm">Modificar costo por día</button>
                                                     </form>
                                                 </td>
                                                 </tr>
@@ -81,4 +78,3 @@
         </div>
     </div>
 </div>
-

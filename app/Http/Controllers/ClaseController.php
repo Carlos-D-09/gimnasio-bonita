@@ -142,6 +142,7 @@ class ClaseController extends Controller
         unlink($clase->imagen);
         $clase->status = 'inactivo';
         $clase->save();
+        DB::update('UPDATE oferta_actividades SET status = "inactivo" where id_clase = ?',[$clase->id]);
         return redirect('/empleado');
     }
 }

@@ -1,88 +1,52 @@
-<html lang="es" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-    <title> Empleado </title>
-    <link rel="stylesheet" href="{{asset('css/welcome/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/welcome/default-min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/welcome/animate.css')}}">
-    <link rel="stylesheet" href="{{asset('css/welcome/aos.css')}}">
-    <link rel="stylesheet" href="{{asset('css/welcome/default.css')}}">
-    <link rel="stylesheet" href="{{asset('css/welcome/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/welcome/Linelcons.css')}}">
-    <link rel="stylesheet" href="{{asset('css/welcome/slick.css')}}">
-    <link rel="stylesheet" href="{{asset('css/welcome/style.css')}}">
-    <link rel="stylesheet" href="{{asset('css/welcome/style.cssmap')}}">
-   </head>
-   <body> 
-    <div class="right_col" role="main" style="margin-top: 10px; margin-bottom: 200px; margin-left: 10px; margin-right: 10px;">
-        <div class="">
-            <div class="page-title">
-                <div class="title_left" style="text-align: center;">
-                    <h3>Información del empleado</h3> <br>
-                </div>
-                <div class="title_right">
-                    <div class="col-md-5 col-sm-5 form-group pull-right top_search">
-                        <div class="empleados-body">
-                            
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3> Perfil del empleado</h3>
+            </div>
+            <div class="title_right" >
+                <div class="col-md-4 col-sm-4   form-group pull-right top_search">
+                    <div class="btn btn-primary btn-info">
+                        <a href="/empleadoCRUD" style="color: white">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            Volver
+                        </a>
+                    </div>
+                    <div class="btn btn-primary btn-warning">
+                        <a href="/empleadoCRUD/{{ $empleado->id }}/edit" style="color: white">
+                            <i class="fa fa-edit m-right-xs"></i>
+                            Editar
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="clearfix"></div>
-            <div class="row">
-                <div class="col-12 col-sm-12">
-                    <div class="x_panel">
-                        <div class="empleados-body x-content">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="card-box table-responsive">
-                                    <table id="example2" class="table table-striped table-bordered"  style="width:100%">
-                                        <thead>
-                                            
-                                            <tr style="text-align:center">
-                                                    <th>Id</th>
-                                                    <th>Nombre</th>
-                                                    <th>RFC</th>
-                                                    <th>Fecha de nacimiento</th>
-                                                    <th>Domicilio</th>
-                                                    <th>Telefono</th>
-                                                    <th>Correo</th>
-                                                    <th>Sueldo</th>
-                                                    <th>Fecha de ingreso</th>
-                                                    <th>NSS</th>
-                                                    <th>Contraseña</th>
-                                                    <th>Activo</th>
-                                                    <th>Tipo de usuario</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                    <tr style="text-align:center">
-                                                    <td>{{ $empleado->id }}</td>
-                                                    <td>{{ $empleado->nombre }}</td>
-                                                    <td>{{ $empleado->RFC }}</td>
-                                                    <td>{{ $empleado->fecha_nacimiento }}</td>
-                                                    <td>{{ $empleado->domicilio }}</td>
-                                                    <td>{{ $empleado->telefono }}</td>
-                                                    <td>{{ $empleado->correo }}</td>
-                                                    <td>{{ $empleado->sueldo }}</td>
-                                                    <td>{{ $empleado->fecha_ingreso }}</td>
-                                                    <td>{{ $empleado->NSS }}</td>
-                                                    <td>{{ $empleado->password }}</td>
-                                                    <td></td>
-                                                    <td>@if ($empleado->id_tipoUsuario == 1) Gerente @elseif ($empleado->id_tipoUsuario == 2) Encargado de sucursal @else Maestro @endif</td>
-                                                    </tr>
-                                        </tbody>
-                                    </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Datos personales</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content" style="text-align: center;">
+                        <br><br>
+                        <ul class="list-unstyled user_data">
+                            <li><i class="fa-solid fa-bookmark-o fa-2x"></i> <h2 style="display:inline;"> &nbsp;&nbsp;&nbsp; <b>ID:</b></h2> <h2 style="display: inline;">&nbsp;{{$empleado->id}}</h2></li><br>
+                            <li><i class="fa-solid fa-comment fa-2x"></i> <h2 style="display:inline;"> &nbsp;&nbsp; <b>Nombre:</b></h2> <h2 style="display: inline;">&nbsp;{{$empleado->nombre}}</h2></li><br>
+                            <li><i class="fa-solid fa-barcode fa-2x"></i> <h2 style="display:inline;"> &nbsp;&nbsp; <b>RFC:</b></h2> <h2 style="display: inline;">&nbsp;{{$empleado->RFC}}</h2></li><br>
+                            <li><i class="fa-solid fa-location-dot fa-2x"></i> <h2 style="display:inline;"> &nbsp;&nbsp;&nbsp; <b>Dirección:</b></h2> <h2 style="display: inline;">&nbsp;{{$empleado->domicilio}}</h2></li><br>
+                            <li><i class="fa-solid fa-heart fa-2x"></i> <h2 style="display:inline;">&nbsp;&nbsp; <b>Fecha de nacimiento:</b></h2><h2 style="display: inline;">&nbsp;{{$empleado->fecha_nacimiento}}</h2></li><br>
+                            <li><i class="fa-solid fa-mobile fa-2x"></i> <h2 style="display:inline;">&nbsp;&nbsp;&nbsp; <b>Teléfono:</b></h2><h2 style="display: inline;">&nbsp;{{$empleado->telefono}}</h2></li><br>
+                            <li><i class="fa-solid fa-envelope fa-2x"></i> <h2 style="display:inline;">&nbsp;&nbsp; <b>Correo:</b> </h2> <h2 style="display: inline;">&nbsp;{{$empleado->correo}}</h2></li><br>
+                            <li><i class="fa-solid fa-calendar fa-2x"></i><h2 style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp; <b>Fecha de registro:</b></h2><h2 style="display: inline;">&nbsp;{{$empleado->fecha_ingreso}}</h2></li><br>
+                            <li><i class="fa-solid fa-info-circle fa-2x"></i><h2 style="display:inline;">&nbsp;&nbsp;&nbsp; <b>NSS:</b></h2><h2 style="display: inline;">&nbsp;{{$empleado->NSS}}</h2></li><br>
+                            <li><i class="fa-solid fa-group fa-2x"></i><h2 style="display:inline;">&nbsp;&nbsp;&nbsp; <b>Tipo de usuario:</b></h2><h2 style="display: inline;">&nbsp;@if ($empleado->id_tipoUsuario == 1) Gerente @elseif ($empleado->id_tipoUsuario == 2) Encargado de sucursal @else Maestro @endif</h2></li><br>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div style="text-align: center;">
-        <br><a href="/empleadoCRUD"> Volver a la consulta de empleados</a></br>
-    </div>
-    </body>
-</html>
+</div>
+

@@ -4,7 +4,7 @@
         <ul class="nav side-menu">
             {{-- Vista Gerente --}}
             @if(Auth::user()->id_tipoUsuario == 1)
-                <h4> Gerente</h4>
+                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gerente</h3> <br><br> 
                 <li>
                     <a><i class="fa-solid fa-id-card-clip fa-xl"></i> Empleados<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -14,8 +14,8 @@
                 </li>
                 <li><a><i class="fa-solid fa-wallet fa-xl"></i> Membresias <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/"></a>Consultar membresias</li>
-                        <li><a href="/"></a>Modificar costo por día</li>
+                        <li><a href="/membresia/create">Registrar una membresia</a></li>
+                        <li><a href="/membresia">Consultar membresias</a></li>
                     </ul>
                 </li>
                 <li><a><i class="fa-solid fa-users fa-xl"></i> Clientes <span class="fa fa-chevron-down"></span></a>
@@ -38,9 +38,24 @@
                     </ul>
                 </li>
                 <li>
+                    <a><i class="fa-solid fa-baseball-bat-ball"></i></i> Equipos<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/empleado/equipos">Consultar equipos</a></li>
+                        <li><a href="/empleado/equipos/create">Registrar equipo</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa-solid fa-hand-holding-dollar"></i></i></i> Prestamos equipos<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/empleado/prestamosEquipos">Consultar prestamos</a></li>
+                    </ul>
+                </li>
+                <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/seePagos">Consultar pagos</a></li>
+                        <li><a href="/seePagos">Consultar pagos membresias</a></li>
+                        <li><a href="/seePagos">Consultar pagos equipos</a></li>
+                        <li><a href="/seePagos">Consultar pagos clases</a></li>
                     </ul>
                 </li>
                 <li>
@@ -51,7 +66,7 @@
                 </li>
             {{-- Vista encargado sucursal --}}
             @elseif(Auth::user()->id_tipoUsuario == 2)
-                <h2> Encargado de sucursal </h2>
+                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Encargado de sucursal </h3> <br><br>
                 <li><a><i class="fa-solid fa-wallet fa-xl"></i> Membresias <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="/"></a>Consultar membresias</li>
@@ -74,11 +89,17 @@
                     </ul>
                 </li>
                 <li>
+                    <a><i class="fa-solid fa-baseball-bat-ball"></i></i> Equipos<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/empleado/equipos">Consultar equipos</a></li>
+                        <li><a href="/empleado/equipos/create">Registrar equipo</a></li>
+                    </ul>
+                </li>
+                <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="">Realizar pago</a></li>
-                        <li><a href="">Consultar pago</a></li>
-                        <li><a href="">Consultar pagos</a></li>
+                        <li><a href="/seePagos">Consultar pagos equipos</a></li>
+                        <li><a href="/seePagos">Consultar pagos clases</a></li>
                     </ul>
                 </li>
                 <li>
@@ -89,7 +110,7 @@
                 </li>
             {{-- Vista maestro --}}
             @elseif(Auth::user()->id_tipoUsuario == 3)
-                <h2>Maestro</h2>
+                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Maestro</h3>  <br><br>
                 <li>
                     <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Clases<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">

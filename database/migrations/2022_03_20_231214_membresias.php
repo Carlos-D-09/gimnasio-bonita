@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Membresia extends Migration
+class Membresias extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class Membresia extends Migration
      */
     public function up()
     {
-        Schema::create('membresia', function (Blueprint $table) {
+        Schema::create('membresias', function (Blueprint $table) {
             $table->id();
             $table->string('Nombre',150);
             $table->smallInteger('Duracion');
             $table->double('costo', 8, 2);
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +29,6 @@ class Membresia extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('membresias');
     }
 }
