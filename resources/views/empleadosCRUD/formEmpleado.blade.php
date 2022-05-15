@@ -7,63 +7,80 @@
     <link rel="stylesheet" href="{{asset('css/EmpleadosCRUD/formEmpleados.css')}}">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
-<body> 
+<body>
   <div class="container">
-    @isset($empleado)
-      <div class="title">Edición del empleado</div> <!-- Edit empleado -->
-      <div class="content">
-      <form action="/empleadoCRUD/{{ $empleado->id }}" method="POST">
-        @method('PATCH') 
-    @else
       <div class="title">Registro de empleados</div> <!-- Fecha de ingreso e id se asignan en automatico -->
       <div class="content">
-      <form action="{{ route('empleadoCRUD.store') }}" method="POST">
-    @endisset
-    
+      <form action="{{ route('empleadoCRUD.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
         <div class="user-details">
           <div class="input-box">
+              <br>
+            <input type="file" id="imagen" name="imagen">
+            <label for="imagen" >
+                <i class="fa-solid fa-file-circle-plus fa-xl"></i>
+                Selecciona Imagen
+            </label>
+            <style type="text/css">
+                input#imagen{
+                    display: none;
+                }
+
+                input#imagen + label{
+                    background-color:rgb(252, 217, 172);
+                    padding: 8px;
+                    color: white;
+                    border: 2px solid white;
+                    border-radius: 9px;
+                }
+
+                input#imagen + label:hover{
+                    background-color: rgba(197, 160, 112, 0.767);
+                    border-color: black;
+                    cursor: pointer;
+                }
+            </style>
+          </div>
+          <div class="input-box">
+              <img id="preview" class="alineadoCentro" src="{{asset('/images/Clases/Form/adjuntarArchivo.png')}}" width="100px" height="100px">
+              <script src="{{asset('/js/Empleado/formEmpleado.js')}}"></script>
+          </div>
+          <div class="input-box">
             <span class="details">Nombre del empleado</span>
-            <input type="text" name="nombre" placeholder="Ejemplo: David Fletes" value="{{ isset($empleado) ? $empleado->nombre : ''}}{{ old('nombre') }}" required> <!-- required a un lado del placeholder -->
+            <input type="text" name="nombre" placeholder="Ejemplo: David Fletes" value="{{ old('nombre') }}" required> <!-- required a un lado del placeholder -->
           </div>
           <div class="input-box">
             <span class="details">RFC del empleado</span>
-            <input type="text" name="RFC" placeholder="Incluye sólo caracteres" value="{{ isset($empleado) ? $empleado->RFC : ''  }}{{ old('RFC') }}" required>
+            <input type="text" name="RFC" placeholder="Incluye sólo caracteres" value="{{ old('RFC') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Fecha de nacimiento del empleado</span>
-            <input type="date" name="fecha_nacimiento" value="{{ isset($empleado) ? $empleado->fecha_nacimiento : '' }}{{ old('fecha_nacimiento') }}" required>
+            <input type="date" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Domicilio del empleado</span>
-            <input type="text" name="domicilio" placeholder="Ejemplo: La Paz #203" value="{{ isset($empleado) ? $empleado->domicilio : '' }}{{ old('domicilio') }}" required>
+            <input type="text" name="domicilio" placeholder="Ejemplo: La Paz #203" value="{{ old('domicilio') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Telefono del empleado</span>
-            <input type="text" name="telefono" placeholder="Ejemplo: 33454345345" value="{{ isset($empleado) ? $empleado->telefono : '' }}{{ old('telefono') }}" required>
+            <input type="text" name="telefono" placeholder="Ejemplo: 33454345345" value="{{ old('telefono') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Correo del empleado</span>
-            <input type="text" name="correo" placeholder="Ejemplo: hola@gmail.com" value="{{ isset($empleado) ? $empleado->correo : '' }}{{ old('correo') }}" required>
+            <input type="text" name="correo" placeholder="Ejemplo: hola@gmail.com" value="{{ old('correo') }}" required>
           </div>
           <div class="input-box">
             <span class="details">Sueldo mensual del empleado</span>
-            <input type="text" name="sueldo" placeholder="Ejemplo: 10000" value="{{ isset($empleado) ? $empleado->sueldo : '' }}{{ old('sueldo') }}" required>
+            <input type="text" name="sueldo" placeholder="Ejemplo: 10000" value="{{ old('sueldo') }}" required>
           </div>
           <div class="input-box">
             <span class="details">NSS del empleado</span>
-            <input type="text" name="NSS" placeholder="Incluye sólo caracteres" value="{{ isset($empleado) ? $empleado->NSS : '' }}{{ old('NSS') }}" required>
+            <input type="text" name="NSS" placeholder="Incluye sólo caracteres" value="{{ old('NSS') }}" required>
           </div>
           <div class="input-box" style="width: 100%;">
             <span class="details" align="center">Contraseña del empleado</span>
-            <input type="password" name="password" placeholder="Introduce su contraseña" value="{{ isset($empleado) ? $empleado->password : '' }}{{ old('password') }}" required>
+            <input type="password" name="password" placeholder="Introduce su contraseña" value="{{ old('password') }}" required>
           </div>
-          @isset($empleado)
-          <div class="input-box" style="width: 100%;">
-            <span class="details" align="center">Fecha de registro de empleado detectado por el sistema</span>
-            <input type="text" name="fecha_ingreso" value="{{ isset($empleado) ? $empleado->fecha_ingreso : '' }}" readonly>
-          </div>
-          @endisset
         </div>
         <div class="cargo-details">
           <input type="radio" name="id_tipoUsuario" id="dot-1" value=1>

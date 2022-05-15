@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset('css/EmpleadosCRUD/formEmpleados.css')}}">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
-<body> 
+<body>
   <div class="container">
       <div class="title">Formulario de membresia</div> <!-- Fecha de ingreso e id se asignan en automatico -->
         <div class="content">
@@ -23,7 +23,7 @@
                         <input type="number" name="Duracion" placeholder="Pon la cantidad de días de la membresia" value="{{ isset($membresia) ? $membresia->Duracion : ''  }}{{ old('Duracion') }}" required>
                     </div>
                     <div class="input-box" style="width: 100%;">
-                        <span class="details">¿Desea cambiar el costo por día de la membresia? <br>Si es así ponga el costo por día, en caso contrario no ponga nada</span>
+                        <span>Costo por día</span>
                         <input type="number" name="costo" value="{{ isset($membresia) ? $membresia->costo : '' }}{{ old('costo') }}">
                     </div>
                 </div>

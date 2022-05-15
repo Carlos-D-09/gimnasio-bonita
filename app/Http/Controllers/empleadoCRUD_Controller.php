@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\empleado;
+use App\Rules\validarPasswordCliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class empleadoCRUD_Controller extends Controller
 {
@@ -41,7 +43,16 @@ class empleadoCRUD_Controller extends Controller
         /*dd($request->all());*/
         $EmpleadoCRUD = new empleado();
         //$EmpleadoCRUD->getRawOriginal('sueldo');
-
+        if($request->hasFile('imagen')){
+            $file = $request->file('imagen');
+            $destino = "images/EmpleadosCRUD/empleadosImagenes/";
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $request->file('imagen')->move($destino,$filename);
+            $EmpleadoCRUD->imagen = $destino . $filename;
+        }
+        else{
+            $EmpleadoCRUD->imagen = '/images/user.png';
+        }
         $EmpleadoCRUD->id = $request->id;
         $EmpleadoCRUD->nombre = $request->nombre;
         $EmpleadoCRUD->RFC = $request->RFC;
@@ -50,11 +61,11 @@ class empleadoCRUD_Controller extends Controller
         $EmpleadoCRUD->telefono = $request->telefono;
         $EmpleadoCRUD->correo = $request->correo;
         $EmpleadoCRUD->sueldo = $request->sueldo;
-        $EmpleadoCRUD->fecha_ingreso = now();
+        $EmpleadoCRUD->fecha_ingreso = date('Y-m-d');
         $EmpleadoCRUD->NSS = $request->NSS;
         $EmpleadoCRUD->password = $request->password;
         $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
-        
+
         $EmpleadoCRUD->save();
 
         $content = 'empleadosCRUD.seeEmpleado';
@@ -74,7 +85,7 @@ class empleadoCRUD_Controller extends Controller
     public function show($id)
     {
         $empleado = empleado::find($id);
-        $content = 'empleadosCRUD.showEmpleado';
+        $content = 'empleadosCRUD.profile';
         return view('dashboard', compact('empleado','content'));
         /*$empleado = empleado::find($id);
         return view('empleadosCRUD.showEmpleado')->with('empleado',$empleado);*/
@@ -91,7 +102,7 @@ class empleadoCRUD_Controller extends Controller
         $empleado = empleado::find($id);
         $content = 'empleadosCRUD.formEditEmpleado';
         //dd($empleado->nombre);
-        return view('empleadosCRUD.formEmpleado')->with('empleado', $empleado);
+        return view('dashboard',compact('empleado','content'));
     }
 
     /**
@@ -105,6 +116,19 @@ class empleadoCRUD_Controller extends Controller
     {
         //dd($request->all());
         $empleado = empleado::find($id);
+        if($request->hasFile('imagen')){
+            $file = $request->file('imagen');
+            $destino = "images/EmpleadosCRUD/empleadosImagenes/";
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $request->file('imagen')->move($destino,$filename);
+            $EmpleadoCRUD->imagen = $destino . $filename;
+            if($empleado->imagen != '/images/user.png'){
+                unlink($empleado->imagen);
+            }
+        }
+        else{
+            $EmpleadoCRUD->imagen = $empleado->imagen;
+        }
         $EmpleadoCRUD->id = $empleado->id;
         $EmpleadoCRUD->nombre = $request->nombre;
         $EmpleadoCRUD->RFC = $request->RFC;
@@ -115,12 +139,13 @@ class empleadoCRUD_Controller extends Controller
         $EmpleadoCRUD->sueldo = $request->sueldo;
         $EmpleadoCRUD->fecha_ingreso = $request->fecha_ingreso;
         $EmpleadoCRUD->NSS = $request->NSS;
-        $EmpleadoCRUD->password = $request->password;
+        $EmpleadoCRUD->password = Hash::make($empleado->password);
         $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
 
         DB::table('empleados')
         ->where('id', $empleado->id)
         ->update([
+            'imagen' => $EmpleadoCRUD->imagen,
             'nombre' => $EmpleadoCRUD->nombre,
             'RFC' => $EmpleadoCRUD->RFC,
             'fecha_nacimiento' => $EmpleadoCRUD->fecha_nacimiento,
@@ -145,11 +170,11 @@ class empleadoCRUD_Controller extends Controller
 
         if(!empty($search)){
             return view('dashboard', ['empleados' => $empleado], compact('content'));
-            
+
         } else {
             return redirect('/empleadoCRUD');
         }
-        
+
     }
 
     /**
@@ -164,5 +189,31 @@ class empleadoCRUD_Controller extends Controller
         $empleado->delete();
 
         return redirect('/empleadoCRUD');
+    }
+
+    public function editPassword(int $id){
+        $empleados = empleado::all()->except('password')->where('id',$id);
+        foreach ($empleados as $empleado){
+            unset($empleado['password']);
+            $content = 'EmpleadosCRUD.formEditEmpleadoPassword';
+            return view('dashboard', compact('empleado','content'));
+        }
+    }
+    public function updatePassword(Request $request, int $id){
+        if(isset($request->oldPassword)){
+        }
+        else{
+            $request->validate([
+                'passwordNew' => [new validarPasswordCliente($request->re_passwordNew)]
+            ]);
+        }
+        $empleados = empleado::all()->where('id',$id);
+        $empleado = null;
+        foreach ($empleados as $empleadoAux){
+            $empleado = $empleadoAux;
+        }
+        $empleado->password = Hash::make($request->passwordNew);
+        $empleado->save();
+        return redirect('/empleadoCRUD/'.$empleado->id);
     }
 }

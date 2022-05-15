@@ -57,16 +57,24 @@
                                                 <td>{{ $empleado->fecha_ingreso }}</td>
                                                 <td>@if ($empleado->id_tipoUsuario == 1) Gerente @elseif ($empleado->id_tipoUsuario == 2) Encargado de sucursal @else Maestro @endif</td>
                                                 <td>
-                                                    <form action="/empleadoCRUD/{{ $empleado->id }}" method="GET">
-                                                        <button type="submit" class="btn btn-round btn-info btn-sm">Ver detalles del empleado</button>
-                                                    </form>
-                                                    <form action="/empleadoCRUD/{{ $empleado->id }}/edit" method="GET">
-                                                        <button type="submit" class="btn btn-round btn-warning btn-sm">Editar información del empleado</button>
-                                                    </form>
-                                                    <form action="/empleadoCRUD/{{ $empleado->id }}/delete">
-                                                        @csrf
-                                                        <button type="submit"class="btn btn-round btn-danger btn-sm">Desactivar cuenta del empleado</button>
-                                                    </form>
+                                                    <table style="align-content: center">
+                                                        <tr>
+                                                            <form action="/empleadoCRUD/{{ $empleado->id }}" method="GET">
+                                                                <button type="submit" class="btn btn-round btn-info btn-sm">Detalle</button>
+                                                            </form>
+                                                        </tr>
+                                                        <tr>
+                                                            <form action="/empleadoCRUD/{{ $empleado->id }}/edit" method="GET">
+                                                                <button type="submit" class="btn btn-round btn-warning btn-sm">Editar</button>
+                                                            </form>
+                                                        </tr>
+                                                        <tr>
+                                                            <form action="/empleadoCRUD/{{ $empleado->id }}/delete">
+                                                                @csrf
+                                                                <button type="submit"class="btn btn-round btn-danger btn-sm">Desactivar</button>
+                                                            </form>
+                                                        </tr>
+                                                    </table>
                                                 </td>
                                                 </tr>
                                             @endforeach
