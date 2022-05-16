@@ -20,6 +20,11 @@
                         </div>
                     </form>
                     <div class="clases-body">
+                        @if(session()->has('data'))
+                            <div style="text-align: center;">
+                                {{ session()->get('data') }} 
+                            </div><br>
+                        @endif
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr style="text-align:center">
@@ -46,6 +51,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="btn btn-primary btn-warning" style="width: 100%;">
+                        <a href="/pagosJson" style="color: white">
+                            <i class="fa fa-edit m-right-xs"></i>
+                            Hacer una consulta de los pagos en formato json
+                        </a>
                     </div>
                 </div>
             </div>

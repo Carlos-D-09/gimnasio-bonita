@@ -79,8 +79,8 @@ Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 Route::resource('/empleado/agenda', AgendaController::class)->middleware('auth');
 
 Route::resource('/seePagos',PagosController::class)->middleware('auth');
-
 Route::get('/searchPago', 'App\Http\Controllers\PagosController@search')->middleware('auth');
+Route::get('/pagosJson', 'App\Http\Controllers\PagosController@toJson')->middleware('auth');
 
 Route::resource('/empleadoCRUD',empleadoCRUD_Controller::class)->middleware('auth');
 Route::get('/searchEmpleado', 'App\Http\Controllers\empleadoCRUD_Controller@search')->middleware('auth');
@@ -91,6 +91,13 @@ Route::post('/send-email', 'App\Http\Controllers\MailController@sendEmail')->mid
 
 Route::resource('/membresia', 'App\Http\Controllers\MembresiaController')->middleware('auth');
 Route::get('/membresia/{id}/delete', 'App\Http\Controllers\MembresiaController@destroy')->middleware('auth');
+Route::get('/membresiaJson', 'App\Http\Controllers\MembresiaController@toJson')->middleware('auth');
+
+Route::get('/equiposJson', 'App\Http\Controllers\EquiposController@toJson')->middleware('auth');
+
+Route::get('/clasesJson', 'App\Http\Controllers\ClaseController@toJson')->middleware('auth');
+
+Route::get('/ofertasJson', 'App\Http\Controllers\oferta_actividadesController@toJson')->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',

@@ -67,7 +67,7 @@ class empleadoCRUD_Controller extends Controller
         else{
             $EmpleadoCRUD->imagen = '/images/user.png';
         }
-        
+
         $EmpleadoCRUD->id = $request->id;
         $EmpleadoCRUD->nombre = $request->nombre;
         $EmpleadoCRUD->RFC = $request->RFC;
@@ -130,20 +130,20 @@ class empleadoCRUD_Controller extends Controller
     public function update(Request $request, empleado $EmpleadoCRUD, $id)
     {
         //dd($request->all());
+        $empleado = empleado::find($id);
         $request->validate([
             'nombre' => 'required|regex:/^[\pL\s\-]+$/u',
-            'RFC' => 'required|alpha|size:14|unique:empleados,RFC',
+            'RFC' => 'required|alpha|size:14|unique:empleados,RFC,' . $empleado->id,
             'fecha_nacimiento' => 'required',
             'domicilio' => 'required',
             'telefono' => 'required|digits:10',
-            'correo' => 'required|email|unique:empleados,correo',
+            'correo' => 'required|email|unique:empleados,correo,' . $empleado->id,
             'sueldo' => 'required|digits_between:4,6',
-            'NSS' => 'required|alpha|size:11|unique:empleados,NSS',
-            'password' => 'required|min:5',
+            'NSS' => 'required|alpha|size:11|unique:empleados,NSS,' . $empleado->id,
             'id_tipoUsuario' => 'required'
         ]);
 
-        $empleado = empleado::find($id);
+        
         if($request->hasFile('imagen')){
             $file = $request->file('imagen');
             $destino = "images/EmpleadosCRUD/empleadosImagenes/";

@@ -13,7 +13,7 @@
                                 <button class="btn btn-secondary buttonPatron" type="submit" style="color: white">Buscar</button>
                             </span>
                         </div>
-                    </form>
+                    </form>  
                 </div>
             </div>
         </div>
@@ -22,6 +22,11 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
+                        @if(session()->has('data'))
+                            <div style="text-align: center;">
+                                {{ session()->get('data') }}
+                            </div>
+                        @endif
                         @if(session()->has('success'))
                         <div class="alert alert-success text-center" style="text-align: center;">
                             {{ session()->get('success') }}
@@ -87,6 +92,12 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="btn btn-primary btn-warning" style="width: 100%;">
+                                    <a href="/membresiaJson" style="color: white">
+                                        <i class="fa fa-edit m-right-xs"></i>
+                                         Hacer una consulta de las membresias en formato json
+                                    </a>
                                 </div>
                             </div>
                         </div>

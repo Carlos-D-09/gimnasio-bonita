@@ -38,6 +38,11 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
+                                @if(session()->has('data'))
+                                    <div style="text-align: center;">
+                                        {{ session()->get('data') }}
+                                    </div><br><br>
+                                @endif
                                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
@@ -107,6 +112,12 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="btn btn-primary btn-warning" style="width: 100%;">
+                                    <a href="/equiposJson" style="color: white">
+                                        <i class="fa fa-edit m-right-xs"></i>
+                                         Hacer una consulta de los equipos en formato json
+                                    </a>
                                 </div>
                             </div>
                         </div>

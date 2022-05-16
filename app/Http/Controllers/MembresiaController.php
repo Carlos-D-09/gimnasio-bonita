@@ -19,7 +19,15 @@ class MembresiaController extends Controller
     {
         $content = 'membresia.seeMembresia';
         $data['membresias'] = membresia::paginate();
+        //dd(json_encode($data));
         return view('dashboard', $data, compact('content'));
+    }
+
+    public function toJson()
+    {
+        $data['membresias'] = membresia::paginate();
+        //dd(json_encode($data));
+        return redirect('/membresia')->with('data', json_encode($data));
     }
 
     /**

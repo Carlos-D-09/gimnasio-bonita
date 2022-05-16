@@ -128,7 +128,8 @@
                         <li><a href="/email">Enviar email</a></li>
                     </ul>
                 </li>
+            
             @endif
-    </div>
-
+            
+        </div>
 </div>

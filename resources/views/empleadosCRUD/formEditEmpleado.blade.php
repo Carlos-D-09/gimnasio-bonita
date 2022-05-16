@@ -56,6 +56,12 @@
                                                 <i class="fa-solid fa-file-circle-plus fa-xl"></i>
                                                 Selecciona Imagen
                                             </label>
+                                            <style>
+                                                .danger {
+                                                    color: red;
+                                                    font-size: 13px;
+                                                }
+                                            </style>
                                             <style type="text/css">
                                                 input#imagen{
                                                     display: none;
@@ -88,7 +94,9 @@
                                             <div class="col-md-9 col-sm-9 ">
                                                 <input type="text" name="nombre" class="form-control" style="display: inline" value="{{$empleado->nombre}}">
                                                 @error('nombre')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                <br>
+                                                <small class="danger">*{{ $message }}</small>
+                                                <br>
                                                 @enderror
                                             </div>
                                         </div>
@@ -99,6 +107,11 @@
                                             </label>
                                             <div class="col-md-9 col-sm-9 ">
                                                 <input type="text" name="domicilio" class="form-control" style="display: inline" value="{{$empleado->domicilio}}">
+                                                @error('domicilio')
+                                                <br>
+                                                <small class="danger">*{{ $message }}</small>
+                                                <br>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row ">
@@ -107,7 +120,12 @@
                                                 Fecha de nacimiento:
                                             </label>
                                             <div class="col-md-9 col-sm-9 ">
-                                                <input type="text" name="fecha_nacimiento" class="form-control" style="display: inline"  value="{{$empleado->fecha_nacimiento}}">
+                                                <input type="date" name="fecha_nacimiento" class="form-control" style="display: inline"  value="{{$empleado->fecha_nacimiento}}">
+                                                @error('fecha_nacimiento')
+                                                <br>
+                                                <small class="danger">*{{ $message }}</small>
+                                                <br>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row ">
@@ -118,7 +136,9 @@
                                             <div class="col-md-9 col-sm-9 ">
                                                 <input type="text" name="telefono" class="form-control" style="display: inline" value="{{$empleado->telefono}}">
                                                 @error('telefono')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                <br>
+                                                <small class="danger">*{{ $message }}</small>
+                                                <br>
                                                 @enderror
                                             </div>
                                         </div>
@@ -130,7 +150,9 @@
                                             <div class="col-md-9 col-sm-9 ">
                                                 <input type="text" name="correo" class="form-control" style="display: inline" value="{{$empleado->correo}}">
                                                 @error('correo')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                <br>
+                                                <small class="danger">*{{ $message }}</small>
+                                                <br>
                                                 @enderror
                                             </div>
                                         </div>
@@ -140,7 +162,12 @@
                                                 Fecha de registro:
                                             </label>
                                             <div class="col-md-9 col-sm-9 ">
-                                                <input type="text" name="fecha_ingreso" class="form-control" style="display: inline;" value="{{$empleado->fecha_ingreso}}">
+                                                <input type="date" name="fecha_ingreso" class="form-control" style="display: inline;" value="{{$empleado->fecha_ingreso}}" readonly>
+                                                @error('fecha_ingreso')
+                                                <br>
+                                                <small class="danger">*{{ $message }}</small>
+                                                <br>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row ">
@@ -150,6 +177,11 @@
                                             </label>
                                             <div class="col-md-9 col-sm-9 ">
                                                 <input type="text" name="sueldo" class="form-control" style="display: inline;" value="{{$empleado->sueldo}}">
+                                                @error('sueldo')
+                                                <br>
+                                                <small class="danger">*{{ $message }}</small>
+                                                <br>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row ">
@@ -159,6 +191,11 @@
                                             </label>
                                             <div class="col-md-9 col-sm-9 ">
                                                 <input type="text" name="NSS" class="form-control" style="display: inline;" value="{{$empleado->NSS}}">
+                                                @error('NSS')
+                                                <br>
+                                                <small class="danger">*{{ $message }}</small>
+                                                <br>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row ">
@@ -168,6 +205,11 @@
                                             </label>
                                             <div class="col-md-9 col-sm-9 ">
                                                 <input type="text" name="RFC" class="form-control" style="display: inline;" value="{{$empleado->RFC}}">
+                                                @error('RFC')
+                                                <br>
+                                                <small class="danger">*{{ $message }}</small>
+                                                <br>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row ">
@@ -191,6 +233,11 @@
                                                   <span class="cargo">Maestro</span>
                                                   </label>
                                                 </div>
+                                                @error('id_tipoUsuario')
+                                                <br>
+                                                <small class="danger">*{{ $message }}</small>
+                                                <br>
+                                                @enderror
                                               </div>
                                         </div>
                                         <style>

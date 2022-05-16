@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\membresia;
 
 class MembresiaSeeder extends Seeder
 {
@@ -33,6 +34,8 @@ class MembresiaSeeder extends Seeder
             'Nombre' => 'Membresia premium',
             'Duracion' => 30,
             'costo' => 2000
-        ]);	
+        ]);
+
+        membresia::factory(10)->create();
     }
 }

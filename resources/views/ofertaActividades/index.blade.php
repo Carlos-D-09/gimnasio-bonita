@@ -26,6 +26,11 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
+                        @if(session()->has('data'))
+                            <div style="text-align: center;">
+                                {{ session()->get('data') }}
+                            </div>
+                        @endif
                     <div class="x_title">
                         <ul class="nav navbar-right panel_toolbox">
                             <li class="dropdown">
@@ -152,6 +157,12 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="btn btn-primary btn-warning" style="width: 100%;">
+                                    <a href="/ofertasJson" style="color: white">
+                                        <i class="fa fa-edit m-right-xs"></i>
+                                         Hacer una consulta de las ofertas de actividades en formato json
+                                    </a>
                                 </div>
                             </div>
                         </div>

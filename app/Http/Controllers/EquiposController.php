@@ -38,6 +38,13 @@ class EquiposController extends Controller
         return view('equipos.formEquipo',compact('id'));
     }
 
+    public function toJson()
+    {
+        $data['equipos'] = equipos::paginate();
+        //dd(json_encode($data));
+        return redirect('/empleado/equipos')->with('data', json_encode($data));
+    }
+
     /**
      * Store a newly created resource in storage.
      *

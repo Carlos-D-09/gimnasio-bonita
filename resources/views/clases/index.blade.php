@@ -14,6 +14,11 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+                        @if(session()->has('data'))
+                            <div style="text-align: center;">
+                                {{ session()->get('data') }}
+                            </div><br><br>
+                        @endif
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
@@ -75,6 +80,12 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="btn btn-primary btn-warning" style="width: 100%;">
+                                    <a href="/clasesJson" style="color: white">
+                                        <i class="fa fa-edit m-right-xs"></i>
+                                         Hacer una consulta de las membresias en formato json
+                                    </a>
                                 </div>
                             </div>
                         </div>

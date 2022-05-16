@@ -25,6 +25,13 @@ class PagosController extends Controller
         return view('dashboard', $data, compact('content'));
     }
 
+    public function toJson()
+    {
+        $data['pagos'] = pago::paginate();
+        //dd(json_encode($data));
+        return redirect('/seePagos')->with('data', json_encode($data));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

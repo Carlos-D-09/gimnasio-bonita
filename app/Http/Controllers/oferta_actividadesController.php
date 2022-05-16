@@ -47,6 +47,13 @@ class oferta_actividadesController extends Controller
         return view('ofertaActividades.formOferta',compact('maestros','clases','id'));
     }
 
+    public function toJson()
+    {
+        $data['oferta_actividades'] = oferta_actividades::paginate();
+        //dd(json_encode($data));
+        return redirect('/empleado/oferta_actividades')->with('data', json_encode($data));
+    }
+
     /**
      * Store a newly created resource in storage.
      *

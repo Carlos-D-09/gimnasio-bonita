@@ -12,8 +12,6 @@
       <div class="title">Registro de empleados</div> <!-- Fecha de ingreso e id se asignan en automatico -->
       <div class="content">
       <form action="{{ route('empleadoCRUD.store') }}" method="POST">
-    @endisset
-
       @csrf
         <style>
           .danger {
