@@ -23,6 +23,13 @@ class ClaseController extends Controller
         return view('dashboard', compact('clases', 'content'));
     }
 
+    public function toJson()
+    {
+        $data['clases'] = clase::paginate();
+        //dd(json_encode($data));
+        return redirect('/empleado/clase')->with('data', json_encode($data));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

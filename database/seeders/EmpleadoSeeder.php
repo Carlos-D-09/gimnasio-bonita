@@ -98,5 +98,6 @@ class EmpleadoSeeder extends Seeder
             'password' => Hash::make('12345'),
             'id_tipoUsuario' => 3
         ]);
+
     }
 }

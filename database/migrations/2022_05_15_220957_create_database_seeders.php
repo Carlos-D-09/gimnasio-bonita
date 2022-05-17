@@ -39,9 +39,44 @@ class CreateDatabaseSeeders extends Migration
             '--class' => 'PagoSeeder',
         ]);
         DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
+
+        Artisan::call('db:seed', [
+            '--class' => 'claseSeeder',
+        ]);
+        DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
+
+        Artisan::call('db:seed', [
+            '--class' => 'oferta_actividadSeeder',
+        ]);
+        DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
+
+        Artisan::call('db:seed', [
+            '--class' => 'agendaSeeder',
+        ]);
+        DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
+
+        Artisan::call('db:seed', [
+            '--class' => 'equipoSeeder',
+        ]);
+        DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
+
+        Artisan::call('db:seed', [
+            '--class' => 'pagos_prestamos_equipoSeeder',
+        ]);
+        DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
+
+        Artisan::call('db:seed', [
+            '--class' => 'pagos_claseSeeder',
+        ]);
+        DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
+
+        Artisan::call('db:seed', [
+            '--class' => 'historial_prestamoSeeder',
+        ]);
+        DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
     }
 
-    /**
+    /**  pagos_prestamos_equipoSeeder
      * Reverse the migrations.
      *
      * @return void

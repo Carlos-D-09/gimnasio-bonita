@@ -11,16 +11,32 @@
   <div class="container">
       <div class="title">Formulario de membresia</div> <!-- Fecha de ingreso e id se asignan en automatico -->
         <div class="content">
+            <style>
+                .danger {
+                    color: red;
+                    font-size: 13px;
+                }
+            </style>
             <form action="{{ route('membresia.store') }}" method="POST">
             @csrf
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">Nombre de la membresia</span>
                         <input type="text" name="Nombre" placeholder="Ejemplo: Membresia premium" value="{{ isset($membresia) ? $membresia->Nombre : ''}}{{ old('Nombre') }}" required> <!-- required a un lado del placeholder -->
+                        @error('Nombre')
+                        <br>
+                        <small class="danger">*{{ $message }}</small>
+                        <br>
+                        @enderror
                     </div>
                     <div class="input-box">
                         <span class="details">Duracion de la membresia</span>
                         <input type="number" name="Duracion" placeholder="Pon la cantidad de días de la membresia" value="{{ isset($membresia) ? $membresia->Duracion : ''  }}{{ old('Duracion') }}" required>
+                        @error('Duracion')
+                        <br>
+                        <small class="danger">*{{ $message }}</small>
+                        <br>
+                        @enderror
                     </div>
                     <div class="input-box" style="width: 100%;">
                         <span>Costo</span>

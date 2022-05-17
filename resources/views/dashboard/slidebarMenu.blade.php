@@ -150,6 +150,6 @@
                     </ul>
                 </li>
             @endif
-    </div>
 
+        </div>
 </div>

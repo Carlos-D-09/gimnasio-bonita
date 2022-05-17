@@ -11,8 +11,14 @@
   <div class="container">
       <div class="title">Registro de empleados</div> <!-- Fecha de ingreso e id se asignan en automatico -->
       <div class="content">
-      <form action="{{ route('empleadoCRUD.store') }}" method="POST" enctype="multipart/form-data">
+      <form action="{{ route('empleadoCRUD.store') }}" method="POST">
       @csrf
+        <style>
+          .danger {
+            color: red;
+            font-size: 13px;
+          }
+        </style>
         <div class="user-details">
           <div class="input-box">
               <br>
@@ -47,39 +53,90 @@
           </div>
           <div class="input-box">
             <span class="details">Nombre del empleado</span>
-            <input type="text" name="nombre" placeholder="Ejemplo: David Fletes" value="{{ old('nombre') }}" required> <!-- required a un lado del placeholder -->
+            <input type="text" name="nombre" placeholder="Ejemplo: David Fletes" value="{{ isset($empleado) ? $empleado->nombre : ''}}{{ old('nombre') }}" required> <!-- required a un lado del placeholder -->
+            @error('nombre')
+            <br>
+            <small class="danger">*{{ $message }}</small>
+            <br>
+            @enderror
           </div>
+          
           <div class="input-box">
             <span class="details">RFC del empleado</span>
-            <input type="text" name="RFC" placeholder="Incluye sólo caracteres" value="{{ old('RFC') }}" required>
+            <input type="text" name="RFC" placeholder="Incluye sólo caracteres" value="{{ isset($empleado) ? $empleado->RFC : ''  }}{{ old('RFC') }}" required>
+            @error('RFC')
+            <br>
+            <small class="danger">*{{ $message }}</small>
+            <br>
+            @enderror
           </div>
           <div class="input-box">
             <span class="details">Fecha de nacimiento del empleado</span>
-            <input type="date" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}" required>
+            <input type="date" name="fecha_nacimiento" value="{{ isset($empleado) ? $empleado->fecha_nacimiento : '' }}{{ old('fecha_nacimiento') }}" required>
+            @error('fecha_nacimiento')
+            <br>
+            <small class="danger">*{{ $message }}</small>
+            <br>
+            @enderror
           </div>
           <div class="input-box">
             <span class="details">Domicilio del empleado</span>
-            <input type="text" name="domicilio" placeholder="Ejemplo: La Paz #203" value="{{ old('domicilio') }}" required>
+            <input type="text" name="domicilio" placeholder="Ejemplo: La Paz #203" value="{{ isset($empleado) ? $empleado->domicilio : '' }}{{ old('domicilio') }}" required>
+            @error('domicilio')
+            <br>
+            <small class="danger">*{{ $message }}</small>
+            <br>
+            @enderror
           </div>
           <div class="input-box">
             <span class="details">Telefono del empleado</span>
-            <input type="text" name="telefono" placeholder="Ejemplo: 33454345345" value="{{ old('telefono') }}" required>
+            <input type="text" name="telefono" placeholder="Ejemplo: 33454345345" value="{{ isset($empleado) ? $empleado->telefono : '' }}{{ old('telefono') }}" required>
+            @error('telefono')
+            <br>
+            <small class="danger">*{{ $message }}</small>
+            <br>
+            @enderror
           </div>
           <div class="input-box">
             <span class="details">Correo del empleado</span>
-            <input type="text" name="correo" placeholder="Ejemplo: hola@gmail.com" value="{{ old('correo') }}" required>
+            <input type="text" name="correo" placeholder="Ejemplo: hola@gmail.com" value="{{ isset($empleado) ? $empleado->correo : '' }}{{ old('correo') }}" required>
+            @error('correo')
+            <br>
+            <small class="danger">*{{ $message }}</small>
+            <br>
+            @enderror
           </div>
           <div class="input-box">
             <span class="details">Sueldo mensual del empleado</span>
-            <input type="text" name="sueldo" placeholder="Ejemplo: 10000" value="{{ old('sueldo') }}" required>
+            <input type="text" name="sueldo" placeholder="Ejemplo: 10000" value="{{ isset($empleado) ? $empleado->sueldo : '' }}{{ old('sueldo') }}" required>
+            @error('sueldo')
+            <br>
+            <small class="danger">*{{ $message }}</small>
+            <br>
+            @enderror
           </div>
           <div class="input-box">
             <span class="details">NSS del empleado</span>
-            <input type="text" name="NSS" placeholder="Incluye sólo caracteres" value="{{ old('NSS') }}" required>
+            <input type="text" name="NSS" placeholder="Incluye sólo caracteres" value="{{ isset($empleado) ? $empleado->NSS : '' }}{{ old('NSS') }}" required>
+            @error('NSS')
+            <br>
+            <small class="danger">*{{ $message }}</small>
+            <br>
+            @enderror
           </div>
           <div class="input-box" style="width: 100%;">
             <span class="details" align="center">Contraseña del empleado</span>
-            <input type="password" name="password" placeholder="Introduce su contraseña" value="{{ old('password') }}" required>
+            <input type="password" name="password" placeholder="Introduce su contraseña" value="{{ isset($empleado) ? $empleado->password : '' }}{{ old('password') }}" required>
+            @error('password')
+            <br>
+            <small class="danger">*{{ $message }}</small>
+            <br>
+            @enderror
+          </div>
+          @isset($empleado)
+          <div class="input-box" style="width: 100%;">
+            <span class="details" align="center">Fecha de registro de empleado detectado por el sistema</span>
+            <input type="text" name="fecha_ingreso" value="{{ isset($empleado) ? $empleado->fecha_ingreso : '' }}" readonly>
           </div>
         </div>
         <div class="cargo-details">
@@ -100,8 +157,21 @@
             <span class="dot three"></span>
             <span class="cargo">Maestro</span>
             </label>
+            @error('id_tipoUsuario')
+            <br>
+            <small class="danger">*{{ $message }}</small>
+            <br>
+            @enderror
           </div>
         </div>
+        
+        <!--@if($errors->any())
+        <ul>
+          @foreach($errors->all() as $error)
+            <li class="danger">{{ $error }}</li>
+          @endforeach
+        </ul>
+        @endif -->
         <div class="button">
           <input type="submit" value="Completar">
         </div>
