@@ -72,10 +72,8 @@
                 <h3>Encargado de sucursal </h3> <br><br>
                 <li><a><i class="fa-solid fa-wallet fa-xl"></i> Membresias <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/"></a>Consultar membresias</li>
-                        <li><a href="/"></a>Modificar costo por día</li>
-                        <li><a href="/"></a>Modificar membresias</li>
-                        <li><a href="/"></a>Eliminar membresias</li>
+                        <li><a href="/membresia/create">Registrar una membresia</a></li>
+                        <li><a href="/membresia">Consultar membresias</a></li>
                     </ul>
                 </li>
                 <li><a><i class="fa-solid fa-book fa-xl"></i> Agenda <span class="fa fa-chevron-down"></span></a>
@@ -101,8 +99,8 @@
                 <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/seePagos">Consultar pagos equipos</a></li>
-                        <li><a href="/seePagos">Consultar pagos clases</a></li>
+                        <li><a href="/empleado/PagosEquipos">Consultar pagos equipos</a></li>
+                        <li><a href="/empleado/PagosClases">Consultar pagos clases</a></li>
                     </ul>
                 </li>
                 <li>
@@ -136,9 +134,8 @@
                 <li>
                     <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Clases<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="">Consultar clases</a></li>
-                        <li><a href="">Consultar oferta actividades</a></li>
-                        <li><a href="">Registrarme en clases</a></li>
+                        <li><a href="/cliente/clases">Consultar clases</a></li>
+                        <li><a href="">Consultar clases en las que me he inscrito</a></li>
                     </ul>
                 </li>
                 <li>

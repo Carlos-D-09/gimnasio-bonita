@@ -124,6 +124,7 @@ class EquiposController extends Controller
         $equipo->unidades = $request->unidades;
         $equipo->cost_x_renta = $request->costo;
         $equipo->descripcion = $request->descripcion;
+        $equipo->updated_at = now();
         $equipo->save();
         return redirect('/empleado/equipos');
     }

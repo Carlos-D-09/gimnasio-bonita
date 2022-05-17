@@ -29,6 +29,7 @@ class CreateEmpleadosTable extends Migration
             $table->unsignedBigInteger('id_tipoUsuario'); /*Si*/
             $table->foreign('id_tipoUsuario')->references("id")->on("tipo_usuario");
             $table->softDeletes();
+            $table->timestamps();
         });
 
 

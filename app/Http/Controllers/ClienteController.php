@@ -143,6 +143,7 @@ class ClienteController extends Controller
             $cliente = $clienteAux;
         }
         $cliente->password = Hash::make($request->passwordNew);
+        $cliente->updated_at = now();
         $cliente->save();
         return redirect('/empleado/cliente/'.$cliente->id);
     }
@@ -180,6 +181,7 @@ class ClienteController extends Controller
         $cliente->domicilio = $request->domicilio;
         $cliente->telefono = $request->telefono;
         $cliente->correo = $request->correo;
+        $cliente->updated_at = now();
 
         $cliente->save();
 

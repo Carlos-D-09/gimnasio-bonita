@@ -23,6 +23,7 @@ class CreatePagosPrestamosEquiposTable extends Migration
                 ->references("id")->on("empleados");
             $table->foreign("id_cliente")
                 ->references("id")->on("clientes");
+            $table->timestamps();
         });
     }
 

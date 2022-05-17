@@ -21,7 +21,9 @@ class PagoSeeder extends Seeder
             'monto' => 1000,
             'id_membresia' => 1,
             'id_empleado' => 1,
-            'id_cliente' => 1
+            'id_cliente' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('pagos')-> insert ([
@@ -31,7 +33,9 @@ class PagoSeeder extends Seeder
             'monto' => 700,
             'id_membresia' => 2,
             'id_empleado' => 1,
-            'id_cliente' => 2
+            'id_cliente' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
     }

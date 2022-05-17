@@ -143,7 +143,6 @@ class empleadoCRUD_Controller extends Controller
             'id_tipoUsuario' => 'required'
         ]);
 
-        
         if($request->hasFile('imagen')){
             $file = $request->file('imagen');
             $destino = "images/EmpleadosCRUD/empleadosImagenes/";
@@ -169,6 +168,7 @@ class empleadoCRUD_Controller extends Controller
         $EmpleadoCRUD->NSS = $request->NSS;
         $EmpleadoCRUD->password = Hash::make($empleado->password);
         $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
+        $EmpleadoCRUD->updated_at = now();
 
         DB::table('empleados')
         ->where('id', $empleado->id)
@@ -185,6 +185,7 @@ class empleadoCRUD_Controller extends Controller
             'NSS' => $EmpleadoCRUD->NSS,
             'password' => $EmpleadoCRUD->password,
             'id_tipoUsuario' => $EmpleadoCRUD->id_tipoUsuario,
+            'updated_at' => $EmpleadoCRUD->updated_at
         ]);
 
         return redirect('/empleadoCRUD/' . $EmpleadoCRUD->id)->with('edited', 'Se ha modificado la informacion del empleado');
@@ -241,6 +242,7 @@ class empleadoCRUD_Controller extends Controller
             $empleado = $empleadoAux;
         }
         $empleado->password = Hash::make($request->passwordNew);
+        $empleado->updated_at = now();
         $empleado->save();
         return redirect('/empleadoCRUD/'.$empleado->id);
     }

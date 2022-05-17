@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class pagos_clases extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function cliente(){
         return $this->belongsTo(cliente::class, 'id_cliente');

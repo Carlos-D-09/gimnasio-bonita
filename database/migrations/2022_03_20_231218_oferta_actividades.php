@@ -27,6 +27,7 @@ class OfertaActividades extends Migration
             $table->foreign("id_clase")
                 ->references("id")->on("clases")->constrained()->onDelete('cascade');
             $table->string('status');
+            $table->timestamps();
         });
 
     }

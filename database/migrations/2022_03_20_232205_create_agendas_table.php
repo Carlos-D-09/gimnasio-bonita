@@ -21,6 +21,7 @@ class CreateAgendasTable extends Migration
                 ->references("id")->on("clientes");
             $table->foreign("id_oferta")
                 ->references("id")->on("oferta_actividades")->constrained();
+            $table->timestamps();
         });
 
     }

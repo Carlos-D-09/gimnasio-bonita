@@ -21,6 +21,7 @@ class CreatePagosClasesTable extends Migration
             $table->unsignedBigInteger('id_cliente');
             $table->foreign('id_empleado')
                 ->references('id')->on('empleados');
+            $table->timestamps();
             $table->foreign('id_cliente')
                 ->references('id')->on('clientes');
         });

@@ -17,7 +17,9 @@ class agendaSeeder extends Seeder
     {
         DB::table('agendas')-> insert ([
             'id_cliente' => 1,
-            'id_oferta' => 1
+            'id_oferta' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         /* $table->id();

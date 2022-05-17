@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class clase extends Model
 {
-    public $timestamps = false;
+    public $timestamps = true;
     use HasFactory;
 
     public function empleados(){

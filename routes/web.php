@@ -33,6 +33,22 @@ Route::get('/', function () {
 
 Route::get('/cliente',[ClienteController::class,'indexClient'])->middleware('auth:client');
 
+Route::get('/cliente/clases/clase','App\Http\Controllers\oferta_actividadesClientesController@orderByClase')->middleware('auth:client');
+
+Route::get('/cliente/clases/dia', 'App\Http\Controllers\oferta_actividadesClientesController@orderByDia')->middleware('auth:client');
+
+Route::get('/cliente/clases/maestro', 'App\Http\Controllers\oferta_actividadesClientesController@orderByMaestro')->middleware('auth:client');
+
+Route::get('/cliente/clases/search', 'App\Http\Controllers\oferta_actividadesClientesController@busquedaPatron')->middleware('auth:client');
+
+Route::get('/cliente/clases/maestro/search', 'App\Http\Controllers\oferta_actividadesClientesController@busquedaPatronMaestro')->middleware('auth:client');
+
+Route::get('/cliente/clases/dia/search', 'App\Http\Controllers\oferta_actividadesClientesController@busquedaPatronDia')->middleware('auth:client');
+
+Route::get('/cliente/clases/clase/search', 'App\Http\Controllers\oferta_actividadesClientesController@busquedaPatronClase')->middleware('auth:client');
+
+Route::resource('/cliente/clases', 'App\Http\Controllers\oferta_actividadesClientesController')->middleware('auth:client');
+
 Route::get('/cliente/login', [ClientAuthController::class, 'login']);
 
 Route::post('/cliente/login', [ClientAuthController::class, 'handleLogin']);
@@ -118,6 +134,12 @@ Route::get('/equiposJson', 'App\Http\Controllers\EquiposController@toJson')->mid
 Route::get('/clasesJson', 'App\Http\Controllers\ClaseController@toJson')->middleware('auth');
 
 Route::get('/ofertasJson', 'App\Http\Controllers\oferta_actividadesController@toJson')->middleware('auth');
+
+
+//Route::resource('/cliente/agenda', AgendaController::class)->middleware('auth');
+//Route::get('/cliente/agenda/search', [AgendaController::class, 'busquedaPatron'])->middleware('auth');
+//Route::get('/cliente/agendaSearch', 'App\Http\Controllers\AgendaController@search')->middleware('auth');
+//Route::resource('/cliente', 'App\Http\Controllers\ClientAuthController');
 
 Route::middleware([
     'auth:sanctum',
