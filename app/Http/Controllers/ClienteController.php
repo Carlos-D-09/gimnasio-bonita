@@ -19,7 +19,6 @@ class ClienteController extends Controller
 {
     public function index()
     {
-        dd("hola desde index");
         $clientes = cliente::all()->except('password')->where('status',1);
         $content = 'cliente.index';
         return view('dashboard',compact('clientes', 'content'));

@@ -35,7 +35,7 @@ class validarDiaOferta implements Rule
             "sabado" => "Saturday"
         ];
         $oferta = new oferta_actividades();
-        $oferta = oferta_actividades::where('id',$value[0]['id_oferta'])->first();
+        $oferta = oferta_actividades::where('id',$value[count($value)-1]['id_oferta'])->first();
         $diaOferta = $diasIngles[$oferta->dia];
         $hoy = getdate();
         $hoy = $hoy['weekday'];

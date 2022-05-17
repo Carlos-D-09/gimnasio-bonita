@@ -19,7 +19,7 @@ class oferta_actividadSeeder extends Seeder
             'id' => 1,
             'horaInicio' => '18:00:00',
             'horaFin' => '20:00:00',
-            'dia' => '5 de mayo del 2022',
+            'dia' => 'lunes',
             'cupos' => 20,
             'costo' => 1500,
             'id_empleado' => 2,

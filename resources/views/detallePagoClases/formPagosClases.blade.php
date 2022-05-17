@@ -14,10 +14,12 @@
                                 Cancelar
                             </a>
                         </div>
-                        <button type="submit" class="btn btn-success" form="formEdit">
-                            <i class="fa-solid fa-floppy-disk" style="color: white;"></i>
-                            Guardar
-                        </button>
+                        @if (@isset($informacion))
+                            <button type="submit" class="btn btn-success" form="formEdit">
+                                <i class="fa-solid fa-floppy-disk" style="color: white;"></i>
+                                Guardar
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>

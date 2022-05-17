@@ -47,7 +47,7 @@
                 <li>
                     <a><i class="fa-solid fa-hand-holding-dollar"></i></i></i> Prestamos equipos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/empleado/prestamosEquipos">Consultar prestamos</a></li>
+                        <li><a href="/empleado/historialPrestamosEquipos">Consultar prestamos</a></li>
                     </ul>
                 </li>
                 <li>
@@ -55,8 +55,8 @@
                     <ul class="nav child_menu">
                         <li><a href="/empleado/PagosMembresias">Consultar pagos membresias</a></li>
                         <li><a href="/empleado/PagosMembresias/create">Registrar pago membresia</a></li>
-                        <li><a href="/empleado/PagosEquipos">Consultar pagos equipos</a></li>
-                        <li><a href="/empleado/PagosEquipos/create">Registrar pago prestamos de equipo</a></li>
+                        <li><a href="/empleado/PrestamosPagosEquipos">Consultar pagos prestamos equipos</a></li>
+                        <li><a href="/empleado/PrestamosPagosEquipos/create">Registrar pago prestamos de equipo</a></li>
                         <li><a href="/empleado/PagosClases">Consultar pagos clases</a></li>
                         <li><a href="/empleado/PagosClases/create">Registrar pago clase</a></li>
                     </ul>

@@ -26,8 +26,11 @@
                                     <th>Id</th>
                                     <th>Fecha</th>
                                     <th>ID de empleado</th>
+                                    <th>Nombre de empleado</th>
                                     <th>ID de cliente</th>
-                                    <th>total</th>
+                                    <th>Nombre del cliente</th>
+                                    <th>Total</th>
+                                    <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,8 +39,15 @@
                                         <td>{{ $pago->id }}</td>
                                         <td>{{ $pago->fecha }}</td>
                                         <td>{{ $pago->id_empleado }}</td>
+                                        <td>{{ $pago->empleado->nombre }}</td>
                                         <td>{{ $pago->id_cliente }}</td>
-                                        <td>{{ $pago->total }}</td>
+                                        <td>{{ $pago->cliente->nombre }}</td>
+                                        <td>${{ $pago->total }}</td>
+                                        <td align="center">
+                                            <form action="/empleado/detallePagoPrestamosEquipo/{{$pago->id}}" method="GET">
+                                                <button type="submit"class="btn btn-round btn-info btn-sm">Detalle</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

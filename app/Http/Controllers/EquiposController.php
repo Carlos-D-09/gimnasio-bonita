@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\equipos;
+use App\Models\historial_prestamos;
 use App\Rules\validarNombreEquipo;
 use App\Rules\validarNombreEquipoEdit;
+use App\Rules\validarNuevaCantidadEquipos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,6 +20,16 @@ class EquiposController extends Controller
     public function index()
     {
         $equipos = equipos::all()->where('status',1);
+        foreach($equipos as $equipo){
+            $equiposUsando = new historial_prestamos();
+            $equiposUsando = historial_prestamos::all()->where('id_equipo',$equipo->id)->where('devuelto',0);
+            $unidadesUsadas = 0;
+            foreach($equiposUsando as $equipoUsando){
+               $unidadesUsadas = $unidadesUsadas + $equipoUsando->cantidad;
+            }
+            $unidadesDisponibles = $equipo->unidades - $unidadesUsadas;
+            $equipo->unidadesDisponibles = $unidadesDisponibles;
+        }
         $content = 'equipos.index';
         return view('dashboard',compact('equipos','content'));
     }
@@ -104,7 +116,7 @@ class EquiposController extends Controller
     {
         $request->validate([
             'nombre' => ['required', 'min:3', 'max:150', new validarNombreEquipoEdit($equipo->id)],
-            'unidades' => ['required','integer'],
+            'unidades' => ['required','integer',new validarNuevaCantidadEquipos($equipo->id)],
             'costo' => ['required','numeric'],
             'descripcion'=> ['required','min:5','max:150']
         ]);
