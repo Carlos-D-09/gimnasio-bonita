@@ -22,6 +22,7 @@ class CreateHistorialPrestamosTable extends Migration
                 ->references("id")->on("equipos");
             $table->foreign("id_pagos_prestamos_equipo")
                 ->references("id")->on("pagos_prestamos_equipos");
+            $table->timestamps();
         });
     }
 

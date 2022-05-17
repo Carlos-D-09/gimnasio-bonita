@@ -132,6 +132,7 @@ class ClaseController extends Controller
         }
         $clase->nombre = $request->nombre;
         $clase->descripcion = $request->descripcion;
+        $clase->updated_at = now();
         $clase->save();
         //Regresar a la vista de clases
         return redirect('/empleado');

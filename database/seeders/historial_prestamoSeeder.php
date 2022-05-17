@@ -20,7 +20,9 @@ class historial_prestamoSeeder extends Seeder
             'id' => 1,
             'devuelto' => true,
             'id_equipo' => 1,
-            'id_pagos_prestamos_equipo' => 1
+            'id_pagos_prestamos_equipo' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         /* $table->id();

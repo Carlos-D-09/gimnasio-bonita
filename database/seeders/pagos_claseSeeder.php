@@ -21,6 +21,8 @@ class pagos_claseSeeder extends Seeder
             'fecha' => '2021-12-31',
             'id_oferta' => 1,
             'id_empleado' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         /*$table->id();

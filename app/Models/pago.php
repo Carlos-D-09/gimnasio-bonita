@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class pago extends Model
 {
-    public $timestamps = false;
+    public $timestamps = true;
     use HasFactory;
 
     public function membresia(){

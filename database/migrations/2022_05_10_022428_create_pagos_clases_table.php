@@ -22,6 +22,7 @@ class CreatePagosClasesTable extends Migration
                 ->references('id')->on('oferta_actividades');
             $table->foreign('id_empleado')
                 ->references('id')->on('empleados');
+            $table->timestamps();
         });
     }
 

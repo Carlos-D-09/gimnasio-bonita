@@ -76,8 +76,6 @@ Route::get('/empleado/prestamosEquipos',[HistorialPrestamosController::class,'in
 
 Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 
-Route::resource('/empleado/agenda', AgendaController::class)->middleware('auth');
-
 Route::resource('/seePagos',PagosController::class)->middleware('auth');
 Route::get('/searchPago', 'App\Http\Controllers\PagosController@search')->middleware('auth');
 Route::get('/pagosJson', 'App\Http\Controllers\PagosController@toJson')->middleware('auth');
@@ -98,6 +96,11 @@ Route::get('/equiposJson', 'App\Http\Controllers\EquiposController@toJson')->mid
 Route::get('/clasesJson', 'App\Http\Controllers\ClaseController@toJson')->middleware('auth');
 
 Route::get('/ofertasJson', 'App\Http\Controllers\oferta_actividadesController@toJson')->middleware('auth');
+
+//Route::resource('/cliente/agenda', AgendaController::class)->middleware('auth');
+//Route::get('/cliente/agenda/search', [AgendaController::class, 'busquedaPatron'])->middleware('auth');
+//Route::get('/cliente/agendaSearch', 'App\Http\Controllers\AgendaController@search')->middleware('auth');
+//Route::resource('/cliente', 'App\Http\Controllers\ClientAuthController');
 
 Route::middleware([
     'auth:sanctum',

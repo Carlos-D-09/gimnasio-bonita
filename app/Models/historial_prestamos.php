@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class historial_prestamos extends Model
 {
     use HasFactory;
+    public $timestamps = true;
 }

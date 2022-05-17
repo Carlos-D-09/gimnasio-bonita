@@ -20,7 +20,9 @@ class claseSeeder extends Seeder
             'imagen' => '/images/user.png',
             'nombre' => 'Gimnasia',
             'descripcion' => 'Clase de gimnasia asignada por deportistas profesionales',
-            'status' => 'activo' //es activo o inactivo
+            'status' => 'activo', //es activo o inactivo
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         /*$table->id();

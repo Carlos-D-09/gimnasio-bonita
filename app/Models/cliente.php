@@ -11,7 +11,7 @@ class cliente extends Authenticatable
 {
     use HasFactory;
 
-    public $timestamps = false;
+    public $timestamps = true;
     protected $hidden = [
         'password',
         'remember_token',

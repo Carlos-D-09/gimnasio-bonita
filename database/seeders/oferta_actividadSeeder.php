@@ -24,7 +24,9 @@ class oferta_actividadSeeder extends Seeder
             'costo' => 1500,
             'id_empleado' => 2,
             'id_clase' => 1,
-            'status' => 'activo'
+            'status' => 'activo',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         /*$table->id();

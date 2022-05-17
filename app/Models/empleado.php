@@ -17,7 +17,7 @@ class empleado extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
-    public $timestamps = false;
+    public $timestamps = true;
     use SoftDeletes;
     /**
      * The attributes that are mass assignable.

@@ -58,6 +58,13 @@
                         <li><a href="/seePagos">Consultar pagos clases</a></li>
                     </ul>
                 </li>
+                <li> <!--Parte de los clientes, borrar si ya esta lista el dashboard de los clientes -->
+                    <a><i class="fa-solid fa-coins fa-xl"></i> Agenda (slidebar Clientes de prueba)<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/empleado/oferta_actividades">Registrarse en una clase</a></li>
+                        <li><a href="/cliente/agenda/show">Consultar clases en donde te inscribiste</a></li>
+                    </ul>
+                </li>
                 <li>
                     <a><i class="fa fa-laptop"></i> Soporte técnico<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">

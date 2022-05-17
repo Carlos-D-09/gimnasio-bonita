@@ -26,7 +26,9 @@ class ClienteSeeder extends Seeder
             'fecha_registro' => now(),
             'status' => 1,
             'password' => Hash::make('12345'),
-            'id_empleado' => 1
+            'id_empleado' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         DB::table('clientes')->insert([
             'id' => 2,
@@ -39,7 +41,9 @@ class ClienteSeeder extends Seeder
             'fecha_registro' => now(),
             'status' => 1,
             'password' => Hash::make('12345'),
-            'id_empleado' => 2
+            'id_empleado' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\clase;
+use App\Models\empleado;
+use App\Models\oferta_actividades;
 use App\Models\agenda;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AgendaController extends Controller
 {
@@ -16,7 +20,10 @@ class AgendaController extends Controller
 
     public function index()
     {
-        // $empleado = session('empleado');
+        /*$ofertaActividades = oferta_actividades::all();
+        $content = 'cliente.inscribirClaseCliente';
+        return view('dashboard', compact('ofertaActividades', 'content'));
+        // $empleado = session('empleado');*/
         // $ofertaActividades = oferta_actividades::all();
         // $content = 'agenda.index';
         // return view('dashboard', compact('ofertaActividades', 'empleado', 'content'));
@@ -48,4 +55,5 @@ class AgendaController extends Controller
     {
 
     }
+   
 }

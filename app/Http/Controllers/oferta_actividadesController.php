@@ -78,6 +78,7 @@ class oferta_actividadesController extends Controller
         $oferta->costo = $request->costo;
         $oferta->id_empleado = $request->id_maestro;
         $oferta->status = 'activo';
+        $oferta->updated_at = now();
         $oferta->save();
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
         $content = 'ofertaActividades.index';

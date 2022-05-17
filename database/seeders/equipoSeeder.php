@@ -21,7 +21,9 @@ class equipoSeeder extends Seeder
             'descripcion' => 'Una pesa con un peso considerable para su uso',
             'unidades' => 20,
             'cost_x_renta' => 100,
-            'status' => 1
+            'status' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         equipos::factory(5)->create();

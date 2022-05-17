@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class pagos_clases extends Model
 {
     use HasFactory;
+    public $timestamps = true;
 }

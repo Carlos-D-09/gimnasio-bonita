@@ -19,6 +19,7 @@ class Membresias extends Migration
             $table->smallInteger('Duracion');
             $table->double('costo', 8, 2);
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

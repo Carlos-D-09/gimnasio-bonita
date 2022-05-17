@@ -20,7 +20,9 @@ class pagos_prestamos_equipoSeeder extends Seeder
             'fecha' => '2017-03-14',
             'total' => 100,
             'id_empleado' => 2,
-            'id_cliente' => 1
+            'id_cliente' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         /* $table->id();
             $table->date('fecha');

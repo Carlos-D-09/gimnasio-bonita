@@ -115,11 +115,13 @@ class MembresiaController extends Controller
         $membresiaData->id = $membresia->id;
         $membresiaData->Nombre = $membresia->Nombre;
         $membresiaData->costo = $request->costo * $membresia->Duracion;
+        $membresiaData->updated_at = now();
 
         DB::table('membresias')
         ->where('id', $membresia->id)
         ->update([
-            'costo' => $membresiaData->costo
+            'costo' => $membresiaData->costo,
+            'updated_at' => $membresiaData->updated_at
         ]);
 
         return redirect('/membresia')->with('edited', 'Se ha modificado el costo por dia de la membresia con el id de ' . $membresia->id);

@@ -19,6 +19,7 @@ class CreateClasesTable extends Migration
             $table->string('nombre', 150);
             $table->string('descripcion', 300);
             $table->string('status');
+            $table->timestamps();
         });
     }
 

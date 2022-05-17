@@ -27,7 +27,7 @@ class CreateClientesTable extends Migration
             $table->unsignedBigInteger('id_empleado');
             $table->foreign("id_empleado")
                 ->references("id")->on("empleados");
-
+            $table->timestamps();
         });
 
     }
