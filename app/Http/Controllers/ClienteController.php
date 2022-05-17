@@ -19,9 +19,15 @@ class ClienteController extends Controller
 {
     public function index()
     {
+        dd("hola desde index");
         $clientes = cliente::all()->except('password')->where('status',1);
         $content = 'cliente.index';
         return view('dashboard',compact('clientes', 'content'));
+    }
+    public function indexClient(){
+        $cliente = cliente::all()->find(Auth::user()->id);
+        $content = 'clienteUser.profile';
+        return view('dashboard',compact('cliente','content'));
     }
 
     /**
@@ -32,6 +38,10 @@ class ClienteController extends Controller
     public function create()
     {
         $ultimoId = cliente::all('id')->last();
+        if($ultimoId == null){
+            $siguienteId = 1;
+            return view('cliente.formCliente',compact('siguienteId'));
+        }
         $siguienteId = (int)$ultimoId->id + 1;
         return view('cliente.formCliente',compact('siguienteId'));
     }

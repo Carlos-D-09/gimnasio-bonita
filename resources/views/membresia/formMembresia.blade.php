@@ -23,7 +23,7 @@
                         <input type="number" name="Duracion" placeholder="Pon la cantidad de días de la membresia" value="{{ isset($membresia) ? $membresia->Duracion : ''  }}{{ old('Duracion') }}" required>
                     </div>
                     <div class="input-box" style="width: 100%;">
-                        <span>Costo por día</span>
+                        <span>Costo</span>
                         <input type="number" name="costo" value="{{ isset($membresia) ? $membresia->costo : '' }}{{ old('costo') }}">
                     </div>
                 </div>

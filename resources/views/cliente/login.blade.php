@@ -26,7 +26,7 @@
                     @endif
                     <label for="correo"> <b>Introduce tu correo</b></label>
                     <div class="flex-form-content">
-                        <input type="text" name="correo" class="input-form">
+                        <input type="text" name="correo" class="input-form" value="{{old('correo')}}">
                     </div>
                     @error('correo')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -34,7 +34,7 @@
                     <br>
                     <label for="password"><b>Introduce tu contraseña</b></label>
                     <div class="flex-form-content">
-                        <input type="password" name="password" class="input-form">
+                        <input type="password" name="password" class="input-form" value="{{old('password')}}">
                     </div>
                     @error('password')
                         <div class="alert alert-danger">{{ $message }}</div>

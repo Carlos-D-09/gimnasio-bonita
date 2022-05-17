@@ -4,7 +4,7 @@
         <ul class="nav side-menu">
             {{-- Vista Gerente --}}
             @if(Auth::user()->id_tipoUsuario == 1)
-                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gerente</h3> <br><br> 
+                <h3>Gerente</h3> <br><br>
                 <li>
                     <a><i class="fa-solid fa-id-card-clip fa-xl"></i> Empleados<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -53,9 +53,12 @@
                 <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/seePagos">Consultar pagos membresias</a></li>
-                        <li><a href="/seePagos">Consultar pagos equipos</a></li>
-                        <li><a href="/seePagos">Consultar pagos clases</a></li>
+                        <li><a href="/empleado/PagosMembresias">Consultar pagos membresias</a></li>
+                        <li><a href="/empleado/PagosMembresias/create">Registrar pago membresia</a></li>
+                        <li><a href="/empleado/PagosEquipos">Consultar pagos equipos</a></li>
+                        <li><a href="/empleado/PagosEquipos/create">Registrar pago prestamos de equipo</a></li>
+                        <li><a href="/empleado/PagosClases">Consultar pagos clases</a></li>
+                        <li><a href="/empleado/PagosClases/create">Registrar pago clase</a></li>
                     </ul>
                 </li>
                 <li>
@@ -66,7 +69,7 @@
                 </li>
             {{-- Vista encargado sucursal --}}
             @elseif(Auth::user()->id_tipoUsuario == 2)
-                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Encargado de sucursal </h3> <br><br>
+                <h3>Encargado de sucursal </h3> <br><br>
                 <li><a><i class="fa-solid fa-wallet fa-xl"></i> Membresias <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="/"></a>Consultar membresias</li>
@@ -110,7 +113,7 @@
                 </li>
             {{-- Vista maestro --}}
             @elseif(Auth::user()->id_tipoUsuario == 3)
-                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Maestro</h3>  <br><br>
+                <h3>Maestro</h3>  <br><br>
                 <li>
                     <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Clases<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -126,6 +129,24 @@
                     <a><i class="fa fa-laptop"></i> Soporte técnico<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="/email">Enviar email</a></li>
+                    </ul>
+                </li>
+            @elseif(isset($cliente))
+                <h3>Cliente</h3> <br><br>
+                <li>
+                    <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Clases<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="">Consultar clases</a></li>
+                        <li><a href="">Consultar oferta actividades</a></li>
+                        <li><a href="">Registrarme en clases</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa-solid fa-coins fa-xl"></i> Mis pagos<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/seePagos">Membresia</a></li>
+                        <li><a href="/seePagos">Clases</a></li>
+                        <li><a href="/seePagos">Prestamos equipos</a></li>
                     </ul>
                 </li>
             @endif

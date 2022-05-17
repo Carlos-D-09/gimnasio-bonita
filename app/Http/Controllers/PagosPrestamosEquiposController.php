@@ -14,7 +14,9 @@ class PagosPrestamosEquiposController extends Controller
      */
     public function index()
     {
-        //
+        $data['pagos'] = pagos_prestamos_equipos::paginate();
+        $content = 'pagos.seePagosEquipos';
+        return view('dashboard', $data, compact('content'));
     }
 
     /**

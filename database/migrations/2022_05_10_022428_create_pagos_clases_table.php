@@ -16,12 +16,13 @@ class CreatePagosClasesTable extends Migration
         Schema::create('pagos_clases', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            $table->unsignedBigInteger('id_oferta');
+            $table->double('total',8,2);
             $table->unsignedBigInteger('id_empleado');
-            $table->foreign('id_oferta')
-                ->references('id')->on('oferta_actividades');
+            $table->unsignedBigInteger('id_cliente');
             $table->foreign('id_empleado')
                 ->references('id')->on('empleados');
+            $table->foreign('id_cliente')
+                ->references('id')->on('clientes');
         });
     }
 

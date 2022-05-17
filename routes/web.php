@@ -4,14 +4,16 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ClaseController;
 use App\Http\Controllers\ClientAuthController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\DetallePagosClasesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\PagosController;
 use App\Http\Controllers\empleadoCRUD_Controller;
 use App\Http\Controllers\EquiposController;
 use App\Http\Controllers\HistorialPrestamosController;
-use App\Http\Controllers\HistorialPrestamosEquiposController;
 use App\Http\Controllers\oferta_actividadesController;
+use App\Http\Controllers\PagosClasesController;
+use App\Http\Controllers\PagosPrestamosEquiposController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +30,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/cliente',[ClienteController::class,'indexClient'])->middleware('auth:client');
+
 Route::get('/cliente/login', [ClientAuthController::class, 'login']);
 
 Route::post('/cliente/login', [ClientAuthController::class, 'handleLogin']);
+
 
 Route::get('/empleado/login', function(){
     return view('auth/login');
@@ -74,11 +79,21 @@ Route::resource('/empleado/equipos',EquiposController::class)->middleware('auth'
 
 Route::get('/empleado/prestamosEquipos',[HistorialPrestamosController::class,'index'])->middleware('auth');
 
+Route::resource('/empleado/PagosMembresias',PagosController::class)->middleware('auth');
+
+Route::resource('/empleado/PagosEquipos',PagosPrestamosEquiposController::class)->middleware('auth');
+
+Route::resource('/empleado/PagosClases',PagosClasesController::class)->except('destroy','update','edit','show')->middleware('auth');
+
+Route::get('/empleado/detallePagoClases/{id}',[DetallePagosClasesController::class,'index'])->middleware('auth');
+
+Route::post('/empleado/PagosClases/validarDatos',[PagosClasesController::class,'validarDatos'])->middleware('auth');
+
+Route::post('/empleado/PagosClases/quitar/{id}',[PagosClasesController::class,'quitarPagoLista'])->middleware('auth');
+
 Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 
 Route::resource('/empleado/agenda', AgendaController::class)->middleware('auth');
-
-Route::resource('/seePagos',PagosController::class)->middleware('auth');
 
 Route::get('/searchPago', 'App\Http\Controllers\PagosController@search')->middleware('auth');
 

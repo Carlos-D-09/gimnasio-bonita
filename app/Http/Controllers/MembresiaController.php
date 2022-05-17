@@ -44,18 +44,14 @@ class MembresiaController extends Controller
         $membresiaData->id = $request->id;
         $membresiaData->Nombre = $request->Nombre;
         $membresiaData->Duracion = $request->Duracion;
-        if(empty($request->costo)) {
-            $membresiaData->costo = $this->costoXdia * $request->Duracion;
-        } else {
-            $membresiaData->costo = $request->costo * $request->Duracion;
-        }
-        
+        $membresiaData->costo = $request->costo;
+
         $membresiaData->save();
 
         $content = 'membresia.seeMembresia';
 
         $data['membresias'] = membresia::paginate();
-        
+
         return view('dashboard', $data, compact('content'));
     }
 
@@ -96,7 +92,7 @@ class MembresiaController extends Controller
         $membresia = membresia::find($id);
         $membresiaData->id = $membresia->id;
         $membresiaData->Nombre = $membresia->Nombre;
-        $membresiaData->costo = $request->costo * $membresia->Duracion;
+        $membresiaData->costo = $request->costo;
 
         DB::table('membresias')
         ->where('id', $membresia->id)
