@@ -39,13 +39,8 @@
                         @enderror
                     </div>
                     <div class="input-box" style="width: 100%;">
-                        <span class="details">Costo por dia de la membresia</span>
-                        <input type="number" name="costo" value="{{ isset($membresia) ? $membresia->costo : '' }}{{ old('costo') }}" required>
-                        @error('costo')
-                        <br>
-                        <small class="danger">*{{ $message }}</small>
-                        <br>
-                        @enderror
+                        <span>Costo</span>
+                        <input type="number" name="costo" value="{{ isset($membresia) ? $membresia->costo : '' }}{{ old('costo') }}">
                     </div>
                 </div>
                 <div class="button">

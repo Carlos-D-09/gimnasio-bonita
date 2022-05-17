@@ -58,18 +58,14 @@ class MembresiaController extends Controller
         $membresiaData->id = $request->id;
         $membresiaData->Nombre = $request->Nombre;
         $membresiaData->Duracion = $request->Duracion;
-        if(empty($request->costo)) {
-            $membresiaData->costo = $this->costoXdia * $request->Duracion;
-        } else {
-            $membresiaData->costo = $request->costo * $request->Duracion;
-        }
-        
+        $membresiaData->costo = $request->costo;
+
         $membresiaData->save();
 
         $content = 'membresia.seeMembresia';
 
         $data['membresias'] = membresia::paginate();
-        
+
         return redirect('/membresia')->with('success', 'Se ha registrado la membresia de forma exitosa');
     }
 
@@ -110,12 +106,12 @@ class MembresiaController extends Controller
         $request->validate([
             'costo' => 'required|digits_between:2,5',
         ]);
-        
+
         $membresia = membresia::find($id);
         $membresiaData->id = $membresia->id;
         $membresiaData->Nombre = $membresia->Nombre;
-        $membresiaData->costo = $request->costo * $membresia->Duracion;
         $membresiaData->updated_at = now();
+        $membresiaData->costo = $request->costo;
 
         DB::table('membresias')
         ->where('id', $membresia->id)

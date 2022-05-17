@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pagos_prestamos_equipos;
+use App\Models\detalle_pagos_clases;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class PagosPrestamosEquiposController extends Controller
+class DetallePagosClasesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(int $id)
     {
-        $data['pagos'] = pagos_prestamos_equipos::paginate();
-        $content = 'pagos.seePagosEquipos';
-        return view('dashboard', $data, compact('content'));
+        $idPago = $id;
+        $detalles =  detalle_pagos_clases::all()->where('id_pago_clase',$idPago);
+        $content = 'detallePagoClases.index';
+        return view('dashboard',compact('content', 'detalles','idPago'));
     }
 
     /**
@@ -43,10 +45,10 @@ class PagosPrestamosEquiposController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\pagos_prestamos_equipos  $pagos_prestamos_equipos
+     * @param  \App\Models\detalle_pagos_clases  $detalle_pagos_clases
      * @return \Illuminate\Http\Response
      */
-    public function show(pagos_prestamos_equipos $pagos_prestamos_equipos)
+    public function show(detalle_pagos_clases $detalle_pagos_clases)
     {
         //
     }
@@ -54,10 +56,10 @@ class PagosPrestamosEquiposController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\pagos_prestamos_equipos  $pagos_prestamos_equipos
+     * @param  \App\Models\detalle_pagos_clases  $detalle_pagos_clases
      * @return \Illuminate\Http\Response
      */
-    public function edit(pagos_prestamos_equipos $pagos_prestamos_equipos)
+    public function edit(detalle_pagos_clases $detalle_pagos_clases)
     {
         //
     }
@@ -66,10 +68,10 @@ class PagosPrestamosEquiposController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\pagos_prestamos_equipos  $pagos_prestamos_equipos
+     * @param  \App\Models\detalle_pagos_clases  $detalle_pagos_clases
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, pagos_prestamos_equipos $pagos_prestamos_equipos)
+    public function update(Request $request, detalle_pagos_clases $detalle_pagos_clases)
     {
         //
     }
@@ -77,10 +79,10 @@ class PagosPrestamosEquiposController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\pagos_prestamos_equipos  $pagos_prestamos_equipos
+     * @param  \App\Models\detalle_pagos_clases  $detalle_pagos_clases
      * @return \Illuminate\Http\Response
      */
-    public function destroy(pagos_prestamos_equipos $pagos_prestamos_equipos)
+    public function destroy(detalle_pagos_clases $detalle_pagos_clases)
     {
         //
     }

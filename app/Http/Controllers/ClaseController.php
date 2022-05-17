@@ -58,6 +58,7 @@ class ClaseController extends Controller
             'nombre' => ['required', 'min:3', new validarNombreClase],
             'descripcion' => 'required',
         ]);
+
         //Verificar que la imagen de la clase venga en el form
         if($request->hasFile('imagen')){
             //Buscar que no se quiera repetir el nombre de una clase

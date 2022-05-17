@@ -21,7 +21,7 @@ class PagosController extends Controller
         /*$date = Carbon::now();
         dd($date);*/
         $data['pagos'] = pago::paginate();
-        $content = 'pagos.seePagos';
+        $content = 'pagos.seePagosMembresias';
         return view('dashboard', $data, compact('content'));
     }
 
@@ -39,7 +39,7 @@ class PagosController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -50,7 +50,7 @@ class PagosController extends Controller
      */
     public function store(Request $request)
     {
- 
+
     }
 
     /**
@@ -61,7 +61,7 @@ class PagosController extends Controller
      */
     public function show(Pago $pago)
     {
-        
+
     }
 
     /**
@@ -72,7 +72,7 @@ class PagosController extends Controller
      */
     public function edit(Pago $pago)
     {
-       
+
     }
 
     /**
@@ -84,7 +84,7 @@ class PagosController extends Controller
      */
     public function update(Request $request, Pago $pago)
     {
-        
+
     }
 
     /**
@@ -95,18 +95,18 @@ class PagosController extends Controller
      */
     public function destroy(Pago $pago)
     {
-        
+
     }
 
     public function search(Request $request)
     {
         $search = $request->get('search');
-        $content = 'pagos.seePagos';
+        $content = 'pagos.seePagosMembresias';
         $pago = DB::table('pagos')->where('id', 'like', '%'.$search.'%')->paginate();
 
         if(!empty($search)){
             return view('dashboard', ['pagos' => $pago], compact('content'));
-            
+
         } else {
             return redirect('/seePagos');
         }

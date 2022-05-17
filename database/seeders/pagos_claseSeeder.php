@@ -19,7 +19,8 @@ class pagos_claseSeeder extends Seeder
         DB::table('pagos_clases')-> insert ([
             'id' => 1,
             'fecha' => '2021-12-31',
-            'id_oferta' => 1,
+            'total' => 1500,
+            'id_cliente' => 1,
             'id_empleado' => 2,
             'created_at' => now(),
             'updated_at' => now()

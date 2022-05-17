@@ -9,4 +9,11 @@ class pagos_clases extends Model
 {
     use HasFactory;
     public $timestamps = true;
+
+    public function cliente(){
+        return $this->belongsTo(cliente::class, 'id_cliente');
+    }
+    public function empleado(){
+        return $this->belongsTo(empleado::class, 'id_empleado');
+    }
 }

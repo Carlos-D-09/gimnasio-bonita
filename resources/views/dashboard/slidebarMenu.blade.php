@@ -4,7 +4,7 @@
         <ul class="nav side-menu">
             {{-- Vista Gerente --}}
             @if(Auth::user()->id_tipoUsuario == 1)
-                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gerente</h3> <br><br> 
+                <h3>Gerente</h3> <br><br>
                 <li>
                     <a><i class="fa-solid fa-id-card-clip fa-xl"></i> Empleados<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -53,16 +53,12 @@
                 <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/seePagos">Consultar pagos membresias</a></li>
-                        <li><a href="/seePagos">Consultar pagos equipos</a></li>
-                        <li><a href="/seePagos">Consultar pagos clases</a></li>
-                    </ul>
-                </li>
-                <li> <!--Parte de los clientes, borrar si ya esta lista el dashboard de los clientes -->
-                    <a><i class="fa-solid fa-coins fa-xl"></i> Agenda (slidebar Clientes de prueba)<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="/empleado/oferta_actividades">Registrarse en una clase</a></li>
-                        <li><a href="/cliente/agenda/show">Consultar clases en donde te inscribiste</a></li>
+                        <li><a href="/empleado/PagosMembresias">Consultar pagos membresias</a></li>
+                        <li><a href="/empleado/PagosMembresias/create">Registrar pago membresia</a></li>
+                        <li><a href="/empleado/PagosEquipos">Consultar pagos equipos</a></li>
+                        <li><a href="/empleado/PagosEquipos/create">Registrar pago prestamos de equipo</a></li>
+                        <li><a href="/empleado/PagosClases">Consultar pagos clases</a></li>
+                        <li><a href="/empleado/PagosClases/create">Registrar pago clase</a></li>
                     </ul>
                 </li>
                 <li>
@@ -73,13 +69,11 @@
                 </li>
             {{-- Vista encargado sucursal --}}
             @elseif(Auth::user()->id_tipoUsuario == 2)
-                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Encargado de sucursal </h3> <br><br>
+                <h3>Encargado de sucursal </h3> <br><br>
                 <li><a><i class="fa-solid fa-wallet fa-xl"></i> Membresias <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/"></a>Consultar membresias</li>
-                        <li><a href="/"></a>Modificar costo por día</li>
-                        <li><a href="/"></a>Modificar membresias</li>
-                        <li><a href="/"></a>Eliminar membresias</li>
+                        <li><a href="/membresia/create">Registrar una membresia</a></li>
+                        <li><a href="/membresia">Consultar membresias</a></li>
                     </ul>
                 </li>
                 <li><a><i class="fa-solid fa-book fa-xl"></i> Agenda <span class="fa fa-chevron-down"></span></a>
@@ -105,8 +99,8 @@
                 <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/seePagos">Consultar pagos equipos</a></li>
-                        <li><a href="/seePagos">Consultar pagos clases</a></li>
+                        <li><a href="/empleado/PagosEquipos">Consultar pagos equipos</a></li>
+                        <li><a href="/empleado/PagosClases">Consultar pagos clases</a></li>
                     </ul>
                 </li>
                 <li>
@@ -117,7 +111,7 @@
                 </li>
             {{-- Vista maestro --}}
             @elseif(Auth::user()->id_tipoUsuario == 3)
-                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Maestro</h3>  <br><br>
+                <h3>Maestro</h3>  <br><br>
                 <li>
                     <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Clases<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -135,8 +129,24 @@
                         <li><a href="/email">Enviar email</a></li>
                     </ul>
                 </li>
-            
+            @elseif(isset($cliente))
+                <h3>Cliente</h3> <br><br>
+                <li>
+                    <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Clases<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/cliente/clases">Consultar clases</a></li>
+                        <li><a href="">Consultar clases en las que me he inscrito</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa-solid fa-coins fa-xl"></i> Mis pagos<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/seePagos">Membresia</a></li>
+                        <li><a href="/seePagos">Clases</a></li>
+                        <li><a href="/seePagos">Prestamos equipos</a></li>
+                    </ul>
+                </li>
             @endif
-            
+
         </div>
 </div>
