@@ -89,6 +89,8 @@ Route::get('/empleado/oferta_actividades/dia/search', [oferta_actividadesControl
 
 Route::get('/empleado/oferta_actividades/clase/search', [oferta_actividadesController::class, 'busquedaPatronClase'])->middleware('auth');
 
+Route::get('/empleado/oferta_actividades/{id}', [oferta_actividadesController::class, 'show'])->middleware('auth');
+
 Route::resource('/empleado/oferta_actividades', oferta_actividadesController::class)->middleware('auth')->except('show');
 
 Route::resource('/empleado/equipos',EquiposController::class)->middleware('auth');
