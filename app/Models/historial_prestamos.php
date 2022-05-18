@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class historial_prestamos extends Model
 {
+    public $timestamps = false;
     use HasFactory;
-    public $timestamps = true;
+
+    public function equipo(){
+        return $this->belongsTo(equipos::class, 'id_equipo');
+    }
 }

@@ -15,8 +15,9 @@ class HistorialPrestamosController extends Controller
     public function index()
     {
         $prestamos = historial_prestamos::all();
-        $content = 'prestamosEquipos.index';
-        return view('dashboard',compact('prestamos','content'));
+        $content = 'prestamosEquipos.indexHistorial';
+        $proviene = 'index';
+        return view('dashboard',compact('prestamos','content','proviene'));
     }
 
     /**
@@ -59,7 +60,6 @@ class HistorialPrestamosController extends Controller
      */
     public function edit(historial_prestamos $historial_prestamos)
     {
-        //
     }
 
     /**
@@ -69,9 +69,18 @@ class HistorialPrestamosController extends Controller
      * @param  \App\Models\historial_prestamos  $historial_prestamos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, historial_prestamos $historial_prestamos)
+    public function update(Request $request)
     {
-        //
+        $historial_prestamo = new historial_prestamos();
+        $historial_prestamo = historial_prestamos::where('id',$request->id_historial_prestamo)->first();
+        $historial_prestamo->devuelto = 1;
+        $historial_prestamo->save();
+        if($request->proviene == "showDetalle"){
+            return redirect('/empleado/PrestamosPagosEquipos');
+        }
+        elseif($request->proviene == "index"){
+            return redirect('/empleado/historialPrestamosEquipos');
+        }
     }
 
     /**
@@ -83,5 +92,12 @@ class HistorialPrestamosController extends Controller
     public function destroy(historial_prestamos $historial_prestamos)
     {
         //
+    }
+
+    public function showDetalle(int $idPago){
+        $prestamos = historial_prestamos::all()->where('id_pagos_prestamos_equipo',$idPago);
+        $content = 'prestamosEquipos.indexHistorial';
+        $proviene = 'showDetalle';
+        return view('dashboard',compact('prestamos','content', 'proviene'));
     }
 }

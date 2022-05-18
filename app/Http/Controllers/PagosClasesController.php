@@ -6,6 +6,7 @@ use App\Models\cliente;
 use App\Models\detalle_pagos_clases;
 use App\Models\oferta_actividades;
 use App\Models\pagos_clases;
+use App\Rules\buscarPagosprevios;
 use App\Rules\requiredUltimoPago;
 use App\Rules\validarClasePago;
 use App\Rules\validarDiaOferta;
@@ -40,7 +41,7 @@ class PagosClasesController extends Controller
     public function create()
     {
         $ultimoId = pagos_clases::all('id')->last();
-        $content = 'pagos.formPagosClases';
+        $content = 'detallePagoClases.formPagosClases';
         $total = 0;
         if($ultimoId == null){
             $siguienteId = 1;
@@ -124,7 +125,7 @@ class PagosClasesController extends Controller
 
     public function validarDatos(Request $request){
         $validator = Validator::make($request->all(), [
-            'pagos' => ['bail',new validarClasePago, new validarUnicidadClasePagos, new validarIdCliente, new validarExistenciaClase, new validarDiaOferta, new validarHoraClasePago]
+            'pagos' => ['bail',new validarClasePago, new validarDiaOferta, new validarUnicidadClasePagos, new validarIdCliente, new validarExistenciaClase, new validarHoraClasePago, new buscarPagosprevios]
         ]);
 
         if($validator->fails()){
@@ -166,7 +167,7 @@ class PagosClasesController extends Controller
                 }
             }
             $ultimoId = pagos_clases::all('id')->last();
-            $content = 'pagos.formPagosClases';
+            $content = 'detallePagoClases.formPagosClases';
             if($ultimoId == null){
                 $siguienteId = 1;
                 return view('dashboard',compact('siguienteId','content','informacion','idCliente','nombreCliente', 'total','errors','idOfertaErroneo', 'idClienteErroneo'));
@@ -199,7 +200,7 @@ class PagosClasesController extends Controller
             }
         }
         $ultimoId = pagos_clases::all('id')->last();
-        $content = 'pagos.formPagosClases';
+        $content = 'detallePagoClases.formPagosClases';
         if($ultimoId == null){
             $siguienteId = 1;
             return view('dashboard',compact('siguienteId','content','informacion','idCliente','nombreCliente', 'total'));
@@ -215,7 +216,7 @@ class PagosClasesController extends Controller
         array_splice($informacion, $numeroPagos - 1, 1);
         array_splice($informacion, $id, 1);
         $ultimoId = pagos_clases::all('id')->last();
-        $content = 'pagos.formPagosClases';
+        $content = 'detallePagoClases.formPagosClases';
         $cont = 0;
         $total = 0;
         $idCliente = null;

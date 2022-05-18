@@ -14,6 +14,7 @@ use App\Http\Controllers\HistorialPrestamosController;
 use App\Http\Controllers\oferta_actividadesController;
 use App\Http\Controllers\PagosClasesController;
 use App\Http\Controllers\PagosPrestamosEquiposController;
+use App\Models\historial_prestamos;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,15 +100,18 @@ Route::get('/empleado/prestamosEquipos',[HistorialPrestamosController::class,'in
 
 Route::resource('/empleado/PagosMembresias',PagosController::class)->middleware('auth');
 
-Route::resource('/empleado/PagosEquipos',PagosPrestamosEquiposController::class)->middleware('auth');
+
+Route::resource('/empleado/PrestamosPagosEquipos',PagosPrestamosEquiposController::class)->middleware('auth')->except('show','edit','update','destroy');
+Route::post('/empleado/PrestamosPagosEquipos/validarDatos',[PagosPrestamosEquiposController::class,'validarDatos'])->middleware('auth');
+Route::post('/empleado/PrestamosPagosEquipos/quitar/{id}',[PagosPrestamosEquiposController::class,'quitarPagoLista'])->middleware('auth');
+Route::resource('/empleado/historialPrestamosEquipos',HistorialPrestamosController::class)->middleware('auth')->except('destroy','edit','show');
+Route::get('/empleado/detallePagoPrestamosEquipo/{id}',[HistorialPrestamosController::class,'showDetalle'])->middleware('auth');
 
 Route::resource('/empleado/PagosClases',PagosClasesController::class)->except('destroy','update','edit','show')->middleware('auth');
+Route::post('/empleado/PagosClases/validarDatos',[PagosClasesController::class,'validarDatos'])->middleware('auth');
+Route::post('/empleado/PagosClases/quitar/{id}',[PagosClasesController::class,'quitarPagoLista'])->middleware('auth');
 
 Route::get('/empleado/detallePagoClases/{id}',[DetallePagosClasesController::class,'index'])->middleware('auth');
-
-Route::post('/empleado/PagosClases/validarDatos',[PagosClasesController::class,'validarDatos'])->middleware('auth');
-
-Route::post('/empleado/PagosClases/quitar/{id}',[PagosClasesController::class,'quitarPagoLista'])->middleware('auth');
 
 Route::resource('/empleado',EmpleadoController::class)->middleware('auth');
 

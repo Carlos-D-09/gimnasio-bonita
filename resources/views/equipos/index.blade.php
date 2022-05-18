@@ -56,6 +56,9 @@
                                                     <p style="text-align: center">Descripcion</p>
                                                 </th>
                                                 <th>
+                                                    <p style="text-align: center">Unidades Totales</p>
+                                                </th>
+                                                <th>
                                                     <p style="text-align: center">Unidades disponibles</p>
                                                 </th>
                                                 <th>
@@ -80,6 +83,9 @@
                                                 </td>
                                                 <td align="center">
                                                     {{$equipo->unidades}}
+                                                </td>
+                                                <td align="center">
+                                                    {{$equipo->unidadesDisponibles}}
                                                 </td>
                                                 <td align="center">
                                                     {{$equipo->cost_x_renta}}

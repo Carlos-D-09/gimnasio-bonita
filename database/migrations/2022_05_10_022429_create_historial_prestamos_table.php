@@ -17,6 +17,7 @@ class CreateHistorialPrestamosTable extends Migration
             $table->id();
             $table->boolean('devuelto');
             $table->unsignedBigInteger('id_equipo');
+            $table->smallInteger('cantidad');
             $table->unsignedBigInteger('id_pagos_prestamos_equipo');
             $table->foreign("id_equipo")
                 ->references("id")->on("equipos");
