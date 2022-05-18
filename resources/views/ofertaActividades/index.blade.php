@@ -26,6 +26,12 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
+
+                        <!--@isset(Auth::user()->id)
+                            @if (Auth::user()->id_tipoUsuario == 3)
+                                <a class="dropdown-item">Soy profe :v con mi id de {{ Auth::user()->id }}</a>
+                            @endif
+                        @endisset -->
                         @if(session()->has('data'))
                             <div style="text-align: center;">
                                 {{ session()->get('data') }}
@@ -42,10 +48,11 @@
                                     <a class="dropdown-item" href="/empleado/oferta_actividades">Todos</a>
                                     <a class="dropdown-item" href="/empleado/oferta_actividades/dia">Dia L-S</a>
                                     <a class="dropdown-item" href="/empleado/oferta_actividades/clase">Clase A-Z</a>
-                                    <a class="dropdown-item" href="/empleado/oferta_actividades/maestro">Maestros A-Z</a>
+                                    
                                     @isset(Auth::user()->id_tipoUsuario)
-                                        @if (Auth::user()->id_tipoUsuario == 3)
-                                            <a class="dropdown-item" href="/empleado/oferta_actividades/clase">Mis clases</a>
+                                        @if (Auth::user()->id_tipoUsuario != 3)
+                                            <!--<a class="dropdown-item" href="/empleado/oferta_actividades/clase">Mis clases</a> -->
+                                            <a class="dropdown-item" href="/empleado/oferta_actividades/maestro">Maestros A-Z</a>
                                         @endif
                                     @endisset
                                 </div>
@@ -129,9 +136,9 @@
                                                 <td align="center">
                                                     {{$ofertaActividad->empleado->nombre}}
                                                 </td>
-                                                @if(isset(Auth::user()->id_tipoUsuario) and Auth::user()->id_tipoUsuario != 3)
                                                 <td align="center">
                                                     <table style="align-content: center">
+                                                    @if(isset(Auth::user()->id_tipoUsuario) and Auth::user()->id_tipoUsuario != 3)
                                                         <tr>
                                                             <form action="/empleado/oferta_actividades/{{$ofertaActividad->id}}/edit" method="GET">
                                                                 <button type="submit" class="btn btn-round btn-warning btn-sm">Editar</button>
@@ -146,8 +153,8 @@
                                                         </tr>
                                                         @else
                                                         <tr>
-                                                            <form action="" method="">
-                                                                <button type="submit"class="btn btn-round btn-succes btn-sm">Registrarse</button>
+                                                            <form action="/empleado/oferta_actividades/{{$ofertaActividad->id}}" method="GET">
+                                                                <button type="submit"class="btn btn-success">Ver detalles</button>
                                                             </form>
                                                         </tr>
                                                         @endif
@@ -158,12 +165,14 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                @if(isset(Auth::user()->id_tipoUsuario) and Auth::user()->id_tipoUsuario != 3)
                                 <div class="btn btn-primary btn-warning" style="width: 100%;">
                                     <a href="/ofertasJson" style="color: white">
                                         <i class="fa fa-edit m-right-xs"></i>
                                          Hacer una consulta de las ofertas de actividades en formato json
                                     </a>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>

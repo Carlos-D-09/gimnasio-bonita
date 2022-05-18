@@ -64,8 +64,11 @@ Route::get('/empleado/oferta_actividades/search', [oferta_actividadesController:
 Route::get('/empleado/oferta_actividades/maestro/search', [oferta_actividadesController::class, 'busquedaPatronMaestro'])->middleware('auth');
 Route::get('/empleado/oferta_actividades/dia/search', [oferta_actividadesController::class, 'busquedaPatronDia'])->middleware('auth');
 Route::get('/empleado/oferta_actividades/clase/search', [oferta_actividadesController::class, 'busquedaPatronClase'])->middleware('auth');
+Route::get('/empleado/oferta_actividades/{id}', [oferta_actividadesController::class, 'show'])->middleware('auth');
 Route::resource('/empleado/oferta_actividades', oferta_actividadesController::class)->middleware('auth')->except('show');
 Route::get('/ofertasJson', 'App\Http\Controllers\oferta_actividadesController@toJson')->middleware('auth');
+
+
 
 //Manejo equipos (empleado)
 Route::resource('/empleado/equipos',EquiposController::class)->middleware('auth');

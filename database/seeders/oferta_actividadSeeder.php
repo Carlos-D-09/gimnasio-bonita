@@ -22,8 +22,22 @@ class oferta_actividadSeeder extends Seeder
             'dia' => 'lunes',
             'cupos' => 20,
             'costo' => 1500,
-            'id_empleado' => 2,
+            'id_empleado' => 5,
             'id_clase' => 1,
+            'status' => 'activo',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('oferta_actividades')-> insert ([
+            'id' => 2,
+            'horaInicio' => '14:00:00',
+            'horaFin' => '16:00:00',
+            'dia' => '6 de marzo del 2022',
+            'cupos' => 15,
+            'costo' => 500,
+            'id_empleado' => 4,
+            'id_clase' => 2,
             'status' => 'activo',
             'created_at' => now(),
             'updated_at' => now()

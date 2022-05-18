@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Models\agenda;
 use App\Models\clase;
 use App\Models\empleado;
 use App\Models\oferta_actividades;
@@ -24,6 +26,14 @@ class oferta_actividadesController extends Controller
      */
     public function index()
     {
+        $empleado = Auth::user();
+        $idTipoUsuario = $empleado->id_tipoUsuario;
+        if($idTipoUsuario == 3){
+            $ofertaActividades = oferta_actividades::all()->where('id_empleado', $empleado->id)->where('status', 'activo');
+            $content = 'ofertaActividades.index';
+            return view('dashboard', compact('ofertaActividades', 'content'));
+        }
+        
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
         $content = 'ofertaActividades.index';
         return view('dashboard', compact('ofertaActividades', 'content'));
@@ -91,9 +101,18 @@ class oferta_actividadesController extends Controller
      * @param  \App\Models\oferta_actividades  $oferta_actividades
      * @return \Illuminate\Http\Response
      */
-    public function show(oferta_actividades $oferta_actividades)
+    public function show($id)
     {
-        //
+        $ofertaActividad = oferta_actividades::find($id);
+        $agendaData = agenda::all()->where('id_oferta', $ofertaActividad->id);
+
+        $content = 'ofertaActividades.showOferta';
+
+        return view('dashboard', compact('content', 'agendaData'));
+        //aplica solo para maestros
+        /*
+        $content = 'ofertaActividades.showOferta';
+        return view('dashboard', compact('ofertaActividad','content'));*/
     }
 
     /**
@@ -160,6 +179,17 @@ class oferta_actividadesController extends Controller
     }
 
     public function orderByClase(){
+        $empleado = Auth::user();
+        $idTipoUsuario = $empleado->id_tipoUsuario;
+
+        if($idTipoUsuario == 3){
+            $ofertaActividades = oferta_actividades::all()->where('id_empleado', $empleado->id)->where('status', 'activo');
+            $ofertaActividades = oferta_actividadesController::burbujaClase($ofertaActividades);
+            $content = 'ofertaActividades.index';
+            $clase = true;
+            return view('dashboard', compact('ofertaActividades', 'content', 'clase'));
+        }
+
         $empleado = session('empleado');
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
         $ofertaActividades = oferta_actividadesController::burbujaClase($ofertaActividades);
@@ -169,6 +199,17 @@ class oferta_actividadesController extends Controller
     }
 
     public function orderByDia(){
+        $empleado = Auth::user();
+        $idTipoUsuario = $empleado->id_tipoUsuario;
+
+        if($idTipoUsuario == 3){
+            $ofertaActividades = oferta_actividades::all()->where('id_empleado', $empleado->id)->where('status', 'activo');
+            $ofertaActividades = oferta_actividadesController::burbujaDia($ofertaActividades);
+            $content = 'ofertaActividades.index';
+            $dia = true;
+            return view('dashboard', compact('ofertaActividades', 'content', 'dia'));
+        }
+
         $empleado = session('empleado');
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
         $ofertaActividades = oferta_actividadesController::burbujaDia($ofertaActividades);
@@ -198,6 +239,19 @@ class oferta_actividadesController extends Controller
     }
 
     public function busquedaPatronDia(Request $request){
+        $empleado = Auth::user();
+        $idTipoUsuario = $empleado->id_tipoUsuario;
+
+        if($idTipoUsuario == 3){
+            $ofertaActividades = oferta_actividades::all()->where('id_empleado', $empleado->id)->where('status', 'activo');
+            $ofertaActividades = oferta_actividadesController::burbujaDia($ofertaActividades);
+            $ofertaActividades = oferta_actividadesController::buscarPatronDia($ofertaActividades, $request->patron);
+            $content = 'ofertaActividades.index';
+            $dia = true;
+            $patronBuscado = $request->patron;
+            return view('dashboard', compact('ofertaActividades', 'content', 'dia', 'patronBuscado'));
+        }
+
         $empleado = session('empleado');
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
         $ofertaActividades = oferta_actividadesController::burbujaDia($ofertaActividades);
@@ -209,6 +263,19 @@ class oferta_actividadesController extends Controller
     }
 
     public function busquedaPatronClase(Request $request){
+        $empleado = Auth::user();
+        $idTipoUsuario = $empleado->id_tipoUsuario;
+
+        if($idTipoUsuario == 3){
+            $ofertaActividades = oferta_actividades::all()->where('id_empleado', $empleado->id)->where('status', 'activo');
+            $ofertaActividades = oferta_actividadesController::burbujaClase($ofertaActividades);
+            $ofertaActividades = oferta_actividadesController::buscarPatron($ofertaActividades, $request->patron);
+            $content = 'ofertaActividades.index';
+            $clase = true;
+            $patronBuscado = $request->patron;
+            return view('dashboard', compact('ofertaActividades', 'content', 'clase', 'patronBuscado'));
+        }
+
         $empleado = session('empleado');
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
         $ofertaActividades = oferta_actividadesController::burbujaClase($ofertaActividades);
@@ -220,12 +287,23 @@ class oferta_actividadesController extends Controller
     }
 
     public function busquedaPatron(Request $request){
+        $empleado = Auth::user();
+        $idTipoUsuario = $empleado->id_tipoUsuario;
+
+        if($idTipoUsuario == 3){
+            $ofertaActividades = oferta_actividades::all()->where('id_empleado', $empleado->id)->where('status', 'activo');
+            $ofertaActividades = oferta_actividadesController::buscarPatron($ofertaActividades, $request->patron);
+            $content = 'ofertaActividades.index';
+            $patronBuscado = $request->patron;
+            return view('dashboard', compact('ofertaActividades', 'content', 'patronBuscado'));
+        }
+
         $empleado = session('empleado');
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
         $ofertaActividades = oferta_actividadesController::buscarPatron($ofertaActividades, $request->patron);
         $content = 'ofertaActividades.index';
         $patronBuscado = $request->patron;
-        return view('dashboard', compact('ofertaActividades','content', 'patronBuscado'));
+        return view('dashboard', compact('ofertaActividades', 'content', 'patronBuscado'));
     }
 
     public function burbujaClase($ofertas){

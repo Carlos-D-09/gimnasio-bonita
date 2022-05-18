@@ -25,6 +25,16 @@ class claseSeeder extends Seeder
             'updated_at' => now()
         ]);
 
+        DB::table('clases')-> insert ([
+            'id' => 2,
+            'imagen' => '/images/user.png',
+            'nombre' => 'Natacion',
+            'descripcion' => 'Natacion',
+            'status' => 'activo', //es activo o inactivo
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
         /*$table->id();
             $table->string('imagen',250);
             $table->string('nombre', 150);
