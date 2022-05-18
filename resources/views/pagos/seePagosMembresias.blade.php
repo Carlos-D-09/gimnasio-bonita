@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="pagos">
-                    <form action="/searchPago" method="GET">
+                    <form action="/empleado/searchPago" method="GET">
                         <div class="form-group pull-right top_search" >
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Buscar por id" name="search">
@@ -22,7 +22,7 @@
                     <div class="clases-body">
                         @if(session()->has('data'))
                             <div style="text-align: center;">
-                                {{ session()->get('data') }} 
+                                {{ session()->get('data') }}
                             </div><br>
                         @endif
                         <table id="example2" class="table table-bordered table-hover">

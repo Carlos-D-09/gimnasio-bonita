@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\pago;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class PagosController extends Controller
 {
@@ -39,7 +38,14 @@ class PagosController extends Controller
      */
     public function create()
     {
-
+        $ultimoId = pago::all('id')->last();
+        $content = 'pagosMembresias.formPagosMembresias';
+        if($ultimoId == null){
+            $siguienteId = 1;
+            return view('dashboard',compact('siguienteId','content', 'total'));
+        }
+        $siguienteId = (int)$ultimoId->id + 1;
+        return view('dashboard',compact('siguienteId','content', 'total'));
     }
 
     /**
