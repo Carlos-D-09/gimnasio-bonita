@@ -75,7 +75,7 @@ Route::resource('/empleado/equipos',EquiposController::class)->middleware('auth'
 Route::get('/equiposJson', 'App\Http\Controllers\EquiposController@toJson')->middleware('auth');
 
 //Manejo pagos membresias (empleado)
-Route::resource('/empleado/pagosMembresias',PagosController::class)->middleware('auth');
+Route::resource('/empleado/pagosMembresias',PagosController::class)->middleware('auth')->except('destroy','edit','show');
 Route::get('/empleado/searchPago', 'App\Http\Controllers\PagosController@search')->middleware('auth');
 Route::get('/pagosJson', 'App\Http\Controllers\PagosController@toJson')->middleware('auth');
 

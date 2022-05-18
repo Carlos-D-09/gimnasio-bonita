@@ -17,31 +17,13 @@ class MembresiaSeeder extends Seeder
     {
         DB::table('membresias')-> insert ([
             'id' => 1,
-            'Nombre' => 'Membresia premium',
-            'Duracion' => 15,
-            'costo' => 1000,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);	
-        
-        DB::table('membresias')-> insert ([
-            'id' => 2,
-            'Nombre' => 'Membresia premium',
-            'Duracion' => 10,
-            'costo' => 700,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);	
-
-        DB::table('membresias')-> insert ([
-            'id' => 3,
-            'Nombre' => 'Membresia premium',
-            'Duracion' => 30,
-            'costo' => 2000,
+            'nombre' => 'Costo diario',
+            'duracion' => 1,
+            'costo' => 50,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
-        membresia::factory(10)->create();
+        // membresia::factory(10)->create();
     }
 }

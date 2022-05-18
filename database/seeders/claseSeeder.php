@@ -41,6 +41,6 @@ class claseSeeder extends Seeder
             $table->string('descripcion', 300);
             $table->string('status');
             */
-        clase::factory(5)->create();
+        // clase::factory(5)->create();
     }
 }

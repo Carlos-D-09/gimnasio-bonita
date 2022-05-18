@@ -19,9 +19,9 @@ class PagosController extends Controller
     {
         /*$date = Carbon::now();
         dd($date);*/
-        $data['pagos'] = pago::paginate();
+        $pagos = pago::all();
         $content = 'pagos.seePagosMembresias';
-        return view('dashboard', $data, compact('content'));
+        return view('dashboard', compact('content','pagos'));
     }
 
     public function toJson()
@@ -38,11 +38,12 @@ class PagosController extends Controller
      */
     public function create()
     {
+        $total = 0;
         $ultimoId = pago::all('id')->last();
         $content = 'pagosMembresias.formPagosMembresias';
         if($ultimoId == null){
             $siguienteId = 1;
-            return view('dashboard',compact('siguienteId','content', 'total'));
+            return view('dashboard',compact('siguienteId','content','total'));
         }
         $siguienteId = (int)$ultimoId->id + 1;
         return view('dashboard',compact('siguienteId','content', 'total'));

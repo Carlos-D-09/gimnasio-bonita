@@ -13,7 +13,7 @@
                                 <button class="btn btn-secondary buttonPatron" type="submit" style="color: white">Buscar</button>
                             </span>
                         </div>
-                    </form>  
+                    </form>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                             {{ session()->get('deleted') }}
                         </div>
                         @endif
-                        
+
                         <h2>Listado de membresias</h2>
                         <div class="clearfix"></div>
                     </div>
@@ -80,10 +80,12 @@
                                                 <td>{{ $membresia->Duracion }}</td>
                                                 <td>${{ $membresia->costo }}</td>
                                                 <td>
-                                                    <form action="/membresia/{{ $membresia->id }}/delete">
-                                                        @csrf
-                                                        <button type="submit"class="btn btn-round btn-danger btn-sm">Eliminar membresia</button>
-                                                    </form>
+                                                    @if ($membresia->id != 1)
+                                                        <form action="/membresia/{{ $membresia->id }}/delete">
+                                                            @csrf
+                                                            <button type="submit"class="btn btn-round btn-danger btn-sm">Eliminar membresia</button>
+                                                        </form>
+                                                    @endif
                                                     <form action="/membresia/{{ $membresia->id }}/edit" method="GET">
                                                         <button type="submit" class="btn btn-round btn-warning btn-sm">Modificar costo por día</button>
                                                     </form>
