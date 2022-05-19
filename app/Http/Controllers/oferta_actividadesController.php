@@ -33,7 +33,7 @@ class oferta_actividadesController extends Controller
             $content = 'ofertaActividades.index';
             return view('dashboard', compact('ofertaActividades', 'content'));
         }
-        
+
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
         $content = 'ofertaActividades.index';
         return view('dashboard', compact('ofertaActividades', 'content'));

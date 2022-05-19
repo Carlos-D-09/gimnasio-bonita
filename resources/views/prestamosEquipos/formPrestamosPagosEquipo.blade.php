@@ -7,7 +7,7 @@
                     <h3> Registro de pago del prestamo de equipos </h3>
                 </div>
                 <div class="title_right" >
-                    <div class="col-md-4 col-sm-4   form-group pull-right top_search">
+                    <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                         <div class="btn btn-primary btn-danger">
                             <a href="/empleado/PagosClases" style="color: white">
                                 <i class="fa-solid fa-circle-xmark"></i>

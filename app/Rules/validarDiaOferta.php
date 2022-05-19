@@ -29,7 +29,7 @@ class validarDiaOferta implements Rule
         $diasIngles = [
             "lunes" => "Monday",
             "martes" => "Tuesday",
-            "miercoles" => "Wendsay",
+            "miercoles" => "Wednesday",
             "jueves" => "Thursday",
             "viernes" => "Friday",
             "sabado" => "Saturday"

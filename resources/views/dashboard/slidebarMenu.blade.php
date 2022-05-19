@@ -53,8 +53,8 @@
                 <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/empleado/PagosMembresias">Consultar pagos membresias</a></li>
-                        <li><a href="/empleado/PagosMembresias/create">Registrar pago membresia</a></li>
+                        <li><a href="/empleado/pagosMembresias">Consultar pagos membresias</a></li>
+                        <li><a href="/empleado/pagosMembresias/create">Registrar pago membresia</a></li>
                         <li><a href="/empleado/PrestamosPagosEquipos">Consultar pagos prestamos equipos</a></li>
                         <li><a href="/empleado/PrestamosPagosEquipos/create">Registrar pago prestamos de equipo</a></li>
                         <li><a href="/empleado/PagosClases">Consultar pagos clases</a></li>
@@ -99,8 +99,12 @@
                 <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                        <li><a href="/empleado/pagosMembresias">Consultar pagos membresias</a></li>
+                        <li><a href="/empleado/pagosMembresias/create">Registrar pago membresia</a></li>
                         <li><a href="/empleado/PrestamosPagosEquipos">Consultar pagos prestamos equipos</a></li>
+                        <li><a href="/empleado/PrestamosPagosEquipos/create">Registrar pago prestamos de equipo</a></li>
                         <li><a href="/empleado/PagosClases">Consultar pagos clases</a></li>
+                        <li><a href="/empleado/PagosClases/create">Registrar pago clase</a></li>
                     </ul>
                 </li>
                 <li>
@@ -134,8 +138,10 @@
                 <li>
                     <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Clases<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/cliente/clases">Consultar clases</a></li>
-                        <li><a href="">Consultar clases en las que me he inscrito</a></li>
+                        <li><a href="/cliente/clases">Clases</a></li>
+                        <li><a href="">Consultar oferta de actividades</a></li>
+                        <li><a href="">Registrarme a clases</a></li>
+                        <li><a href="">Ver mis claes</a></li>
                     </ul>
                 </li>
                 <li>

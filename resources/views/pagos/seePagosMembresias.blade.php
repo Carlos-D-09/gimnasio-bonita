@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="pagos">
-                    <form action="/searchPago" method="GET">
+                    <form action="/empleado/searchPago" method="GET">
                         <div class="form-group pull-right top_search" >
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Buscar por id" name="search">
@@ -22,18 +22,22 @@
                     <div class="clases-body">
                         @if(session()->has('data'))
                             <div style="text-align: center;">
-                                {{ session()->get('data') }} 
+                                {{ session()->get('data') }}
                             </div><br>
                         @endif
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr style="text-align:center">
                                     <th>Id</th>
-                                    <th>Fecha de inicio</th>
-                                    <th>Fecha fin</th>
+                                    <th>Fecha del pago</th>
+                                    <th>Dias que se pagaron</th>
                                     <th>ID de membresía</th>
+                                    <th>Nombre de la membresia</th>
                                     <th>ID de empleado</th>
+                                    <th>Nombre del empleado</th>
                                     <th>ID de cliente</th>
+                                    <th>Nombre del cliente</th>
+                                    <th>Costo</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,9 +45,14 @@
                                     <tr style="text-align:center">
                                         <td>{{ $pago->id }}</td>
                                         <td>{{ $pago->fecha }}</td>
+                                        <td>{{ $pago->dias }}</td>
                                         <td>{{ $pago->id_membresia }}</td>
+                                        <td>{{ $pago->membresia->Nombre }}</td>
                                         <td>{{ $pago->id_empleado }}</td>
+                                        <td>{{ $pago->empleado->nombre }}</td>
                                         <td>{{ $pago->id_cliente }}</td>
+                                        <td>{{ $pago->cliente->nombre }}</td>
+                                        <td>{{ $pago->total}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
