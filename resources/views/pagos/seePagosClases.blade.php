@@ -2,21 +2,40 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3 >Pagos de clases</h3>
+                @isset($id_pago)
+                    <h3>Informacion de pago</h3>
+                @else
+                    <h3> Buscar Pago</h3>
+                @endauth
             </div>
             <div class="title_right">
-                <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                    <form action="" method="GET">
-                        <div class="form-group pull-right top_search" >
+                @isset($id_pago)
+                    <div class="col-md-2 col-sm-2   form-group pull-right top_search">
+                        <div class="btn btn-primary btn-info">
+                            <a href="/empleado/PagosClases" style="color: white">
+                                <i class="fa-solid fa-arrow-left"></i>
+                                Volver
+                            </a>
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-4 col-sm-4   form-group pull-right top_search">
+                        @if( strpos(Route::current()->uri,"search",0) === false)
+                            <form action="{{ '/' . Route::current()->uri . '/searchPago'}}" method="POST">
+                        @else
+                            <form action="{{ '/' . Route::current()->uri}}" method="POST">
+                        @endif
+                            @csrf
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Buscar por id" name="search">
+                                <input type="text" name="idPagoBuscar" class="form-control inputPatron" placeholder="Id pago">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-secondary" type="submit" style="color: white">Buscar</button>
+                                    <button class="btn btn-default buttonPatron" type="submit"> Buscar</button>
+                                    <script src="{{asset('/js/ofertaActividades/index/botonBusqueda.js')}}"></script>
                                 </span>
                             </div>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
+                @endisset
             </div>
         </div>
         <div class="clearfix"></div>
@@ -24,77 +43,75 @@
             <div class="col-md-12 col-sm-12">
                 <div class="x-panel">
                     <div class="x_title">
-                        <h2>Listado de pagos</h2>
+                        @isset($id_pago)
+                            <div style="display:inline-flex;width: 100%">
+                                <div style="width: 50%;">
+                                    <p style="font-size: 15px"> <b> Id cliente: {{$id_cliente}} </b></p>
+                                    <p style="font-size: 15px"> <b> Nombre del cliente: {{$clienteNombre}} </b></p>
+                                    <p style="font-size: 15px"> <b> Id empleado: {{$id_empleado}} </b></p>
+                                    <p style="font-size: 15px"> <b> Nombre del empleado: {{$empleadoNombre}} </b></p>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p style="font-size: 15px; text-align:right"> <b> Numero de pago: {{$id_pago}}</b></p>
+                                    <p style="font-size: 15px; text-align:right"> <b> Fecha del pago: {{$fecha}}</b></p>
+                                </div>
+                            </div>
+                        @else
+                            @isset($errorIdPago)
+                                <p>
+                                    Sin coincidencias para el id: {{$errorIdPago}}
+                                </p>
+                            @endisset
+                        @endisset
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card-box table-responsive">
-                                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    <p style="text-align: center">Id</p>
-                                                </th>
-                                                <th>
-                                                    <p style="text-align: center">Fecha</p>
-                                                </th>
-                                                <th>
-                                                    <p style="text-align: center">Id empleado</p>
-                                                </th>
-                                                <th>
-                                                    <p style="text-align: center">Nombre empleado</p>
-                                                </th>
-                                                <th>
-                                                    <p style="text-align: center">Id cliente</p>
-                                                </th>
-                                                <th>
-                                                    <p style="text-align: center">Nombre cliente </p>
-                                                </th>
-                                                <th>
-                                                    <p style="text-align: center">Total</p>
-                                                </th>
-                                                <th>
-                                                    <p style="text-align: center">Opciones</p>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($pagos as $pago)
-                                            <tr>
-                                                <td align="center">
-                                                    {{$pago->id}}
-                                                </td>
-                                                <td align="center">
-                                                    {{$pago->fecha}}
-                                                </td>
-                                                <td align="center">
-                                                    {{$pago->id_empleado}}
-                                                </td>
-                                                <td align="center">
-                                                    {{$pago->empleado->nombre}}
-                                                </td>
-                                                <td align="center">
-                                                    {{$pago->id_cliente}}
-                                                </td>
-                                                <td align="center">
-                                                    {{$pago->cliente->nombre}}
-                                                </td>
-                                                <td align="center">
-                                                    ${{$pago->total}}
-                                                </td>
-                                                <td align="center">
-                                                    <form action="/empleado/detallePagoClases/{{$pago->id}}" method="GET">
-                                                        <button type="submit"class="btn btn-round btn-info btn-sm">Detalle</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                        <div class="form-group row">
+                            @isset($id_pago)
+                                <div class="col-sm-12">
+                                    <p>Clases que se pagaron</p>
+                                    <div class="card-box table-responsive">
+                                        <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <p style="text-align: center">Id oferta</p>
+                                                    </th>
+                                                    <th>
+                                                        <p style="text-align: center">Clase</p>
+                                                    </th>
+                                                    <th>
+                                                        <p style="text-align: center">Costo</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($detalles as $detalle)
+                                                <tr>
+                                                    <td align="center">
+                                                        {{$detalle->id_oferta}}
+                                                    </td>
+                                                    <td align="center">
+                                                        {{$detalle->oferta_actividades->clase->nombre}}
+                                                    </td>
+                                                    <td align="center">
+                                                        {{$detalle->oferta_actividades->costo}}
+                                                    </td>
+                                                    </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <td></td>
+                                                    <td align="center"><b>Total:</b></td>
+                                                    <td align="center">${{$total}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    @isset($cliente)
+                                        <h1 style="text-align: right"> <br> <br> Total: ${{$total}}</h1>
+                                    @endisset
                                 </div>
-                            </div>
+                            @endisset
                         </div>
                     </div>
                 </div>

@@ -33,7 +33,7 @@ class oferta_actividadSeeder extends Seeder
             'id' => 2,
             'horaInicio' => '14:00:00',
             'horaFin' => '16:00:00',
-            'dia' => '6 de marzo del 2022',
+            'dia' => 'miercoles',
             'cupos' => 15,
             'costo' => 500,
             'id_empleado' => 4,

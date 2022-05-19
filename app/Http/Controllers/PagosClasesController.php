@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\cliente;
 use App\Models\detalle_pagos_clases;
 use App\Models\oferta_actividades;
+use App\Models\pago;
 use App\Models\pagos_clases;
 use App\Rules\buscarPagosprevios;
 use App\Rules\requiredUltimoPago;
@@ -41,7 +42,7 @@ class PagosClasesController extends Controller
     public function create()
     {
         $ultimoId = pagos_clases::all('id')->last();
-        $content = 'detallePagoClases.formPagosClases';
+        $content = 'pagoClases.formPagosClases';
         $total = 0;
         if($ultimoId == null){
             $siguienteId = 1;
@@ -66,7 +67,7 @@ class PagosClasesController extends Controller
         $pagoNuevo->fecha = date('Y-m-d');
         $pagoNuevo->id_empleado = Auth::user()->id;
         $pagoNuevo->total = $request->total;
-        $pagoNuevo->id_cliente = $pagos[0]['id_cliente'];
+        $pagoNuevo->id_cliente = $request->id_cliente;
         $pagoNuevo->save();
         $idPago = DB::table('pagos_clases')->select('id')->orderByDesc('id')->first();
         foreach($pagos as $pago){
@@ -125,89 +126,79 @@ class PagosClasesController extends Controller
 
     public function validarDatos(Request $request){
         $validator = Validator::make($request->all(), [
-            'pagos' => ['bail',new validarClasePago, new validarDiaOferta, new validarUnicidadClasePagos, new validarIdCliente, new validarExistenciaClase, new validarHoraClasePago, new buscarPagosprevios]
+            'pagos' => ['bail',new validarClasePago, new validarDiaOferta, new validarUnicidadClasePagos, new validarHoraClasePago, new buscarPagosprevios($request->id_cliente)]
         ]);
 
+        $cliente = $request->id_cliente; //id del cliente
+        $clienteNombre = cliente::all()->where('id', $cliente)->first();
+        $clienteNombre = $clienteNombre->nombre;
+        $total = 0;
+        $informacion = $request->pagos;
+        $numeroPagos = count($informacion);
+        $ultimoId = pagos_clases::all('id')->last();
+        $content = 'pagoClases.formPagosClases';
+        $fecha = date('d/m/Y');
+
+        //Proceso a realizar cuando se encuentra alguna falla en las validaciones
         if($validator->fails()){
             $errors = $validator->errors()->messages();
             $errors = $errors['pagos'];
-            $informacion = $request->pagos;
-            $numeroPagos = count($informacion);
             $cont = 0;
-            $idCliente = null;
-            $total = 0;
-            $nombreCliente = null;
             $idOfertaErroneo = null;
-            $idClienteErroneo = null;
             if($numeroPagos < 2){
                 $idOfertaErroneo = $informacion[0]['id_oferta'];
-                $idClienteErroneo = $informacion[0]['id_cliente'];
                 $informacion = null;
             }
             else{
-
                 $idOfertaErroneo = $informacion[$numeroPagos-1]['id_oferta'];
                 array_splice($informacion, $numeroPagos - 1, 1);
+                $cliente = $request->id_cliente;
                 foreach($informacion as $pago){
                     if($cont < $numeroPagos-1){
                         $oferta = new oferta_actividades();
                         $oferta = oferta_actividades::all()->where('id', $pago['id_oferta'])->first();
-                        $nombreCliente = cliente::all()->where('id', $pago['id_cliente'])->first();
                         $informacion[$cont]['clase'] = $oferta->clase->nombre;
                         $informacion[$cont]['dia'] = $oferta->dia;
                         $informacion[$cont]['horaInicio'] =  $oferta->horaInicio;
                         $informacion[$cont]['horaFin'] = $oferta->horaFin;
                         $informacion[$cont]['costo'] = $oferta->costo;
                         $total = $total + $oferta->costo;
-                        $informacion[$cont]['cliente'] = $nombreCliente->nombre;
-                        $idCliente = $pago['id_cliente'];
-                        $nombreCliente = $nombreCliente->nombre;
                         $cont++;
                     }
                 }
             }
             $ultimoId = pagos_clases::all('id')->last();
-            $content = 'detallePagoClases.formPagosClases';
+            $content = 'pagoClases.formPagosClases';
             if($ultimoId == null){
                 $siguienteId = 1;
-                return view('dashboard',compact('siguienteId','content','informacion','idCliente','nombreCliente', 'total','errors','idOfertaErroneo', 'idClienteErroneo'));
+                return view('dashboard',compact('siguienteId','content','informacion','cliente','clienteNombre', 'total','errors','idOfertaErroneo','fecha'));
             }
             $siguienteId = (int)$ultimoId->id + 1;
 
-            return view('dashboard',compact('siguienteId','content','informacion','idCliente', 'nombreCliente', 'total','errors','idOfertaErroneo', 'idClienteErroneo'));
+            return view('dashboard',compact('siguienteId','content','informacion','cliente', 'clienteNombre', 'total','errors','idOfertaErroneo','fecha'));
         }
-
+        //Proceso a realizar cuando falla ninguna validacion y se va a agregar una oferta al grid
         $cont = 0;
-        $informacion = $request->pagos;
-        $idCliente = null;
-        $total = 0;
-        $nombreCliente = null;
         foreach($informacion as $pago){
-            if($cont < count($request->pagos)){
+            if($cont < $numeroPagos){
                 $oferta = new oferta_actividades();
                 $oferta = oferta_actividades::all()->where('id', $pago['id_oferta'])->first();
-                $nombreCliente = cliente::all()->where('id', $pago['id_cliente'])->first();
                 $informacion[$cont]['clase'] = $oferta->clase->nombre;
                 $informacion[$cont]['dia'] = $oferta->dia;
                 $informacion[$cont]['horaInicio'] =  $oferta->horaInicio;
                 $informacion[$cont]['horaFin'] = $oferta->horaFin;
                 $informacion[$cont]['costo'] = $oferta->costo;
                 $total = $total + $oferta->costo;
-                $informacion[$cont]['cliente'] = $nombreCliente->nombre;
-                $idCliente = $pago['id_cliente'];
-                $nombreCliente = $nombreCliente->nombre;
                 $cont++;
             }
         }
-        $ultimoId = pagos_clases::all('id')->last();
-        $content = 'detallePagoClases.formPagosClases';
         if($ultimoId == null){
             $siguienteId = 1;
-            return view('dashboard',compact('siguienteId','content','informacion','idCliente','nombreCliente', 'total'));
+            return view('dashboard',compact('siguienteId','content','informacion','cliente','clienteNombre', 'total','fecha'));
         }
         $siguienteId = (int)$ultimoId->id + 1;
 
-        return view('dashboard',compact('siguienteId','content','informacion','idCliente', 'nombreCliente', 'total'));
+        return view('dashboard',compact('siguienteId','content','informacion','cliente', 'clienteNombre', 'total', 'fecha'));
     }
 
     public function quitarPagoLista(Request $request, int $id){
@@ -216,25 +207,24 @@ class PagosClasesController extends Controller
         array_splice($informacion, $numeroPagos - 1, 1);
         array_splice($informacion, $id, 1);
         $ultimoId = pagos_clases::all('id')->last();
-        $content = 'detallePagoClases.formPagosClases';
+        $content = 'pagoClases.formPagosClases';
         $cont = 0;
         $total = 0;
-        $idCliente = null;
-        $nombreCliente = null;
+        $cliente = $request->id_cliente;
+        $clienteNombre = null;
+        $clienteNombre = cliente::all()->where('id', $cliente)->first();
+        $clienteNombre = $clienteNombre->nombre;
+        $fecha = date('d/m/Y');
         foreach($informacion as $pago){
             if($cont < count($request->pagos)){
                 $oferta = new oferta_actividades();
                 $oferta = oferta_actividades::all()->where('id', $pago['id_oferta'])->first();
-                $nombreCliente = cliente::all()->where('id', $pago['id_cliente'])->first();
                 $informacion[$cont]['clase'] = $oferta->clase->nombre;
                 $informacion[$cont]['dia'] = $oferta->dia;
                 $informacion[$cont]['horaInicio'] =  $oferta->horaInicio;
                 $informacion[$cont]['horaFin'] = $oferta->horaFin;
                 $informacion[$cont]['costo'] = $oferta->costo;
                 $total = $total + $oferta->costo;
-                $informacion[$cont]['cliente'] = $nombreCliente->nombre;
-                $idCliente = $pago['id_cliente'];
-                $nombreCliente = $nombreCliente->nombre;
                 $cont++;
             }
         }
@@ -243,10 +233,66 @@ class PagosClasesController extends Controller
         }
         if($ultimoId == null){
             $siguienteId = 1;
-            return view('dashboard',compact('siguienteId','content','informacion','idCliente','nombreCliente', 'total'));
+            return view('dashboard',compact('siguienteId','content','informacion','cliente','clienteNombre', 'total','fecha'));
         }
         $siguienteId = (int)$ultimoId->id + 1;
 
-        return view('dashboard',compact('siguienteId','content','informacion','idCliente', 'nombreCliente', 'total'));
+        return view('dashboard',compact('siguienteId','content','informacion','cliente', 'clienteNombre', 'total','fecha'));
+    }
+
+    public function searchCliente(Request $request){
+        $cliente = new cliente();
+        $cliente  = cliente::all()->where('id',$request->id_clienteBuscar)->first();
+        if($cliente == null){
+            $resultadoBusqueda = 'no';
+        }
+        else{
+            $resultadoBusqueda = $cliente->nombre;
+            $idCliente = $cliente->id;
+        }
+        $ultimoId = pagos_clases::all('id')->last();
+        $content = 'pagoClases.formPagosClases';
+        if($ultimoId == null){
+            $siguienteId = 1;
+            return view('dashboard',compact('siguienteId','content', 'total','resultadoBusqueda','idCliente'));
+        }
+        $siguienteId = (int)$ultimoId->id + 1;
+        return view('dashboard',compact('siguienteId','content','resultadoBusqueda','idCliente'));
+    }
+
+    public function searchPago(Request $request){
+        $pago = new pago();
+        $pago = pago::all()->where('id',$request->idPagoBuscar)->first();
+        $content = 'pagos.seePagosClases';
+        if($pago != null){
+            $id_pago = $pago->id;
+            $id_cliente = $pago->id_cliente;
+            $clienteNombre = $pago->cliente->nombre;
+            $id_empleado = $pago->id_empleado;
+            $empleadoNombre = $pago->empleado->nombre;
+            $fecha = $pago->fecha;
+            $total = $pago->total;
+            $detalles = new detalle_pagos_clases();
+            $detalles = detalle_pagos_clases::all()->where('id_pago_clase',$id_pago);
+            return view('dashboard',compact('id_pago', 'content', 'id_cliente','clienteNombre','id_empleado','empleadoNombre','detalles','fecha','total'));
+        }
+        else{
+            $errorIdPago = $request->idPagoBuscar;
+            return view('dashboard',compact('errorIdPago', 'content'));
+        }
+    }
+
+    public function mostrarForm(Request $request){
+        $cliente = $request->cliente;
+        $clienteNombre = $request->clienteNombre;
+        $ultimoId = pagos_clases::all('id')->last();
+        $content = 'pagoClases.formPagosClases';
+        $total = 0;
+        if($ultimoId == null){
+            $siguienteId = 1;
+            return view('dashboard',compact('siguienteId','content', 'total','cliente','clienteNombre'));
+        }
+        $siguienteId = (int)$ultimoId->id + 1;
+        return view('dashboard',compact('siguienteId','content', 'total','cliente','clienteNombre'));
     }
 }

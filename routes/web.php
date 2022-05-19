@@ -64,8 +64,8 @@ Route::get('/empleado/oferta_actividades/search', [oferta_actividadesController:
 Route::get('/empleado/oferta_actividades/maestro/search', [oferta_actividadesController::class, 'busquedaPatronMaestro'])->middleware('auth');
 Route::get('/empleado/oferta_actividades/dia/search', [oferta_actividadesController::class, 'busquedaPatronDia'])->middleware('auth');
 Route::get('/empleado/oferta_actividades/clase/search', [oferta_actividadesController::class, 'busquedaPatronClase'])->middleware('auth');
-Route::get('/empleado/oferta_actividades/{id}', [oferta_actividadesController::class, 'show'])->middleware('auth');
 Route::resource('/empleado/oferta_actividades', oferta_actividadesController::class)->middleware('auth')->except('show');
+Route::get('/empleado/oferta_actividades/{id}', [oferta_actividadesController::class, 'show'])->middleware('auth');
 Route::get('/ofertasJson', 'App\Http\Controllers\oferta_actividadesController@toJson')->middleware('auth');
 
 
@@ -88,9 +88,11 @@ Route::get('/empleado/detallePagoPrestamosEquipo/{id}',[HistorialPrestamosContro
 
 //Manejo pagos clases (empleado)
 Route::resource('/empleado/PagosClases',PagosClasesController::class)->except('destroy','update','edit','show')->middleware('auth');
+Route::post('/empleado/PagosClases/nuevo',[PagosClasesController::class,'mostrarForm'])->middleware('auth');
+Route::post('/empleado/PagosClases/searchPago',[PagosClasesController::class,'searchPago'])->middleware('auth');
+Route::post('/empleado/PagosClases/searchCliente',[PagosClasesController::class,'searchCliente'])->middleware('auth');
 Route::post('/empleado/PagosClases/validarDatos',[PagosClasesController::class,'validarDatos'])->middleware('auth');
 Route::post('/empleado/PagosClases/quitar/{id}',[PagosClasesController::class,'quitarPagoLista'])->middleware('auth');
-Route::get('/empleado/detallePagoClases/{id}',[DetallePagosClasesController::class,'index'])->middleware('auth');
 
 //Manejo empleados (empleado)
 Route::resource('/empleado',EmpleadoController::class)->middleware('auth');

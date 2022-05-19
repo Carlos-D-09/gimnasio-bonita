@@ -13,9 +13,10 @@ class buscarPagosprevios implements Rule
      *
      * @return void
      */
-    public function __construct()
+    public $id_cliente;
+    public function __construct($id_cliente)
     {
-        //
+        $this->id_cliente = $id_cliente;
     }
 
     /**
@@ -29,7 +30,7 @@ class buscarPagosprevios implements Rule
     {
         $datosValidar = last($value);
         $pago = new pagos_clases();
-        $pago = pagos_clases::all()->where('fecha',date('Y-m-d'))->where('id_cliente',$datosValidar['id_cliente'])->first();
+        $pago = pagos_clases::all()->where('fecha',date('Y-m-d'))->where('id_cliente',$this->id_cliente)->first();
         if($pago != null){
             $detallePago = new detalle_pagos_clases();
             $detallePago = detalle_pagos_clases::all()->where('id_pago_clase', $pago->id)->where('id_oferta',$datosValidar['id_oferta'])->first();

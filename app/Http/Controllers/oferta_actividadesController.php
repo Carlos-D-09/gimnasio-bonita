@@ -33,7 +33,7 @@ class oferta_actividadesController extends Controller
             $content = 'ofertaActividades.index';
             return view('dashboard', compact('ofertaActividades', 'content'));
         }
-        
+
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
         $content = 'ofertaActividades.index';
         return view('dashboard', compact('ofertaActividades', 'content'));
@@ -103,12 +103,12 @@ class oferta_actividadesController extends Controller
      */
     public function show($id)
     {
-        $ofertaActividad = oferta_actividades::find($id);
-        $agendaData = agenda::all()->where('id_oferta', $ofertaActividad->id);
+        // $ofertaActividad = oferta_actividades::find($id);
+        // $agendaData = agenda::all()->where('id_oferta', $ofertaActividad->id);
 
-        $content = 'ofertaActividades.showOferta';
+        // $content = 'ofertaActividades.showOferta';
 
-        return view('dashboard', compact('content', 'agendaData'));
+        // return view('dashboard', compact('content', 'agendaData'));
         //aplica solo para maestros
         /*
         $content = 'ofertaActividades.showOferta';
@@ -152,6 +152,7 @@ class oferta_actividadesController extends Controller
         $oferta->horaFin = $request->horaFin;
         $oferta->dia = $request->dia;
         $oferta->cupos = $request->cupos;
+        $oferta->costo = $request->costo;
         $oferta->id_empleado = $request->id_maestro;
         $oferta->save();
 

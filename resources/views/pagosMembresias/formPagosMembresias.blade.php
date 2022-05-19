@@ -26,75 +26,73 @@
             <div class="clearfix"></div>
             <div class="x_content">
                 <div class="form-group row">
-                    <table class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <th>
-                                <p style="text-align: center">Id del pago</p>
-                            </th>
-                            <th>
-                                <p style="text-align: center">Id de la membresia</p>
-                            </th>
-                            @isset($pago)
+                    @isset($idCliente)
+                        <table class="table table-striped table-bordered" style="width:50%">
+                            <thead>
                                 <th>
-                                    <p style="text-align: center">Nombre</p>
+                                    <p style="text-align: center">Id de la membresia</p>
                                 </th>
-                                @if($pago->id != 1)
+                                @isset($pago)
                                     <th>
-                                        <p style="text-align: center">Duracion</p>
+                                        <p style="text-align: center">Nombre</p>
                                     </th>
-                                    @else
+                                    @if($pago->id != 1)
+                                        <th>
+                                            <p style="text-align: center">Duracion</p>
+                                        </th>
+                                        @else
+                                        <th>
+                                            <p style="text-align: center">Introduce los días</p>
+                                        </th>
+                                        @endif
                                     <th>
-                                        <p style="text-align: center">Introduce los días</p>
-                                    </th>
-                                    @endif
-                                <th>
-                                    <p style="text-align: center">Costo</p>
-                                </th>
-                            @endisset
-                            <th>
-                                <p style="text-align: center">Id del cliente</p>
-                            </th>
-                            @isset($pago)
-                                <th>
-                                    <p style="text-align: center">Nombre del cliente</p>
-                                </th>
-                                @isset($pago->dias)
-                                    <th>
-                                        <p style="text-align: center">Quitar</p>
-                                    </th>
-                                @else
-                                    <th>
-                                        <p style="text-align: center">Confirmar días</p>
+                                        <p style="text-align: center">Costo</p>
                                     </th>
                                 @endisset
-                            @else
                                 <th>
-                                    <p style="text-align: center">Validar datos</p>
+                                    <p style="text-align: center">Id del cliente</p>
                                 </th>
-                            @endif
-                        </thead>
-                        <tbody>
-                            @isset($pago)
-                            @else
-                                <tr style="text-align:center">
-                                    <td>
-                                        {{$siguienteId}}
-                                    </td>
-                                    <td>
-                                        <input type="text" name="pago[id_membresia]" class="form-control" placeholder="Id oferta" value= "" required>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="pagos[id_cliente]" class="form-control" placeholder="Id cliente" value="" required>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-success" type="submit" formaction="/empleado/PagosMembresias/validarDatos">
-                                            Validar
-                                        </button>
-                                    </td>
-                                </tr>
-                            @endisset
-                        </tbody>
-                    </table>
+                                @isset($pago)
+                                    <th>
+                                        <p style="text-align: center">Nombre del cliente</p>
+                                    </th>
+                                    @isset($pago->dias)
+                                        <th>
+                                            <p style="text-align: center">Quitar</p>
+                                        </th>
+                                    @else
+                                        <th>
+                                            <p style="text-align: center">Confirmar días</p>
+                                        </th>
+                                    @endisset
+                                @else
+                                    <th>
+                                        <p style="text-align: center">Validar datos</p>
+                                    </th>
+                                @endif
+                            </thead>
+                            <tbody>
+                                @isset($pago)
+                                @else
+                                    <tr style="text-align:center">
+                                        <td>
+                                            <input type="text" name="pago[id_membresia]" class="form-control" placeholder="Id oferta" value= "" required>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="pagos[id_cliente]" class="form-control" placeholder="Id cliente" value="" required>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success" type="submit" formaction="/empleado/PagosMembresias/validarDatos">
+                                                Validar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endisset
+                            </tbody>
+                        </table>
+                    @else
+
+                    @endisset
                 </div>
                 @isset($errors)
                     @for ( $x=0; $x < count($errors); $x++)
