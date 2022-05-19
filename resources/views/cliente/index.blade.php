@@ -24,13 +24,25 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-            <div class="col-md-12 col-sm-12 ">
+            <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
                             @if(isset($idBuscado))
                                 <h2>Resultados de la busqueda para el id: {{$idBuscado}}</h2>
                             @else
                                 <h2>Listado de clientes</h2>
+                            @endif
+
+                            @if(session()->has('success'))
+                            <div class="alert alert-success text-center" style="text-align: center;">
+                                {{ session()->get('success') }}
+                            </div>
+                            @endif
+
+                            @if(session()->has('deleted'))
+                            <div class="alert alert-danger" role="alert" style="text-align: center;">
+                                {{ session()->get('deleted') }}
+                            </div>
                             @endif
                             <div class="clearfix"></div>
                     </div>
@@ -100,13 +112,8 @@
                                                         </tr>
                                                         <tr>
                                                             <form action="/empleado/cliente/{{$cliente->id}}" method="POST">
+                                                                @csrf
                                                                 <button type="submit"class="btn btn-round btn-danger btn-sm">Eliminar</button>
-                                                            </form>
-                                                        </tr>
-                                                        @else
-                                                        <tr>
-                                                            <form action="" method="">
-                                                                <button type="submit"class="btn btn-round btn-succes btn-sm">Registrarse</button>
                                                             </form>
                                                         </tr>
                                                         @endif

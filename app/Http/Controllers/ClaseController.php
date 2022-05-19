@@ -57,6 +57,7 @@ class ClaseController extends Controller
         $request->validate([
             'nombre' => ['required', 'min:3', new validarNombreClase],
             'descripcion' => 'required',
+            'imagen' => 'required'
         ]);
 
         //Verificar que la imagen de la clase venga en el form
@@ -74,10 +75,9 @@ class ClaseController extends Controller
             $clase->descripcion = $request->descripcion;
             $clase->status = "activo";
             $clase->save();
-            $clases = DB::table('clases')->select()->where('status','activo')->get();
-            $content = 'clases.index';
-            return view('dashboard', compact('clases', 'content'));
+            return redirect('/empleado')->with('success', 'Se ha registrado la clase de forma exitosa');
         }
+        return redirect('/empleado');
     }
 
     /**
@@ -136,7 +136,7 @@ class ClaseController extends Controller
         $clase->updated_at = now();
         $clase->save();
         //Regresar a la vista de clases
-        return redirect('/empleado');
+        return redirect('/empleado/clase')->with('edited', 'Se ha modificado la informacion de la clase con el id: ' . $clase->id);
 
     }
 
@@ -152,6 +152,6 @@ class ClaseController extends Controller
         $clase->status = 'inactivo';
         $clase->save();
         DB::update('UPDATE oferta_actividades SET status = "inactivo" where id_clase = ?',[$clase->id]);
-        return redirect('/empleado');
+        return redirect('/empleado/clase')->with('deleted', 'Se ha desactivado la clase con el id: ' . $clase->id);
     }
 }

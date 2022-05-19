@@ -1,16 +1,16 @@
 <div class="right_col" role="main">
     <div class="">
-        <form action="/empleado/cliente/{{$cliente->id}}/edit/password" class="form-vertical form-label-left" id="formEditPass" method="POST">
+        <form action="/cliente/{{ Auth::user()->id }}/edit/password" class="form-vertical form-label-left" id="formEditPass" method="POST">
             @csrf
             @method('PATCH')
             <div class="page-title">
                 <div class="title_left">
-                    <h3> Restauracion de la contraseña de perfil de cliente</h3>
+                    <h3>Edicion de contraseña</h3>
                 </div>
                 <div class="title_right" >
                     <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                         <div class="btn btn-primary btn-danger">
-                            <a href="/empleado/cliente/{{$cliente->id}}/edit" style="color: white">
+                            <a href="/cliente/" style="color: white">
                                 <i class="fa-solid fa-circle-xmark"></i>
                                 Cancelar
                             </a>

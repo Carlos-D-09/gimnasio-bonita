@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="pagos">
-                    <form action="/searchPago" method="GET">
+                    <form action="" method="GET">
                         <div class="form-group pull-right top_search" >
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Buscar por id" name="search">

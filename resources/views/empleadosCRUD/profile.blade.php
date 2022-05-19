@@ -7,10 +7,17 @@
             <div class="title_right" >
                 <div class="col-md-4 col-sm-4   form-group pull-right top_search">
                     <div class="btn btn-primary btn-info">
+                    @if(isset(Auth::user()->id_tipoUsuario) and Auth::user()->id_tipoUsuario == 1)
                         <a href="/empleadoCRUD" style="color: white">
                             <i class="fa-solid fa-arrow-left"></i>
                             Volver
                         </a>
+                    @else
+                        <a href="/empleado/clase" style="color: white">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            Volver
+                        </a>
+                    @endif
                     </div>
                     <div class="btn btn-primary btn-warning">
                         <a href="/empleadoCRUD/{{ $empleado->id }}/edit" style="color: white">
@@ -26,6 +33,11 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
+                        @if(session()->has('edited'))
+                        <div class="alert alert-warning text-center" style="text-align: center;">
+                            {{ session()->get('edited') }}
+                        </div>
+                        @endif
                         <h2>Datos personales</h2>
                         <div class="clearfix"></div>
                     </div>

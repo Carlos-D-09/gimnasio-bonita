@@ -23,6 +23,12 @@
 				</div>
 				<form action="/empleado/equipos/{{$equipo->id}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <style>
+                        .danger {
+                            color: red;
+                            font-size: 13px;
+                        }
+                    </style>
                     @method('PATCH')
 					<h3>Editar equipo</h3>
                     <p>ID del del equipo: {{$equipo->id}}</p>
@@ -30,25 +36,25 @@
                     <label for="nombre" style="display: inline">Nombre: </label>
                     <input type="text" name="nombre" style="display: inline" class="form-control" placeholder="Nombre" value = "{{$equipo->nombre}}">
                     @error('nombre')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <div class="danger">*{{ $message }}</div>
                     @enderror
                     <br><br>
                     <label for="unidades">Unidades:</label>
                     <input type="text" name="unidades" class="form-control" placeholder="Unidades disponibles" value = "{{$equipo->unidades}}" style="display: inline">
                     @error('unidades')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <div class="danger">*{{ $message }}</div>
                     @enderror
                     <br><br>
                     <label for="costo">Costo: $</label>
                     <input type="text" name="costo" class="form-control" placeholder="Costo x dia" value = "{{$equipo->cost_x_renta}}" style="display: inline">
                     @error('costo')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="danger">*{{ $message }}</div>
                     @enderror
                     <br><br>
                     <label for="descripcion">Descripcion: </label><br> <br>
 					<textarea name="descripcion" placeholder="Descripcion" class="form-control" style="height: 130px;">{{$equipo->descripcion}}</textarea>
                     @error('descripcion')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <div class="danger">*{{ $message }}</div>
                     @enderror
                     <div class="form-row">
                         <button type="submit">

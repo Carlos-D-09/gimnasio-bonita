@@ -43,7 +43,7 @@
                 <img src="{{asset(Auth::user()->imagen)}}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
+                <span>Bienvenido,</span>
                 <h2>{{Auth::user()->nombre}}</h2>
               </div>
               <div class="clearfix"></div>
@@ -72,16 +72,16 @@
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                         @if (isset(Auth::user()->id_tipoUsuario))
-                            <a class="dropdown-item"  href="/empleadoCRUD/{{Auth::user()->id}}"> Profile</a>
+                            <a class="dropdown-item"  href="/empleadoCRUD/{{Auth::user()->id}}"> Perfil</a>
                         @else
-                            <a class="dropdown-item"  href="/cliente/{{Auth::user()->id}}"> Profile</a>
+                            <a class="dropdown-item"  href="/cliente/{{Auth::user()->id}}"> Perfil</a>
                         @endif
                         <div class = "dropdown-item"> <i class = "fa fa-sign-out pull-right"></i>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault();
                                 this.closest('form').submit();" role="button">
-                                Log Out
+                                Cerrar sesion
                             </a>
                         </form>
                       </div>

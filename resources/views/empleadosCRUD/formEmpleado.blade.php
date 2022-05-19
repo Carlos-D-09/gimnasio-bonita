@@ -133,10 +133,14 @@
             <br>
             @enderror
           </div>
-          @isset($empleado)
           <div class="input-box" style="width: 100%;">
-            <span class="details" align="center">Fecha de registro de empleado detectado por el sistema</span>
-            <input type="text" name="fecha_ingreso" value="{{ isset($empleado) ? $empleado->fecha_ingreso : '' }}" readonly>
+            <span class="details" align="center">Escribe de nuevo la contraseña del empleado</span>
+            <input type="password" name="password_confirmation" placeholder="Introduce su contraseña" value="{{ isset($empleado) ? $empleado->password : '' }}{{ old('password') }}" required>
+            @error('password_confirmation')
+            <br>
+            <small class="danger">*{{ $message }}</small>
+            <br>
+            @enderror
           </div>
         </div>
         <div class="cargo-details">
@@ -164,14 +168,6 @@
             @enderror
           </div>
         </div>
-        
-        <!--@if($errors->any())
-        <ul>
-          @foreach($errors->all() as $error)
-            <li class="danger">{{ $error }}</li>
-          @endforeach
-        </ul>
-        @endif -->
         <div class="button">
           <input type="submit" value="Completar">
         </div>
@@ -181,6 +177,5 @@
       </form>
     </div>
   </div>
-
 </body>
 </html>

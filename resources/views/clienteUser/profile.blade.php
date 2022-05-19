@@ -6,12 +6,14 @@
             </div>
             <div class="title_right" >
                 <div class="col-md-2 col-sm-2   form-group pull-right top_search">
-                    <div class="btn btn-primary btn-warning">
-                        <a href="" style="color: white">
-                            <i class="fa fa-edit m-right-xs"></i>
-                            Editar
-                        </a>
-                    </div>
+                        @isset(Auth::user()->id)
+                            <div class="btn btn-primary btn-warning">
+                                <a href="/cliente/{{ Auth::user()->id }}/edit" style="color: white">
+                                    <i class="fa fa-edit m-right-xs"></i>
+                                    Editar
+                                </a>
+                            </div>
+                        @endisset
                 </div>
             </div>
         </div>
@@ -20,6 +22,11 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
+                        @if(session()->has('edited'))
+                        <div class="alert alert-warning text-center" style="text-align: center;">
+                            {{ session()->get('edited') }}
+                        </div>
+                        @endif
                         <h2>Datos personales</h2>
                         <div class="clearfix"></div>
                     </div>

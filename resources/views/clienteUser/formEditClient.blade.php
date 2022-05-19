@@ -1,16 +1,16 @@
 <div class="right_col" role="main">
     <div class="">
-        <form id="formEdit" action="/empleado/cliente/{{$cliente->id}}" class="form-vertical form-label-left" method="POST" enctype="multipart/form-data">
+        <form id="formEdit" action="/cliente/{{ Auth::user()->id }}/edit" class="form-vertical form-label-left" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="page-title">
                 <div class="title_left">
-                    <h3> Edicion del perfil de cliente</h3>
+                    <h3> Edicion de tu informacion</h3>
                 </div>
                 <div class="title_right" >
                     <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                         <div class="btn btn-primary btn-danger">
-                            <a href="/empleado/cliente/{{$cliente->id}}" style="color: white">
+                            <a href="/cliente" style="color: white">
                                 <i class="fa-solid fa-circle-xmark"></i>
                                 Cancelar
                             </a>
@@ -40,7 +40,7 @@
                                 </div>
                                 <br>
                                 <div class="btn btn-primary btn-infor">
-                                    <a href="/empleado/cliente/{{$cliente->id}}/edit/password" style="color: white">
+                                    <a href="/cliente/{{ Auth::user()->id }}/edit/password" style="color: white">
                                         <i class="fa fa-edit m-right-xs"></i>
                                         Cambiar password
                                     </a>
@@ -153,4 +153,3 @@
         </form>
     </div>
 </div>
-

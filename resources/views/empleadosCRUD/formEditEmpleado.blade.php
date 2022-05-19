@@ -212,6 +212,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        @if(isset(Auth::user()->id_tipoUsuario) and Auth::user()->id_tipoUsuario == 1)
                                         <div class="form-group row ">
                                             <div class="cargo-details" style="display: inline">
                                                 <input type="radio" name="id_tipoUsuario" id="dot-1" value=1 {{($empleado->id_tipoUsuario == 1 ? ' checked' : '')}}>
@@ -240,6 +241,7 @@
                                                 @enderror
                                               </div>
                                         </div>
+                                        @endif
                                         <style>
                                             form .cargo-details .cargo-title{
                                                 font-size: 20px;
