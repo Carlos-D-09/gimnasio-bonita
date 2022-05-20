@@ -133,7 +133,7 @@
                     <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Clases<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="/cliente/clases">Clases</a></li>
-                        <li><a href="/cliente/oferta_actividades">Consultar oferta de actividades (proximamente)</a></li>
+                        <li><a href="/cliente/oferta_actividades">Consultar oferta de actividades</a></li>
                         {{-- <li><a href="">Registrarme a clases (proximamente)</a></li> --}}
                         <li><a href="/cliente/clases/misClases">Ver mis clases</a></li>
                     </ul>

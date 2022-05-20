@@ -74,7 +74,7 @@ class PagosController extends Controller
         $pago->updated_at = now();
         $pago->save();
 
-        return redirect('/empleado/pagosMembresias');
+        return redirect('/empleado/pagosMembresias')->with('success','Registro del pago de una membresia realizado correctamente');
     }
 
     /**
@@ -207,18 +207,21 @@ class PagosController extends Controller
     }
 
     public function quitarPagoMembresia(Request $request){
-        $cliente = $request->cliente;
-        $clienteNombre = $request->clienteNombre;
+        $cliente = $request->id_cliente;
+        $total = 0;
+        $clienteNombre = cliente::all()->where('id',$cliente)->first();
+        $clienteNombre = $clienteNombre->nombre;
         $ultimoId = pago::all('id')->last();
         $content = 'pagosMembresias.formPagosMembresias';
-        $total = 0;
         $fecha = date('d/m/Y');
+        $total = 0;
         if($ultimoId == null){
             $siguienteId = 1;
-            return view('dashboard',compact('siguienteId','content', 'total','cliente','clienteNombre','fecha'));
         }
-        $siguienteId = (int)$ultimoId->id + 1;
-        return view('dashboard',compact('siguienteId','content', 'total','cliente','clienteNombre','fecha'));
+        else{
+            $siguienteId = (int)$ultimoId->id + 1;
+        }
+        return view('dashboard',compact('siguienteId','content','cliente','clienteNombre','fecha', 'total'));
     }
 
     public function searchPago(Request $request){

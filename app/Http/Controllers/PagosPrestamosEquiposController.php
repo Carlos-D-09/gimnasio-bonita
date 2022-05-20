@@ -76,7 +76,7 @@ class PagosPrestamosEquiposController extends Controller
             $detallePago->devuelto = 0;
             $detallePago->save();
         }
-        return redirect('/empleado/PrestamosPagosEquipos');
+        return redirect('/empleado/PrestamosPagosEquipos')->with('success','Se registro el pago del prestamo correctamente');
     }
 
     /**

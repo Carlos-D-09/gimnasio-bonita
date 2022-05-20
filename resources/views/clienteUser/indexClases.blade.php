@@ -33,6 +33,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
+                                    @isset($misClases)
                                         <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
@@ -50,9 +51,6 @@
                                                     </th>
                                                     <th>
                                                         <p style="text-align: center">Día</p>
-                                                    </th>
-                                                    <th>
-                                                        <p style="text-align: center">Cupos</p>
                                                     </th>
                                                     <th>
                                                         <p style="text-align: center">Maestro</p>
@@ -84,6 +82,9 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
+                                    @else
+                                        <p style="font-size:30px;color:rgb(41, 165, 41)">No cuentas con ninguna actividad programada</p>
+                                    @endisset
                                 </div>
                             </div>
                         </div>

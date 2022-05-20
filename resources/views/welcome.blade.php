@@ -170,7 +170,7 @@
                         <p class="mt-25">
                             Hemos estado establecidos en el mercado durante 5 años en los cuales hemos aprendido de escuchar a nuestros clientes para mejorar
                             nuestro servicio y atención hacia ellos. <br><br>
-                            Deseamos que tu experiencia en el gym sea lo más comoda posible para que de esa forma te sientasmotivad@ a regresar. <br><br>
+                            Deseamos que tu experiencia en el gym sea lo más comoda posible para que de esa forma te sientas motivad@ a regresar. <br><br>
                             Si el gimnasio clasico no es lo tuyo, tenemos clases especializadas que te permitiran exprimir todo tu potencial.
                         </p>
                     </div> <!-- about content -->
@@ -245,7 +245,7 @@
                         </div>
                     </div> <!-- single services -->
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
+                {{-- <div class="col-lg-4 col-md-6 col-sm-8">
                     <div class="single-services text-center mt-30 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.8s">
                         <div class="services-icon">
                             <i class="fa-solid fa-book fa-2x1"></i>
@@ -257,7 +257,7 @@
                             </p>
                         </div>
                     </div> <!-- single services -->
-                </div>
+                </div> --}}
             </div> <!-- row -->
         </div> <!-- container -->
     </section>

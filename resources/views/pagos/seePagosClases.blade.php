@@ -66,6 +66,17 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+                        @if(session()->has('success'))
+                            <div class="alert alert-success text-center" style="text-align: center;">
+                                {{ session()->get('success') }}
+                            </div>
+                        @endif
+
+                        @if(session()->has('deleted'))
+                            <div class="alert alert-danger" role="alert" style="text-align: center;">
+                                {{ session()->get('deleted') }}
+                            </div>
+                        @endif
                         <div class="form-group row">
                             @isset($id_pago)
                                 <div class="col-sm-12">

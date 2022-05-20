@@ -20,6 +20,17 @@
                         </div>
                     </form>
                     <div class="clases-body">
+                        @if(session()->has('success'))
+                            <div class="alert alert-success text-center" style="text-align: center;">
+                                {{ session()->get('success') }}
+                            </div>
+                        @endif
+
+                        @if(session()->has('deleted'))
+                            <div class="alert alert-danger" role="alert" style="text-align: center;">
+                                {{ session()->get('deleted') }}
+                            </div>
+                        @endif
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr style="text-align:center">

@@ -76,7 +76,7 @@ class PagosClasesController extends Controller
             $detallePago->costo = $oferta->costo;
             $detallePago->save();
         }
-        return redirect('/empleado/PagosClases');
+        return redirect('/empleado/PagosClases')->with('success','Se ha registrado el pago de la clase correactamente');
     }
 
     /**
@@ -211,7 +211,6 @@ class PagosClasesController extends Controller
         $cont = 0;
         $total = 0;
         $cliente = $request->id_cliente;
-        $clienteNombre = null;
         $clienteNombre = cliente::all()->where('id', $cliente)->first();
         $clienteNombre = $clienteNombre->nombre;
         $fecha = date('d/m/Y');
