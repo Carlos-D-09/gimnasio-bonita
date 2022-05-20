@@ -42,7 +42,7 @@ class validarCantidadPrestamo implements Rule
             foreach($equiposUsando as $equipoUsado){
                 $unidades_usadas = $unidades_usadas + $equipoUsado->cantidad;
             }
-            if($unidadesTotales-$unidades_usadas-$value[0]['cantidad'] < 0){
+            if($unidadesTotales-$unidades_usadas-$value[count($value)-1]['cantidad'] < 0){
                 return false;
             }
             return true;

@@ -60,7 +60,7 @@
                                     <a class="dropdown-item" href="/empleado/oferta_actividades">Todos</a>
                                     <a class="dropdown-item" href="/empleado/oferta_actividades/dia">Dia L-S</a>
                                     <a class="dropdown-item" href="/empleado/oferta_actividades/clase">Clase A-Z</a>
-                                    
+
                                     @isset(Auth::user()->id_tipoUsuario)
                                         @if (Auth::user()->id_tipoUsuario != 3)
                                             <!--<a class="dropdown-item" href="/empleado/oferta_actividades/clase">Mis clases</a> -->
@@ -111,6 +111,9 @@
                                                     <p style="text-align: center">Cupos</p>
                                                 </th>
                                                 <th>
+                                                    <p style="text-align: center">Cupos disponibles</p>
+                                                </th>
+                                                <th>
                                                     <p style="text-align: center">Costo</p>
                                                 </th>
                                                 <th>
@@ -143,6 +146,9 @@
                                                     {{$ofertaActividad->cupos}}
                                                 </td>
                                                 <td align="center">
+                                                    {{$ofertaActividad->cuposDisponibles}}
+                                                </td>
+                                                <td align="center">
                                                     {{'$'.$ofertaActividad->costo}}
                                                 </td>
                                                 <td align="center">
@@ -163,9 +169,9 @@
                                                                 <button type="submit"class="btn btn-round btn-danger btn-sm">Eliminar</button>
                                                             </form>
                                                         </tr>
-                                                        @else
+                                                    @else
                                                         <tr>
-                                                            <form action="/empleado/oferta_actividades/{{$ofertaActividad->id}}" method="GET">
+                                                            <form action="/empleado/oferta_actividades/detalle/{{$ofertaActividad->id}}" method="GET">
                                                                 <button type="submit"class="btn btn-success">Ver detalles</button>
                                                             </form>
                                                         </tr>

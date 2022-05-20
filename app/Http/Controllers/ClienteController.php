@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\clase;
 use App\Models\cliente;
-use App\Rules\validaFechaNacimientoCliente;
-use App\Rules\validarDisponibilidadCorreo;
 use App\Rules\validarDisponibilidadCorreoEdit;
 use App\Rules\validarPasswordCliente;
-use DateTime;
-use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +34,7 @@ class ClienteController extends Controller
 
     public function updateClient(Request $request, cliente $cliente)
     {
-        $cliente = cliente::all()->find(Auth::user()->id);   
+        $cliente = cliente::all()->find(Auth::user()->id);
         $rules =[
             'nombre' => ['required','min:3','max:150','regex:/^[a-zA-Z ]*$/'],
             'telefono' => ['numeric','min:1000000000','max:9999999999'],

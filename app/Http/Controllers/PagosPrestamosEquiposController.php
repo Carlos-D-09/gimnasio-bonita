@@ -6,11 +6,13 @@ use App\Models\cliente;
 use App\Models\equipos;
 use App\Models\historial_prestamos;
 use App\Models\pagos_prestamos_equipos;
+use App\Rules\validarCantidadMinimaPrestamo;
 use App\Rules\validarCantidadPrestamo;
 use App\Rules\validarClientePrestamoEquipo;
 use App\Rules\validarEquipoPrestamo;
 use App\Rules\validarFilledCantidad;
 use App\Rules\validarFilledIdEquipo;
+use App\Rules\validarUnicidadEquipo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -124,7 +126,7 @@ class PagosPrestamosEquiposController extends Controller
 
     public function validarDatos(Request $request){
         $validator = Validator::make($request->all(), [
-            'pagos' => ['bail', new validarClientePrestamoEquipo, new validarEquipoPrestamo, new validarFilledCantidad, new validarCantidadPrestamo]
+            'pagos' => ['bail', new validarUnicidadEquipo, new validarClientePrestamoEquipo, new validarEquipoPrestamo, new validarFilledCantidad, new validarCantidadPrestamo, new validarCantidadMinimaPrestamo]
         ]);
         if($validator->fails()){
             $errors = $validator->errors()->messages();
@@ -142,7 +144,7 @@ class PagosPrestamosEquiposController extends Controller
                 $idEquipoErroneo = $informacion[0]['id_equipo'];
                 $idClienteErroneo = $informacion[0]['id_cliente'];
                 $cantidadErronea = $informacion[0]['cantidad'];
-                $informacion = null;
+                // $informacion = null;
             }
             else{
 
@@ -155,7 +157,7 @@ class PagosPrestamosEquiposController extends Controller
                         $nombreCliente = cliente::all()->where('id', $pago['id_cliente'])->first();
                         $informacion[$cont]['id_equipo'] = $equipo->id;
                         $informacion[$cont]['equipo'] = $equipo->nombre;
-                        $informacion[$cont]['precio_x_unidad'] = $equipo->costo_x_renta;
+                        $informacion[$cont]['precio_x_unidad'] = $equipo->cost_x_renta;
                         $informacion[$cont]['precio_x_prestamo'] = $informacion[$cont]['precio_x_unidad'] * $pago['cantidad'];
                         $tota = $total + $informacion[$cont]['precio_x_prestamo'];
                         $informacion[$cont]['cliente'] = $nombreCliente->nombre;

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\clase;
+use App\Models\cliente;
+use App\Models\detalle_pagos_clases;
 use App\Models\empleado;
 use App\Models\oferta_actividades;
+use App\Models\pagos_clases;
 use App\Rules\validaDisponibilidadEspacioEdit;
 use App\Rules\validarCuposMinimos;
 use App\Rules\validarDisponibilidadEspacio;
@@ -26,14 +29,36 @@ class oferta_actividadesController extends Controller
     public function index()
     {
         $empleado = Auth::user();
+
         $idTipoUsuario = $empleado->id_tipoUsuario;
         if($idTipoUsuario == 3){
             $ofertaActividades = oferta_actividades::all()->where('id_empleado', $empleado->id)->where('status', 'activo');
+            foreach($ofertaActividades as $oferta){
+                $cuposUsados = 0;
+                $pagos = pagos_clases::all()->where('fecha',date('Y-m-d'));
+                foreach($pagos as $pago){
+                    $detallePago = detalle_pagos_clases::all()->where('id_oferta',$oferta->id)->first();
+                    if($detallePago != null){
+                        $cuposUsados++;
+                    }
+                }
+                $oferta->cuposDisponibles = $oferta->cupos - $cuposUsados;
+            }
             $content = 'ofertaActividades.index';
             return view('dashboard', compact('ofertaActividades', 'content'));
         }
-
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
+        foreach($ofertaActividades as $oferta){
+            $cuposUsados = 0;
+            $pagos = pagos_clases::all()->where('fecha',date('Y-m-d'));
+            foreach($pagos as $pago){
+                $detallePago = detalle_pagos_clases::all()->where('id_oferta',$oferta->id)->first();
+                if($detallePago != null){
+                    $cuposUsados++;
+                }
+            }
+            $oferta->cuposDisponibles = $oferta->cupos - $cuposUsados;
+        }
         $content = 'ofertaActividades.index';
         return view('dashboard', compact('ofertaActividades', 'content'));
     }
@@ -99,24 +124,22 @@ class oferta_actividadesController extends Controller
      * @param  \App\Models\oferta_actividades  $oferta_actividades
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        $empleado = Auth::user();
-        $idTipoUsuario = $empleado->id_tipoUsuario;
-        if($idTipoUsuario == 3){
-            $ofertaActividad = oferta_actividades::find($id);
-            $agendaData = agenda::all()->where('id_oferta', $ofertaActividad->id);
-
-            $content = 'ofertaActividades.showOferta';
-
-            return view('dashboard', compact('content', 'agendaData'));
+        $alumnos = null;
+        $cont = 0;
+        $pagos = pagos_clases::all()->where('fecha',date('Y-m-d'));
+        foreach($pagos as $pago){
+            $detallePago = detalle_pagos_clases::all()->where('id_oferta',$id)->where('id_pago_clase',$pago->id)->first();
+            if($detallePago != null){
+                $cliente = cliente::all()->where('id',$pago->id_cliente)->first();
+                $alumnos[$cont]['id_cliente'] = $cliente->id;
+                $alumnos[$cont]['nombreAlumno'] = $cliente->nombre;
+                $cont++;
+            }
         }
-        
-        return $this->create();
-        //aplica solo para maestros
-        /*
-        $content = 'ofertaActividades.showOferta';
-        return view('dashboard', compact('ofertaActividad','content'));*/
+        $content = 'ofertaActividades.detalleOferta';
+        return view('dashboard', compact('content','alumnos'));
     }
 
     /**
@@ -193,10 +216,6 @@ class oferta_actividadesController extends Controller
 
     }
 
-    public function showResult($ofertaActividades, $empleado, $content, $dia){
-        return view('dashboard', compact('ofertaActividades', 'content'));
-    }
-
     public function orderByClase(){
         $empleado = Auth::user();
         $idTipoUsuario = $empleado->id_tipoUsuario;
@@ -204,6 +223,17 @@ class oferta_actividadesController extends Controller
         if($idTipoUsuario == 3){
             $ofertaActividades = oferta_actividades::all()->where('id_empleado', $empleado->id)->where('status', 'activo');
             $ofertaActividades = oferta_actividadesController::burbujaClase($ofertaActividades);
+            foreach($ofertaActividades as $oferta){
+                $cuposUsados = 0;
+                $pagos = pagos_clases::all()->where('fecha',date('Y-m-d'));
+                foreach($pagos as $pago){
+                    $detallePago = detalle_pagos_clases::all()->where('id_oferta',$oferta->id)->first();
+                    if($detallePago != null){
+                        $cuposUsados++;
+                    }
+                }
+                $oferta->cuposDisponibles = $oferta->cupos - $cuposUsados;
+            }
             $content = 'ofertaActividades.index';
             $clase = true;
             return view('dashboard', compact('ofertaActividades', 'content', 'clase'));
@@ -212,6 +242,17 @@ class oferta_actividadesController extends Controller
         $empleado = session('empleado');
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
         $ofertaActividades = oferta_actividadesController::burbujaClase($ofertaActividades);
+        foreach($ofertaActividades as $oferta){
+            $cuposUsados = 0;
+            $pagos = pagos_clases::all()->where('fecha',date('Y-m-d'));
+            foreach($pagos as $pago){
+                $detallePago = detalle_pagos_clases::all()->where('id_oferta',$oferta->id)->first();
+                if($detallePago != null){
+                    $cuposUsados++;
+                }
+            }
+            $oferta->cuposDisponibles = $oferta->cupos - $cuposUsados;
+        }
         $content = 'ofertaActividades.index';
         $clase = true;
         return view('dashboard', compact('ofertaActividades', 'content', 'clase'));
@@ -224,6 +265,17 @@ class oferta_actividadesController extends Controller
         if($idTipoUsuario == 3){
             $ofertaActividades = oferta_actividades::all()->where('id_empleado', $empleado->id)->where('status', 'activo');
             $ofertaActividades = oferta_actividadesController::burbujaDia($ofertaActividades);
+            foreach($ofertaActividades as $oferta){
+                $cuposUsados = 0;
+                $pagos = pagos_clases::all()->where('fecha',date('Y-m-d'));
+                foreach($pagos as $pago){
+                    $detallePago = detalle_pagos_clases::all()->where('id_oferta',$oferta->id)->first();
+                    if($detallePago != null){
+                        $cuposUsados++;
+                    }
+                }
+                $oferta->cuposDisponibles = $oferta->cupos - $cuposUsados;
+            }
             $content = 'ofertaActividades.index';
             $dia = true;
             return view('dashboard', compact('ofertaActividades', 'content', 'dia'));
@@ -232,6 +284,17 @@ class oferta_actividadesController extends Controller
         $empleado = session('empleado');
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
         $ofertaActividades = oferta_actividadesController::burbujaDia($ofertaActividades);
+        foreach($ofertaActividades as $oferta){
+            $cuposUsados = 0;
+            $pagos = pagos_clases::all()->where('fecha',date('Y-m-d'));
+            foreach($pagos as $pago){
+                $detallePago = detalle_pagos_clases::all()->where('id_oferta',$oferta->id)->first();
+                if($detallePago != null){
+                    $cuposUsados++;
+                }
+            }
+            $oferta->cuposDisponibles = $oferta->cupos - $cuposUsados;
+        }
         $content = 'ofertaActividades.index';
         $dia = true;
         return view('dashboard', compact('ofertaActividades','content', 'dia'));
@@ -241,6 +304,17 @@ class oferta_actividadesController extends Controller
         $empleado = session('empleado');
         $ofertaActividades = oferta_actividades::all()->where('status','activo');
         $ofertaActividades = oferta_actividadesController::burbujaMaestro($ofertaActividades);
+        foreach($ofertaActividades as $oferta){
+            $cuposUsados = 0;
+            $pagos = pagos_clases::all()->where('fecha',date('Y-m-d'));
+            foreach($pagos as $pago){
+                $detallePago = detalle_pagos_clases::all()->where('id_oferta',$oferta->id)->first();
+                if($detallePago != null){
+                    $cuposUsados++;
+                }
+            }
+            $oferta->cuposDisponibles = $oferta->cupos - $cuposUsados;
+        }
         $content = 'ofertaActividades.index';
         $maestro = true;
         return view('dashboard', compact('ofertaActividades','content', 'maestro'));

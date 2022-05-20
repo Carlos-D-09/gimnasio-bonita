@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\clase;
+use App\Models\detalle_pagos_clases;
+use App\Models\oferta_actividades;
+use App\Models\pagos_clases;
 use App\Rules\validarNombreClase;
 use App\Rules\validarNombreClaseEdit;
 use Illuminate\Http\Request;
@@ -88,12 +91,24 @@ class ClaseController extends Controller
      */
     public function show(Clase $clase)
     {
-        // $clases = clase::with('empleados')->get();foreach($clases as $clase){
-        //     foreach($clase->empleados as $empleado){
-        //         dd($empleado->nombre);
-        //     }
-        // }
         return view('clases.showClase', compact('clase'));
+    }
+
+    public function showClasesClientes()
+    {
+        $cliente = Auth::user()->id;
+        $misClases = null;
+        $cont = 0;
+        $pagos = pagos_clases::all()->where('fecha',date('Y-m-d'))->where('id_cliente',$cliente);
+        foreach($pagos as $pago){
+            $detallesPago = detalle_pagos_clases::all()->where('id_pago_clase',$pago->id);
+            foreach($detallesPago as $detallePago){
+                $misClases[$cont] = oferta_actividades::all()->where('id',$detallePago->id_oferta)->first();
+                $cont++;
+            }
+        }
+        $content = 'clienteUser.indexClases';
+        return view('dashboard', compact('misClases', 'content'));
     }
 
     /**
@@ -153,5 +168,16 @@ class ClaseController extends Controller
         $clase->save();
         DB::update('UPDATE oferta_actividades SET status = "inactivo" where id_clase = ?',[$clase->id]);
         return redirect('/empleado/clase')->with('deleted', 'Se ha desactivado la clase con el id: ' . $clase->id);
+    }
+
+    public function pagosMembresias(){
+        $content = 'clienteUser.seePagosMembresias';
+        return view('dashboard', compact('content'));
+    }
+    public function pagosPrestamosEquipos(){
+
+    }
+    public function pagosClases(){
+
     }
 }

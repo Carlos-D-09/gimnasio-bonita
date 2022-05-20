@@ -45,12 +45,6 @@
                     </ul>
                 </li>
                 <li>
-                    <a><i class="fa-solid fa-hand-holding-dollar"></i></i></i> Prestamos equipos<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="/empleado/historialPrestamosEquipos">Consultar prestamos</a></li>
-                    </ul>
-                </li>
-                <li>
                     <a><i class="fa-solid fa-coins fa-xl"></i> Pagos<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="/empleado/pagosMembresias">Consultar pagos membresias</a></li>
@@ -133,23 +127,15 @@
                         <li><a href="/email">Enviar email</a></li>
                     </ul>
                 </li>
-            @elseif(isset($cliente))
-                <h3>Tipo de usuario: Cliente</h3> <br><br>
+            @else
+                <h3>Cliente</h3> <br><br>
                 <li>
                     <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Clases<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="/cliente/clases">Clases</a></li>
-                        <li><a href="">Consultar oferta de actividades</a></li>
-                        <li><a href="">Registrarme a clases</a></li>
-                        <li><a href="">Ver mis claes</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a><i class="fa-solid fa-coins fa-xl"></i> Mis pagos<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="/seePagos">Membresia</a></li>
-                        <li><a href="/seePagos">Clases</a></li>
-                        <li><a href="/seePagos">Prestamos equipos</a></li>
+                        <li><a href="/cliente/oferta_actividades">Consultar oferta de actividades</a></li>
+                        {{-- <li><a href="">Registrarme a clases</a></li> --}}
+                        <li><a href="/cliente/clases/misClases">Ver mis claes</a></li>
                     </ul>
                 </li>
             @endif
