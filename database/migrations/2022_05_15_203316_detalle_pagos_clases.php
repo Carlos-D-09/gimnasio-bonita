@@ -17,6 +17,7 @@ class DetallePagosClases extends Migration
             $table->id();
             $table->unsignedBigInteger('id_pago_clase');
             $table->unsignedBigInteger('id_oferta');
+            $table->double('costo', 8, 2);
             $table->foreign("id_pago_clase")
                 ->references("id")->on("pagos_clases");
             $table->foreign("id_oferta")

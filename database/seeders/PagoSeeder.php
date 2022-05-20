@@ -17,8 +17,8 @@ class PagoSeeder extends Seeder
         DB::table('pagos')-> insert ([
             'id' => 1,
             'fecha' => '2022-05-09',
-            'dias' => 15,
-            'total' => 1500,
+            'dias' => 1,
+            'total' => 50,
             'id_membresia' => 1,
             'id_empleado' => 1,
             'id_cliente' => 1,

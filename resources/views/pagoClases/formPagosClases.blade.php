@@ -94,7 +94,7 @@
                                                 <td>{{$pago['horaInicio'] . ' a ' . $pago['horaFin']}}</td>
                                                 <td>{{$pago['costo']}}</td>
                                                 <td>
-                                                    <button class="btn btn-danger" type="submit" formaction="/empleado/PagosClases/quitar/{{$count}}">
+                                                    <button class="btn btn-danger" type="submit" formaction="/empleado/PagosClases/quitar/{{$count}}" formmethod="POST">
                                                         Quitar
                                                     </button>
                                                 </td>
@@ -128,7 +128,7 @@
                                             <td></td>
                                             <td></td>
                                             <td>
-                                                <button class="btn btn-success" type="submit" formaction="/empleado/PagosClases/validarDatos">
+                                                <button class="btn btn-success" type="submit" formaction="/empleado/PagosClases/validarDatos" formmethod="POST">
                                                     Agregar
                                                 </button>
                                             </td>

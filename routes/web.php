@@ -76,14 +76,17 @@ Route::get('/equiposJson', 'App\Http\Controllers\EquiposController@toJson')->mid
 
 //Manejo pagos membresias (empleado)
 Route::resource('/empleado/pagosMembresias',PagosController::class)->middleware('auth')->except('destroy','edit','show');
-Route::get('/empleado/searchPago', 'App\Http\Controllers\PagosController@search')->middleware('auth');
+Route::post('/empleado/pagosMembresias/validarDatos',[PagosController::class,'validarDatos'])->middleware('auth');
+Route::post('/empleado/pagosMembresias/nuevo',[PagosController::class,'mostrarForm'])->middleware('auth');
+Route::post('/empleado/pagosMembresias/searchCliente',[PagosController::class,'searchCliente'])->middleware('auth');
+Route::post('/empleado/pagosMembresias/quitar',[PagosController::class,'quitarPagoMembresia'])->middleware('auth');
+Route::post('/empleado/pagosMembresias/searchPago',[PagosController::class,'searchPago'])->middleware('auth');
 Route::get('/pagosJson', 'App\Http\Controllers\PagosController@toJson')->middleware('auth');
 
 //Manejo pagos prestamos equipos (empleado)
 Route::resource('/empleado/PrestamosPagosEquipos',PagosPrestamosEquiposController::class)->middleware('auth')->except('show','edit','update','destroy');
 Route::post('/empleado/PrestamosPagosEquipos/validarDatos',[PagosPrestamosEquiposController::class,'validarDatos'])->middleware('auth');
 Route::post('/empleado/PrestamosPagosEquipos/quitar/{id}',[PagosPrestamosEquiposController::class,'quitarPagoLista'])->middleware('auth');
-Route::resource('/empleado/historialPrestamosEquipos',HistorialPrestamosController::class)->middleware('auth')->except('destroy','edit','show');
 Route::get('/empleado/detallePagoPrestamosEquipo/{id}',[HistorialPrestamosController::class,'showDetalle'])->middleware('auth');
 
 //Manejo pagos clases (empleado)

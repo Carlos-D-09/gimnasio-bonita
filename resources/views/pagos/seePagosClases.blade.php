@@ -95,7 +95,7 @@
                                                         {{$detalle->oferta_actividades->clase->nombre}}
                                                     </td>
                                                     <td align="center">
-                                                        {{$detalle->oferta_actividades->costo}}
+                                                        {{$detalle->costo}}
                                                     </td>
                                                     </tr>
                                                 @endforeach
@@ -107,9 +107,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    @isset($cliente)
-                                        <h1 style="text-align: right"> <br> <br> Total: ${{$total}}</h1>
-                                    @endisset
                                 </div>
                             @endisset
                         </div>

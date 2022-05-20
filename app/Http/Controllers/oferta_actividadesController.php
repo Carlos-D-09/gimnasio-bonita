@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\Models\agenda;
 use App\Models\clase;
 use App\Models\empleado;
 use App\Models\oferta_actividades;

@@ -8,12 +8,9 @@ use App\Models\oferta_actividades;
 use App\Models\pago;
 use App\Models\pagos_clases;
 use App\Rules\buscarPagosprevios;
-use App\Rules\requiredUltimoPago;
 use App\Rules\validarClasePago;
 use App\Rules\validarDiaOferta;
-use App\Rules\validarExistenciaClase;
 use App\Rules\validarHoraClasePago;
-use App\Rules\validarIdCliente;
 use App\Rules\validarUnicidadClasePagos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -74,6 +71,9 @@ class PagosClasesController extends Controller
             $detallePago = new detalle_pagos_clases();
             $detallePago->id_pago_clase = $idPago->id;
             $detallePago->id_oferta = $pago['id_oferta'];
+            $oferta = new oferta_actividades();
+            $oferta = oferta_actividades::all()->where('id',$pago['id_oferta'])->first();
+            $detallePago->costo = $oferta->costo;
             $detallePago->save();
         }
         return redirect('/empleado/PagosClases');
@@ -254,15 +254,15 @@ class PagosClasesController extends Controller
         $content = 'pagoClases.formPagosClases';
         if($ultimoId == null){
             $siguienteId = 1;
-            return view('dashboard',compact('siguienteId','content', 'total','resultadoBusqueda','idCliente'));
+            return view('dashboard',compact('siguienteId','content','resultadoBusqueda','idCliente'));
         }
         $siguienteId = (int)$ultimoId->id + 1;
         return view('dashboard',compact('siguienteId','content','resultadoBusqueda','idCliente'));
     }
 
     public function searchPago(Request $request){
-        $pago = new pago();
-        $pago = pago::all()->where('id',$request->idPagoBuscar)->first();
+        $pago = new pagos_clases();
+        $pago = pagos_clases::all()->where('id',$request->idPagoBuscar)->first();
         $content = 'pagos.seePagosClases';
         if($pago != null){
             $id_pago = $pago->id;
@@ -271,6 +271,8 @@ class PagosClasesController extends Controller
             $id_empleado = $pago->id_empleado;
             $empleadoNombre = $pago->empleado->nombre;
             $fecha = $pago->fecha;
+            $fecha = strtotime($fecha);
+            $fecha = date('d/m/Y',$fecha);
             $total = $pago->total;
             $detalles = new detalle_pagos_clases();
             $detalles = detalle_pagos_clases::all()->where('id_pago_clase',$id_pago);
@@ -288,11 +290,12 @@ class PagosClasesController extends Controller
         $ultimoId = pagos_clases::all('id')->last();
         $content = 'pagoClases.formPagosClases';
         $total = 0;
+        $fecha = date('d/m/Y');
         if($ultimoId == null){
             $siguienteId = 1;
-            return view('dashboard',compact('siguienteId','content', 'total','cliente','clienteNombre'));
+            return view('dashboard',compact('siguienteId','content', 'total','cliente','clienteNombre','fecha'));
         }
         $siguienteId = (int)$ultimoId->id + 1;
-        return view('dashboard',compact('siguienteId','content', 'total','cliente','clienteNombre'));
+        return view('dashboard',compact('siguienteId','content', 'total','cliente','clienteNombre','fecha'));
     }
 }
