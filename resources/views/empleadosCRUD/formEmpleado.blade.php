@@ -63,7 +63,7 @@
           
           <div class="input-box">
             <span class="details">RFC del empleado</span>
-            <input type="text" name="RFC" placeholder="Incluye sólo caracteres" value="{{ isset($empleado) ? $empleado->RFC : ''  }}{{ old('RFC') }}" required>
+            <input type="text" name="RFC" placeholder="" value="{{ isset($empleado) ? $empleado->RFC : ''  }}{{ old('RFC') }}" required>
             @error('RFC')
             <br>
             <small class="danger">*{{ $message }}</small>
@@ -117,7 +117,7 @@
           </div>
           <div class="input-box">
             <span class="details">NSS del empleado</span>
-            <input type="text" name="NSS" placeholder="Incluye sólo caracteres" value="{{ isset($empleado) ? $empleado->NSS : '' }}{{ old('NSS') }}" required>
+            <input type="text" name="NSS" placeholder="" value="{{ isset($empleado) ? $empleado->NSS : '' }}{{ old('NSS') }}" required>
             @error('NSS')
             <br>
             <small class="danger">*{{ $message }}</small>

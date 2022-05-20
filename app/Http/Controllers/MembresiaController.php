@@ -49,7 +49,7 @@ class MembresiaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Nombre' => 'required|regex:/^[\pL\s\-]+$/u|unique:membresias,Nombre',
+            'Nombre' => 'required|regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z ]*$/|unique:membresias,Nombre',
             'Duracion' => 'required|digits_between:1,5',
             'costo' => 'required|digits_between:2,5',
         ]);

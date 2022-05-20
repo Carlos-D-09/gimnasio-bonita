@@ -36,7 +36,7 @@ class ClienteController extends Controller
     {
         $cliente = cliente::all()->find(Auth::user()->id);
         $rules =[
-            'nombre' => ['required','min:3','max:150','regex:/^[a-zA-Z ]*$/'],
+            'nombre' => ['required','min:3','max:150','regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z ]*$/'],
             'telefono' => ['numeric','min:1000000000','max:9999999999'],
             'correo' => ['email:rfc', new validarDisponibilidadCorreoEdit($cliente->id)],
             'fecha_nacimiento' => ['required','date']
@@ -123,7 +123,7 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $rules =[
-            'nombre' => ['required','min:3', 'max:150', 'regex:/^[a-zA-Z ]*$/'],
+            'nombre' => ['required','min:3', 'max:150', 'regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z ]*$/'],
             'fecha_nacimiento' => ['required','date'],
             'telefono' => ['numeric','min:1000000000','max:9999999999'],
             'correo' => 'email:rfc|unique:clientes,correo',
@@ -223,7 +223,7 @@ class ClienteController extends Controller
     public function update(Request $request, cliente $cliente)
     {
         $rules =[
-            'nombre' => ['required','min:3','max:150','regex:/^[a-zA-Z ]*$/'],
+            'nombre' => ['required','min:3','max:150','regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z ]*$/'],
             'telefono' => ['numeric','min:1000000000','max:9999999999'],
             'correo' => ['email:rfc', new validarDisponibilidadCorreoEdit($cliente->id)],
             'fecha_nacimiento' => ['required','date']

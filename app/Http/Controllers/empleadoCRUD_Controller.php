@@ -42,7 +42,7 @@ class empleadoCRUD_Controller extends Controller
     {
         /*dd($request->all());*/
         $request->validate([
-            'nombre' => 'required|regex:/^[a-zA-Z ]*$/',
+            'nombre' => 'required|regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z ]*$/',
             'RFC' => 'required|alpha_num|size:14|unique:empleados,RFC',
             'fecha_nacimiento' => 'required',
             'domicilio' => 'required',
@@ -133,7 +133,7 @@ class empleadoCRUD_Controller extends Controller
         //dd($request->all());
         $empleado = empleado::find($id);
         $request->validate([
-            'nombre' => 'required|regex:/^[a-zA-Z ]*$/',
+            'nombre' => 'required|regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z ]*$/',
             'RFC' => 'required|alpha_num|size:14|unique:empleados,RFC,' . $empleado->id,
             'fecha_nacimiento' => 'required',
             'domicilio' => 'required',

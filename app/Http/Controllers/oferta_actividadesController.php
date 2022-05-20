@@ -47,7 +47,7 @@ class oferta_actividadesController extends Controller
             $content = 'ofertaActividades.index';
             return view('dashboard', compact('ofertaActividades', 'content'));
         }
-        $ofertaActividades = oferta_actividades::all()->where('status','activo');
+        $ofertaActividades = oferta_actividades::all()->where('status','activo'); 
         foreach($ofertaActividades as $oferta){
             $cuposUsados = 0;
             $pagos = pagos_clases::all()->where('fecha',date('Y-m-d'));
