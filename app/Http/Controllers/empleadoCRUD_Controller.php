@@ -42,15 +42,16 @@ class empleadoCRUD_Controller extends Controller
     {
         /*dd($request->all());*/
         $request->validate([
-            'nombre' => 'required|regex:/^[\pL\s\-]+$/u',
-            'RFC' => 'required|alpha|size:14|unique:empleados,RFC',
+            'nombre' => 'required|regex:/^[a-zA-Z ]*$/',
+            'RFC' => 'required|alpha_num|size:14|unique:empleados,RFC',
             'fecha_nacimiento' => 'required',
             'domicilio' => 'required',
             'telefono' => 'required|digits:10',
             'correo' => 'required|email|unique:empleados,correo',
             'sueldo' => 'required|digits_between:4,6',
-            'NSS' => 'required|alpha|size:11|unique:empleados,NSS',
-            'password' => 'required|min:5',
+            'NSS' => 'required|alpha_num|size:11|unique:empleados,NSS',
+            'password' => 'min:5|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:5',
             'id_tipoUsuario' => 'required'
         ]);
 
@@ -132,15 +133,14 @@ class empleadoCRUD_Controller extends Controller
         //dd($request->all());
         $empleado = empleado::find($id);
         $request->validate([
-            'nombre' => 'required|regex:/^[\pL\s\-]+$/u',
-            'RFC' => 'required|alpha|size:14|unique:empleados,RFC,' . $empleado->id,
+            'nombre' => 'required|regex:/^[a-zA-Z ]*$/',
+            'RFC' => 'required|alpha_num|size:14|unique:empleados,RFC,' . $empleado->id,
             'fecha_nacimiento' => 'required',
             'domicilio' => 'required',
             'telefono' => 'required|digits:10',
             'correo' => 'required|email|unique:empleados,correo,' . $empleado->id,
             'sueldo' => 'required|digits_between:4,6',
-            'NSS' => 'required|alpha|size:11|unique:empleados,NSS,' . $empleado->id,
-            'id_tipoUsuario' => 'required'
+            'NSS' => 'required|alpha_num|size:11|unique:empleados,NSS,' . $empleado->id
         ]);
 
         if($request->hasFile('imagen')){
@@ -167,7 +167,13 @@ class empleadoCRUD_Controller extends Controller
         $EmpleadoCRUD->fecha_ingreso = $request->fecha_ingreso;
         $EmpleadoCRUD->NSS = $request->NSS;
         $EmpleadoCRUD->password = Hash::make($empleado->password);
-        $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
+
+        if($empleado->id_tipoUsuario == 1){
+            $EmpleadoCRUD->id_tipoUsuario = $request->id_tipoUsuario;
+        } else {
+            $EmpleadoCRUD->id_tipoUsuario = $empleado->id_tipoUsuario;
+        }
+        
         $EmpleadoCRUD->updated_at = now();
 
         DB::table('empleados')
@@ -233,7 +239,7 @@ class empleadoCRUD_Controller extends Controller
         }
         else{
             $request->validate([
-                'passwordNew' => [new validarPasswordCliente($request->re_passwordNew)]
+                'passwordNew' => [new validarPasswordCliente($request->re_passwordNew), 'min:5']
             ]);
         }
         $empleados = empleado::all()->where('id',$id);
@@ -244,6 +250,6 @@ class empleadoCRUD_Controller extends Controller
         $empleado->password = Hash::make($request->passwordNew);
         $empleado->updated_at = now();
         $empleado->save();
-        return redirect('/empleadoCRUD/'.$empleado->id);
+        return redirect('/empleadoCRUD/'.$empleado->id)->with('edited', 'Se ha modificado la informacion del empleado');
     }
 }

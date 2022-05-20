@@ -26,12 +26,24 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
+                        @if(session()->has('success'))
+                            <div class="alert alert-success text-center" style="text-align: center;">
+                                {{ session()->get('success') }}
+                            </div>
+                        @endif
 
-                        <!--@isset(Auth::user()->id)
-                            @if (Auth::user()->id_tipoUsuario == 3)
-                                <a class="dropdown-item">Soy profe :v con mi id de {{ Auth::user()->id }}</a>
-                            @endif
-                        @endisset -->
+                        @if(session()->has('edited'))
+                            <div class="alert alert-warning text-center" style="text-align: center;">
+                                {{ session()->get('edited') }}
+                            </div>
+                        @endif
+
+                        @if(session()->has('deleted'))
+                            <div class="alert alert-danger" role="alert" style="text-align: center;">
+                                {{ session()->get('deleted') }}
+                            </div>
+                        @endif
+
                         @if(session()->has('data'))
                             <div style="text-align: center;">
                                 {{ session()->get('data') }}

@@ -15,8 +15,8 @@
                             <div class="input-group">
                                 <input type="text" name="idBuscar" class="form-control inputPatron" placeholder="Buscar por id">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default buttonPatron" type="submit"> Buscar por id pago</button>
-                                    <script src="{{asset('/js/ofertaActividades/index/botonBusqueda.js')}}"></script>
+                                    <button class="btn btn-default buttonPatron" type="submit">Buscar por id pago</button>
+                                    <!--<script src="{{asset('/js/ofertaActividades/index/botonBusqueda.js')}}"></script>-->
                                 </span>
                             </div>
                         </form>

@@ -89,9 +89,8 @@ class oferta_actividadesController extends Controller
         $oferta->status = 'activo';
         $oferta->updated_at = now();
         $oferta->save();
-        $ofertaActividades = oferta_actividades::all()->where('status','activo');
-        $content = 'ofertaActividades.index';
-        return view('dashboard', compact('ofertaActividades','content'));
+
+        return redirect('/empleado/oferta_actividades')->with('success', 'Se ha asignado el horario y maestro de forma exitosa');;
     }
 
     /**
@@ -102,12 +101,18 @@ class oferta_actividadesController extends Controller
      */
     public function show($id)
     {
-        // $ofertaActividad = oferta_actividades::find($id);
-        // $agendaData = agenda::all()->where('id_oferta', $ofertaActividad->id);
+        $empleado = Auth::user();
+        $idTipoUsuario = $empleado->id_tipoUsuario;
+        if($idTipoUsuario == 3){
+            $ofertaActividad = oferta_actividades::find($id);
+            $agendaData = agenda::all()->where('id_oferta', $ofertaActividad->id);
 
-        // $content = 'ofertaActividades.showOferta';
+            $content = 'ofertaActividades.showOferta';
 
-        // return view('dashboard', compact('content', 'agendaData'));
+            return view('dashboard', compact('content', 'agendaData'));
+        }
+        
+        return $this->create();
         //aplica solo para maestros
         /*
         $content = 'ofertaActividades.showOferta';
@@ -145,17 +150,31 @@ class oferta_actividadesController extends Controller
             'dia' => [new validaDisponibilidadEspacioEdit($request->horaInicio,$oferta->id)],
             'horaFin' => [new validarHora_fin($request->horaInicio), new validarIntervaloTiempo($request->horaInicio)],
             'id_maestro' => [new validarDisponibilidadMaestroEdit($request->horaInicio,$request->dia,$oferta->id)],
-            'costs' => ['numeric']
+            'costo' => ['numeric']
         ]);
+
+        $oferta->id_clase = $request->id_clase;
         $oferta->horaInicio = $request->horaInicio;
         $oferta->horaFin = $request->horaFin;
         $oferta->dia = $request->dia;
         $oferta->cupos = $request->cupos;
         $oferta->costo = $request->costo;
         $oferta->id_empleado = $request->id_maestro;
-        $oferta->save();
+        $oferta->updated_at = now();
 
-        return redirect('/empleado/oferta_actividades');
+        DB::table('oferta_actividades')
+        ->where('id', $oferta->id)
+        ->update([
+            'id_clase' => $oferta->id_clase,
+            'horaInicio' => $oferta->horaInicio,
+            'horaFin' => $oferta->horaFin,
+            'dia' => $oferta->dia,
+            'costo' => $oferta->costo,
+            'cupos' => $oferta->cupos,
+            'updated_at' => $oferta->updated_at
+        ]);
+
+        return redirect('/empleado/oferta_actividades')->with('edited', 'Se ha modificado la informacion de la clase con el id: ' . $oferta->id);
     }
 
     /**
@@ -170,7 +189,7 @@ class oferta_actividadesController extends Controller
         $oferta = $ofertas[0];
         $oferta->status = 'inactivo';
         $oferta->save();
-        return redirect('/empleado/oferta_actividades');
+        return redirect('/empleado/oferta_actividades')->with('deleted', 'Se ha desactivado la clase con el id de: ' . $oferta->id);
 
     }
 

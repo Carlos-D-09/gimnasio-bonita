@@ -31,6 +31,35 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+Route::get('/cliente',[ClienteController::class,'indexClient'])->middleware('auth:client');
+
+Route::get('/cliente/{id}/edit',[ClienteController::class,'editClient'])->middleware('auth:client');  
+
+Route::patch('/cliente/{id}/edit',[ClienteController::class,'updateClient'])->middleware('auth:client');
+
+Route::get('/cliente/{id}/edit/password',[ClienteController::class,'editPasswordClient'])->middleware('auth:client');
+
+Route::patch('/cliente/{id}/edit/password',[ClienteController::class,'updatePasswordClient'])->middleware('auth:client');
+
+
+/*Route::get('/cliente/clases/clase','App\Http\Controllers\oferta_actividadesClientesController@orderByClase')->middleware('auth:client');
+
+Route::get('/cliente/clases/dia', 'App\Http\Controllers\oferta_actividadesClientesController@orderByDia')->middleware('auth:client');
+
+Route::get('/cliente/clases/maestro', 'App\Http\Controllers\oferta_actividadesClientesController@orderByMaestro')->middleware('auth:client');
+
+Route::get('/cliente/clases/search', 'App\Http\Controllers\oferta_actividadesClientesController@busquedaPatron')->middleware('auth:client');
+
+Route::get('/cliente/clases/maestro/search', 'App\Http\Controllers\oferta_actividadesClientesController@busquedaPatronMaestro')->middleware('auth:client');
+
+Route::get('/cliente/clases/dia/search', 'App\Http\Controllers\oferta_actividadesClientesController@busquedaPatronDia')->middleware('auth:client');
+
+Route::get('/cliente/clases/clase/search', 'App\Http\Controllers\oferta_actividadesClientesController@busquedaPatronClase')->middleware('auth:client');*/
+
+Route::resource('/cliente/clases', 'App\Http\Controllers\oferta_actividadesClientesController')->middleware('auth:client');
+
 //autenticacion cliente
 Route::get('/cliente/login', [ClientAuthController::class, 'login']);
 Route::post('/cliente/login', [ClientAuthController::class, 'handleLogin']);
@@ -50,6 +79,9 @@ Route::get('/cliente',[ClienteController::class,'indexClient'])->middleware('aut
 //Manejo de clientes desde la vista de empleados
 Route::get('/empleado/cliente/search',[ClienteController::class,'search'])->middleware('auth');
 Route::resource('/empleado/cliente',ClienteController::class)->middleware('auth');
+
+Route::post('/empleado/cliente/{id}',[ClienteController::class,'destroy'])->middleware('auth');
+
 Route::get('/empleado/cliente/{id}/edit/password',[ClienteController::class,'editPassword'])->middleware('auth');
 Route::patch('/empleado/cliente/{id}/edit/password',[ClienteController::class,'updatePassword'])->middleware('auth');
 

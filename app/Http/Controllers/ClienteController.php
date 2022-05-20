@@ -23,10 +23,84 @@ class ClienteController extends Controller
         $content = 'cliente.index';
         return view('dashboard',compact('clientes', 'content'));
     }
+
+    //sesion de cliente
     public function indexClient(){
         $cliente = cliente::all()->find(Auth::user()->id);
         $content = 'clienteUser.profile';
         return view('dashboard',compact('cliente','content'));
+    }
+
+    public function editClient(){
+        $cliente = cliente::all()->find(Auth::user()->id);
+        $content = 'clienteUser.formEditClient';
+        return view('dashboard', compact('cliente','content'));
+    }
+
+    public function updateClient(Request $request, cliente $cliente)
+    {
+        $cliente = cliente::all()->find(Auth::user()->id);   
+        $rules =[
+            'nombre' => ['required','min:3','max:150','regex:/^[a-zA-Z ]*$/'],
+            'telefono' => ['numeric','min:1000000000','max:9999999999'],
+            'correo' => ['email:rfc', new validarDisponibilidadCorreoEdit($cliente->id)],
+            'fecha_nacimiento' => ['required','date']
+        ];
+        $message = [
+            'telefono.min' => 'El número teléfonico debe tener 10 digitos',
+            'telefono.max' => 'El número teléfonico debe tener 10 digitos',
+        ];
+        $this->validate($request,$rules,$message);
+        if($request->hasFile('imagen')){
+            $file = $request->file('imagen');
+            $destino = "images/Cliente/imagenCliente/";
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $request->file('imagen')->move($destino,$filename);
+            if($cliente->imagen != '/images/user.png'){
+                unlink($cliente->imagen);
+            }
+            $cliente->imagen = $destino . $filename;
+        }
+        $cliente->nombre = $request->nombre;
+        $cliente->domicilio = $request->domicilio;
+        $cliente->fecha_nacimiento = $request->fecha_nacimiento;
+        $cliente->telefono = $request->telefono;
+        $cliente->correo = $request->correo;
+        $cliente->updated_at = now();
+
+        $cliente->save();
+
+        return redirect('/cliente')->with('edited', 'Se ha modificado tu informacion personal');
+    }
+
+    public function editPasswordClient(int $id)
+    {
+        $cliente = cliente::all()->find(Auth::user()->id);
+        $clientes = cliente::all()->except('password')->where('id',$id);
+        foreach ($clientes as $cliente){
+            unset($cliente['password']);
+            $content = 'clienteUser.formEditClientePassword';
+            return view('dashboard', compact('cliente','content'));
+        }
+    }
+
+    public function updatePasswordClient(Request $request, int $id)
+    {
+        $cliente = cliente::all()->find(Auth::user()->id);
+
+        $request->validate([
+            'passwordNew' => [new validarPasswordCliente($request->re_passwordNew), 'min:5']
+        ]);
+
+        $clientes = cliente::all()->where('id',$id);
+        $cliente = null;
+        foreach ($clientes as $clienteAux){
+            $cliente = $clienteAux;
+        }
+        $cliente->password = Hash::make($request->passwordNew);
+        $cliente->updated_at = now();
+        $cliente->save();
+        return redirect('/cliente')->with('edited', 'Se ha modificado tu informacion personal');
     }
 
     /**
@@ -54,10 +128,10 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $rules =[
-            'nombre' => ['required','min:3', 'max:150'],
-            'fecha_nacimiento' => ['required','date_format:d/m/Y',new validaFechaNacimientoCliente],
+            'nombre' => ['required','min:3', 'max:150', 'regex:/^[a-zA-Z ]*$/'],
+            'fecha_nacimiento' => ['required','date'],
             'telefono' => ['numeric','min:1000000000','max:9999999999'],
-            'correo' => ['email:rfc', new validarDisponibilidadCorreo],
+            'correo' => 'email:rfc|unique:clientes,correo',
             'passwordNuevo' => [new validarPasswordCliente($request->re_password)]
         ];
         $message = [
@@ -77,8 +151,7 @@ class ClienteController extends Controller
             $cliente->imagen = '/images/user.png';
         }
         $cliente->nombre = $request->nombre;
-        $fechaNuevoFormato = DateTime::createFromFormat('d/m/Y', $request->fecha_nacimiento);
-        $cliente->fecha_nacimiento =  $fechaNuevoFormato->format('Y-m-d');;
+        $cliente->fecha_nacimiento =  $request->fecha_nacimiento;
         $cliente->domicilio = $request->domicilio;
         $cliente->telefono = $request->telefono;
         $cliente->correo = $request->correo;
@@ -89,7 +162,7 @@ class ClienteController extends Controller
         $cliente->save();
         $clientes = cliente::all()->where('status',1);
         $content = 'cliente.index';
-        return view('dashboard', compact('clientes', 'content'));
+        return view('dashboard', compact('clientes', 'content'))->with('success', 'Se ha registrado el cliente de forma exitosa');
     }
 
     /**
@@ -130,13 +203,10 @@ class ClienteController extends Controller
 
     public function updatePassword(Request $request, int $id)
     {
-        if(isset($request->oldPassword)){
-        }
-        else{
-            $request->validate([
-                'passwordNew' => [new validarPasswordCliente($request->re_passwordNew)]
-            ]);
-        }
+        $request->validate([
+            'passwordNew' => [new validarPasswordCliente($request->re_passwordNew), 'min:5']
+        ]);
+
         $clientes = cliente::all()->where('id',$id);
         $cliente = null;
         foreach ($clientes as $clienteAux){
@@ -145,7 +215,7 @@ class ClienteController extends Controller
         $cliente->password = Hash::make($request->passwordNew);
         $cliente->updated_at = now();
         $cliente->save();
-        return redirect('/empleado/cliente/'.$cliente->id);
+        return redirect('/empleado/cliente/'.$cliente->id)->with('edited', 'Se ha modificado la informacion del cliente');
     }
 
     /**
@@ -158,9 +228,10 @@ class ClienteController extends Controller
     public function update(Request $request, cliente $cliente)
     {
         $rules =[
-            'nombre' => ['required','min:3','max:150'],
+            'nombre' => ['required','min:3','max:150','regex:/^[a-zA-Z ]*$/'],
             'telefono' => ['numeric','min:1000000000','max:9999999999'],
             'correo' => ['email:rfc', new validarDisponibilidadCorreoEdit($cliente->id)],
+            'fecha_nacimiento' => ['required','date']
         ];
         $message = [
             'telefono.min' => 'El número teléfonico debe tener 10 digitos',
@@ -179,14 +250,14 @@ class ClienteController extends Controller
         }
         $cliente->nombre = $request->nombre;
         $cliente->domicilio = $request->domicilio;
+        $cliente->fecha_nacimiento = $request->fecha_nacimiento;
         $cliente->telefono = $request->telefono;
         $cliente->correo = $request->correo;
         $cliente->updated_at = now();
 
         $cliente->save();
 
-        return redirect('/empleado/cliente/'.$cliente->id);
-
+        return redirect('/empleado/cliente/'.$cliente->id)->with('edited', 'Se ha modificado la informacion del cliente');
     }
 
     /**
@@ -195,11 +266,17 @@ class ClienteController extends Controller
      * @param  \App\Models\cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(cliente $cliente)
+    public function destroy(cliente $cliente, $id)
     {
+        $cliente = cliente::find($id);
         $cliente->status = 0;
-        $cliente->save();
-        return redirect('/empleado/cliente');
+        DB::table('clientes')
+        ->where('id', $cliente->id)
+        ->update([
+            'status' => $cliente->status,
+            'updated_at' => $cliente->updated_at
+        ]);
+        return redirect('/empleado/cliente')->with('deleted', 'Se ha desactivado la cuenta del cliente con el id de: ' . $cliente->id);
     }
 
     public function search(Request $request){

@@ -78,9 +78,7 @@ class EquiposController extends Controller
         $equipo->descripcion = $request->descripcion;
         $equipo->status = 1;
         $equipo->save();
-        $equipos = equipos::all()->where('status',1);
-        $content = 'equipos.index';
-        return view('dashboard',compact('equipos','content'));
+        return redirect('/empleado/equipos')->with('success', 'Se ha registrado el equipo con exito');
     }
 
     /**
@@ -126,7 +124,7 @@ class EquiposController extends Controller
         $equipo->descripcion = $request->descripcion;
         $equipo->updated_at = now();
         $equipo->save();
-        return redirect('/empleado/equipos');
+        return redirect('/empleado/equipos')->with('edited', 'Se ha editado el equipo con id: ' . $equipo->id);
     }
 
     /**
@@ -139,6 +137,6 @@ class EquiposController extends Controller
     {
         $equipo->status = 0;
         $equipo->save();
-        return redirect('/empleado/equipos');
+        return redirect('/empleado/equipos')->with('deleted', 'Se ha desactivado el equipo con id: ' . $equipo->id);
     }
 }

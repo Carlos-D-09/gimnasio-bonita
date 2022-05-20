@@ -27,6 +27,24 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
+                        @if(session()->has('success'))
+                            <div class="alert alert-success text-center" style="text-align: center;">
+                                {{ session()->get('success') }}
+                            </div>
+                        @endif
+
+                        @if(session()->has('edited'))
+                            <div class="alert alert-warning text-center" style="text-align: center;">
+                                {{ session()->get('edited') }}
+                            </div>
+                        @endif
+
+                        @if(session()->has('deleted'))
+                            <div class="alert alert-danger" role="alert" style="text-align: center;">
+                                {{ session()->get('deleted') }}
+                            </div>
+                        @endif
+
                             @if(isset($idBuscado))
                                 <h2>Resultados de la busqueda para el id: {{$idBuscado}}</h2>
                             @else

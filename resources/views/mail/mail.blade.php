@@ -39,7 +39,7 @@
                                     <div >
                                         <div class="form-group">
                                         <div class="col-md-6 offset-md-3">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary">Enviar e-mail</button>
                                         </div>
                                     </div>
                                 </div>

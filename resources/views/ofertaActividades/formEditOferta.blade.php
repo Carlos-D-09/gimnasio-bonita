@@ -34,7 +34,7 @@
                         <div class="u-form-group u-form-select u-form-group-1">
                             <label for="id_clase" class="u-label u-text-body-alt-color u-label-1">Clase</label>
                             <div class="u-form-select-wrapper">
-                                <select id="id_clase" name="id_clase" style="color: black" class="u-border-3 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle" disabled>
+                                <select id="id_clase" name="id_clase" style="color: black" class="u-border-3 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle">
                                     @foreach ($clases as $clase)
                                         <option value="{{$clase->id}}" {{$oferta->id_clase == $clase->id ? 'selected' : ''}}>{{$clase->nombre}}</option>
                                     @endforeach

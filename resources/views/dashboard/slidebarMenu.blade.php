@@ -4,7 +4,7 @@
         <ul class="nav side-menu">
             {{-- Vista Gerente --}}
             @if(Auth::user()->id_tipoUsuario == 1)
-                <h3>Gerente</h3> <br><br>
+                <h3>Cargo: Gerente</h3> <br><br>
                 <li>
                     <a><i class="fa-solid fa-id-card-clip fa-xl"></i> Empleados<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -69,7 +69,7 @@
                 </li>
             {{-- Vista encargado sucursal --}}
             @elseif(Auth::user()->id_tipoUsuario == 2)
-                <h3>Encargado de sucursal </h3> <br><br>
+                <h3>Cargo: Encargado de sucursal </h3> <br><br>
                 <li><a><i class="fa-solid fa-wallet fa-xl"></i> Membresias <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="/membresia/create">Registrar una membresia</a></li>
@@ -78,8 +78,8 @@
                 </li>
                 <li><a><i class="fa-solid fa-book fa-xl"></i> Agenda <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="/oferta_actividad">Mostrar la oferta de actividades</a></li>
-                        <li><a href="/oferta_actividades/create">Asignar horario y maestro a clase</a></li>
+                        <li><a href="/empleado/oferta_actividades">Mostrar la oferta de actividades</a></li>
+                        <li><a href="/empleado/oferta_actividades/create">Asignar horario y maestro a clase</a></li>
                     </ul>
                 </li>
                 <li>
@@ -115,7 +115,13 @@
                 </li>
             {{-- Vista maestro --}}
             @elseif(Auth::user()->id_tipoUsuario == 3)
-                <h3>Maestro</h3>  <br><br>
+                <h3>Cargo: Maestro</h3>  <br><br>
+                <li>
+                    <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Clases<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="/empleado/clase">Mostrar clases</a></li>
+                    </ul>
+                </li>
                 <li><a><i class="fa-solid fa-book fa-xl"></i> Agenda <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="/empleado/oferta_actividades">Mostrar tus clases</a></li>
@@ -128,7 +134,7 @@
                     </ul>
                 </li>
             @elseif(isset($cliente))
-                <h3>Cliente</h3> <br><br>
+                <h3>Tipo de usuario: Cliente</h3> <br><br>
                 <li>
                     <a><i class="fa-solid fa-chalkboard-user fa-xl"></i> Clases<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
