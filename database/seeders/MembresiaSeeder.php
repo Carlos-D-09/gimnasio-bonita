@@ -24,6 +24,6 @@ class MembresiaSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        // membresia::factory(10)->create();
+        membresia::factory(10)->create();
     }
 }

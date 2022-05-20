@@ -34,13 +34,6 @@ class claseSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
-        /*$table->id();
-            $table->string('imagen',250);
-            $table->string('nombre', 150);
-            $table->string('descripcion', 300);
-            $table->string('status');
-            */
-        // clase::factory(5)->create();
+        clase::factory(5)->create();
     }
 }

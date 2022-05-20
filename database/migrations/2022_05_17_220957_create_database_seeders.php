@@ -36,22 +36,12 @@ class CreateDatabaseSeeders extends Migration
         DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
 
         Artisan::call('db:seed', [
-            '--class' => 'PagoSeeder',
-        ]);
-        DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
-
-        Artisan::call('db:seed', [
             '--class' => 'claseSeeder',
         ]);
         DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
 
         Artisan::call('db:seed', [
             '--class' => 'oferta_actividadSeeder',
-        ]);
-        DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
-
-        Artisan::call('db:seed', [
-            '--class' => 'agendaSeeder',
         ]);
         DB::statement('SET GLOBAL FOREIGN_KEY_CHECKS=0');
     }
